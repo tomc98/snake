@@ -1,0 +1,26 @@
+{
+  "cordova-plugin-nativeaudio": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-nativeaudio"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-firebase-realtime-database": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-firebase-realtime-database"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-firebase": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-firebase"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}
