@@ -3,6 +3,7 @@ import {Platform} from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { SplashPage } from '../splash/splash';
+
 // import { Firebase } from '@ionic-native/firebase';
 
 @Component({
@@ -25,7 +26,7 @@ export class HomePage {
   down = false;
   theInt : any;
   snake = [[window.innerWidth/2, window.innerHeight/2, "red"],[window.innerWidth/2, window.innerHeight/2, "red"]];
-  constructor(public navCtrl: NavController, private nativeAudio: NativeAudio) {
+  constructor(public navCtrl: NavController, private nativeAudio: NativeAudio, public plt: Platform) {
 
 
   }
@@ -40,7 +41,19 @@ export class HomePage {
     });
     this.theInt = setInterval(() => {this.render();}, 1000/60);
     this.restart();
+    this.loadSound();
   }
+
+  loadSound(){
+
+      if (this.plt.is('android')) {
+          this.nativeAudio.preloadSimple('pop', '../../assets/sounds/pop.mp3').then();
+          this.nativeAudio.preloadSimple('1bite', '../../assets/sounds/1bite.mp3').then();
+          this.nativeAudio.preloadSimple('2bite', '../../assets/sounds/2bite.mp3').then();
+          this.nativeAudio.preloadSimple('3bite', '../../assets/sounds/3bite.mp3').then();
+      }
+  }
+
 
   render(){
     if(!this.checkLose()&&this.lives>0){
@@ -212,8 +225,7 @@ export class HomePage {
     }else{
       this.makeFruit();
       this.lives -= 1;
-      // this.nativeAudio.preloadSimple('pop', 'assets/sounds/pop.mp3').then();
-      // this.nativeAudio.play('pop', () => console.log('1bite is done playing'));
+      this.nativeAudio.play('pop', () => console.log('1bite is done playing'));
     }
   }
 
@@ -225,19 +237,16 @@ export class HomePage {
       this.snake.push([xSnake, ySnake, this.fruitC]);
       this.makeFruit();
       this.points+=1;
-      // switch(this.getRandomInt(1,3)){
-      //   case 1:
-      //       this.nativeAudio.preloadSimple('1bite', 'assets/sounds/1bite.mp3').then();
-      //       this.nativeAudio.play('1bite', () => console.log('1bite is done playing'));
-      //     break
-      //   case 2:
-      //       this.nativeAudio.preloadSimple('2bite', 'assets/sounds/2bite.mp3').then();
-      //       this.nativeAudio.play('2bite', () => console.log('uniqueId1 is done playing'));
-      //     break
-      //   case 3:
-      //       this.nativeAudio.preloadSimple('3bite', 'assets/sounds/3bite.mp3').then();
-      //       this.nativeAudio.play('3bite', () => console.log('uniqueId1 is done playing'));
-      // }
+      switch(this.getRandomInt(1,3)){
+        case 1:
+            this.nativeAudio.play('1bite', () => console.log('1bite is done playing'));
+          break
+        case 2:
+            this.nativeAudio.play('2bite', () => console.log('uniqueId1 is done playing'));
+          break
+        case 3:
+            this.nativeAudio.play('3bite', () => console.log('uniqueId1 is done playing'));
+      }
 
     }
     this.fruitDisapear();
