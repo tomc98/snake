@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import {Platform} from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
-import { SplashPage } from '../splash/splash';
+
 
 // import { Firebase } from '@ionic-native/firebase';
 
@@ -76,7 +76,7 @@ export class HomePage {
     }else {
       console.log(this.points);
       clearInterval(this.theInt);
-      this.navCtrl.push(SplashPage)
+      this.navCtrl.pop();
 
     }
   }
