@@ -1,0 +1,40 @@
+page-leader-board {
+
+  .title{
+    font-size: 60px;
+    font-family: "Bungee",cursive;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left:0;
+    right:0;
+    text-align: center;
+    width: 80vw;
+		top: 0vh;
+		
+		color: #4D3F30;
+  }
+
+	.scroll-content{
+		background-color: #f9cb9c;
+	  }
+
+	.button_container{
+	position: absolute;
+	text-align: center;
+	left:0;
+	right:0;
+	margin: auto;
+	bottom: 30px;
+	}
+
+	.button_container button{
+	text-align: center;
+	display: inline;
+	width: 80vw;
+	height: 8vh;
+	border-radius: 10px;
+	font-size: 30px;
+	font-family: 'Bungee', cursive;
+	}
+}

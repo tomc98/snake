@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import {Platform} from 'ionic-angular';
+import {Platform, ViewController} from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { LostPage } from '../lost/lost';
 
 
 // import { Firebase } from '@ionic-native/firebase';
@@ -71,12 +72,19 @@ export class HomePage {
         }
       }
       this.fruitProcess();
-      this.displayPoints();
-      this.displayLives();
+      //this.displayPoints();
+      //this.displayLives();
     }else {
       console.log(this.points);
       clearInterval(this.theInt);
-      this.navCtrl.pop();
+      //this.navCtrl.pop();
+
+      this.navCtrl.push(LostPage, this.points);
+
+      //This will replace the current page in stak with new one
+      //var currentView: ViewController = this.navCtrl.getActive()
+      //this.navCtrl.push(LostPage, this.points);
+      //this.navCtrl.removeView(currentView)
 
     }
   }
@@ -89,7 +97,7 @@ export class HomePage {
   }
 
   background(){
-    this.ctx.fillStyle = "#18ed09";
+    this.ctx.fillStyle = "#b4a7d6";
     this.ctx.fillRect(0,0,this.myCanvas.nativeElement.width,this.myCanvas.nativeElement.height);
   }
 

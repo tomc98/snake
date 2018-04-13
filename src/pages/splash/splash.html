@@ -9,11 +9,25 @@
 <ion-content padding>
   <img class = "snakepic"src="assets/imgs/snakepic.png">
   <div class = "title">
-    <font color="red">K</font><font color="blue">i</font><font color="green">n</font><font color="purple">g </font>
-  </div>
-  <div class = "title2">
-    <font color="yellow">S</font><font color="white">n</font><font color="lime">a</font><font color="pink">k</font><font color="aqua">e</font>
+    <p>
+      <font color="red">K</font>
+      <font color="blue">i</font>
+      <font color="green">n</font>
+      <font color="purple">g </font>
+    </p>
+    <p>
+      <font color="yellow">S</font>
+      <font color="white">n</font>
+      <font color="lime">a</font>
+      <font color="pink">k</font>
+      <font color="aqua">e</font>
+    </p>
   </div>
 
-<button class="startBtn" ion-button (click)="onClick()">Play</button>
+  <div class="button_container">
+    <button ion-button color="blue1" (click)="onClickPlay()">Play</button>
+    <button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>
+    <button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>
+  </div>
+
 </ion-content>

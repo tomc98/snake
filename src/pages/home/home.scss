@@ -1,3 +1,15 @@
 page-home {
-
+	.stats{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    padding: 30px;
+    margin: 0px;
+  }
+	.stats span{
+    color: #413C4D;
+    
+    font-size: 20px;
+    font-family: "Bungee",cursive;
+  }
 }

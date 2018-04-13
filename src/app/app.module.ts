@@ -8,6 +8,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SplashPage } from '../pages/splash/splash';
+import { HowToPage } from '../pages/how-to/how-to';
+import { LostPage } from '../pages/lost/lost';
+import { LeaderBoardPage } from '../pages/leader-board/leader-board';
 //import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 
 import { NativeAudio } from '@ionic-native/native-audio';
@@ -17,7 +20,10 @@ import { NativeAudio } from '@ionic-native/native-audio';
   declarations: [
     MyApp,
     HomePage,
-    SplashPage
+    SplashPage,
+    HowToPage,
+    LostPage,
+    LeaderBoardPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,10 @@ import { NativeAudio } from '@ionic-native/native-audio';
   entryComponents: [
     MyApp,
     HomePage,
-    SplashPage
+    SplashPage,
+    HowToPage,
+    LostPage,
+    LeaderBoardPage
   ],
   providers: [
     StatusBar,
