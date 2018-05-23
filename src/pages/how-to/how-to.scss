@@ -1,39 +1,58 @@
 page-how-to {
-  .title{
-    font-size: 60px;
-    font-family: "Bungee",cursive;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left:0;
-    right:0;
-    text-align: center;
-    width: 80vw;
-		top: 0vh;
-		
-		color: #4D452E;
-  }
 
+	//everything
+	*{
+		font-family: "Bungee",cursive;
+		font-size: 20px;
+		line-height: 20px;
+		color: #4D452E;
+	}
+
+	//main content height and position (except bottom buttons)
+	.page_content{
+		min-height: calc(100vh - 150px);
+		max-width: 600px;
+		margin: auto;
+	}
+
+	//main title
+	.title{
+		line-height: 60px;
+		font-size: 60px;
+		padding: 60px;
+		text-align: center;
+		width: 100%;
+		top: 0vh;
+	}
+
+	//main text
+	.text{
+		padding: 30px;
+	}
+
+	//page background and padding
 	.scroll-content{
 		background-color: #ffe599;
+		padding: 0px !important;
 	}
 
+	//bottom button layout
 	.button_container{
-		position: absolute;
 		text-align: center;
-		left:0;
-		right:0;
+		width: 100%;
+		padding: 20px;
+		max-width: 600px;
 		margin: auto;
-		bottom: 30px;
 	}
-
+	
+	//bottom button
 	.button_container button{
 		text-align: center;
-		display: inline;
-		width: 80vw;
-		height: 8vh;
+		height: 80px;
+		width: calc(100% - 40px);
+		max-width: 400px;
+		margin: 5px 0px;
 		border-radius: 10px;
 		font-size: 30px;
-		font-family: 'Bungee', cursive;
 	}
 }

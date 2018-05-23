@@ -1,5 +1,80 @@
-<script src="lib/ionic/js/ionic.bundle.js"></script>
-<script src="lib/ngCordova/dist/ng-cordova.js"></script>
-<script src="cordova.js"></script>
-<canvas (move)="test($event)" width={{screenWidth}} height={{screenHeight}} #myCanvas></canvas>
-<p class="stats"><span style="float:left;">Score: {{points}}</span><span style="float:right;">Lives: {{lives}}</span></p>
+<!--
+	Generated template for the SplashPage page.
+
+	See http://ionicframework.com/docs/components/#navigation for more info on
+	Ionic pages and navigation.
+-->
+<ion-header>
+</ion-header>
+<ion-content padding>
+
+	<!-- main content -->
+	<div class="page_content">
+		
+		<!-- big top title -->
+		<div class = "title">
+			King Snake
+		</div>
+
+		<!-- snake image -->
+		<div align="center">
+			<img class = "snake"src="assets/imgs/snakepic.png">
+		</div>
+
+		<!-- main texual based content -->
+		<div class = "text">
+
+			<!-- greeting -->
+			<p>
+				Welcome
+			</p>
+
+			<!-- user details -->
+			<table>
+				<tr>
+					<!-- username -->
+					<td>
+						{{username}}
+					</td>
+
+					<!-- users age -->
+					<td>
+						{{age}}
+					</td>
+
+					<!-- user account edit button -->
+					<td align="right">
+						<button ion-button color="blue1" (click)="onClickEditAccount()">Edit</button>
+					</td>
+				</tr>
+			</table>
+
+			<!-- bots option -->
+			<table>
+				<tr>
+					<td>
+						<!-- checkbox to enable bots -->
+						<ion-item>
+							<ion-label>Enable Bots</ion-label>
+							<ion-checkbox [(ngModel)]="bots"></ion-checkbox>
+						</ion-item>
+					</td>
+					<td align="right">
+						<!-- bots count -->
+						<ion-item>
+							<ion-input type="number" [(ngModel)]='botCount' min="1" max="10" align="right"></ion-input>
+						</ion-item>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<!-- bottom button layout -->
+	<div class="button_container">
+		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>
+		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>
+		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>
+	</div>
+
+</ion-content>

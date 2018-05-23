@@ -1,15 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+
 page-home {
-	.stats{
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    padding: 30px;
-    margin: 0px;
-  }
-	.stats span{
-    color: #413C4D;
-    
-    font-size: 20px;
-    font-family: "Bungee",cursive;
-  }
+
+	//everything
+	*{
+		font-family: "Bungee",cursive;
+		font-size: 20px;
+		line-height: 20px;
+	}
+
+	//main content height and position (except bottom buttons)
+	.page_content{
+		min-height: calc(100vh - 350px);
+		max-width: 600px;
+		margin: auto;
+	}
+
+	//main title
+	.title{
+		line-height: 60px;
+		font-size: 60px;
+		padding: 60px;
+		text-align: center;
+		width: 100%;
+		color: #313D4D;
+	}
+
+	//main text
+	.text{
+		margin: 30px;
+		color: #313D4D;
+		/*padding-bottom: 300px;*/
+	}
+	
+	//preference tables
+	.text table{
+		width: 100%;
+	}
+
+	//remove background and border from checkbox and number input
+	ion-item{
+		background: none !important;
+		border: none !important;
+		color: #313D4D !important;
+		padding: 0px;
+	}
+	
+	//remove background and border from checkbox and number input
+	ion-item *{
+		box-shadow: none !important;
+		border: none !important;
+	}
+
+	//page background and padding
+	.scroll-content{
+		background-color: #9fc5f8;
+		padding: 0px !important;
+	}
+
+	//snake image size and centering
+	.snake{
+		display: inline-block;
+		width: 50vw;
+	}
+
+	//bottom button layout
+	.button_container{
+		text-align: center;
+		width: 100%;
+		padding: 20px;
+		max-width: 600px;
+		margin: auto;
+	}
+
+	//bottom button
+	.button_container button{
+		text-align: center;
+		height: 80px;
+		width: calc(100% - 40px);
+		max-width: 400px;
+		margin: 5px 0px;
+		border-radius: 10px;
+		font-size: 30px;
+	}
 }

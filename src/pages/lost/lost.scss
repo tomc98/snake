@@ -1,40 +1,60 @@
 page-lost {
-  .title{
-    font-size: 60px;
-    font-family: "Bungee",cursive;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left:0;
-    right:0;
-    text-align: center;
-    width: 80vw;
-    top: 0vh;
+	
+	//everything
+	*{
+		font-family: "Bungee",cursive;
+	}
 
-    color: #4D3232;
-  }
+	//main content height and position (except bottom buttons)
+	.page_content{
+		min-height: calc(100vh - 200px);
+		max-width: 600px;
+		margin: auto;
+	}
 
-  .scroll-content{
-    background-color: #ea9999;
-  }
+	//main title
+	.title{
+		line-height: 60px;
+		font-size: 60px;
+		font-family: "Bungee",cursive;
+		padding: 60px;
+		text-align: center;
+		width: 100%;
+		color: #4D3232;
+	}
 
+	//main text
+	.text{
+		width: 100%;
+		height: calc(100vh - 200px - 180px);
+		text-align: center;
+		color: #4D3232;
+		font-size: 30px;
+	}
 
-  .button_container{
-    position: absolute;
-    text-align: center;
-    left:0;
-    right:0;
-    margin: auto;
-    bottom: 30px;
-  }
+	//page background and padding
+	.scroll-content{
+		background-color: #ea9999;
+		padding: 0px !important;
+	}
 
-  .button_container button{
-    text-align: center;
-    display: inline;
-    width: 80vw;
-    height: 8vh;
-    border-radius: 10px;
-    font-size: 30px;
-    font-family: 'Bungee', cursive;
-  }
+	//bottom button layout
+	.button_container{
+		text-align: center;
+		width: 100%;
+		padding: 20px;
+		max-width: 600px;
+		margin: auto;
+	}
+
+	//bottom button
+	.button_container button{
+		text-align: center;
+		height: 80px;
+		width: calc(100% - 40px);
+		max-width: 400px;
+		margin: 5px 0px;
+		border-radius: 10px;
+		font-size: 30px;
+	}
 }

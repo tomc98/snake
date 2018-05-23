@@ -17,11 +17,12 @@ export class HowToPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  //not currently used
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HowToPage');
+    //console.log('ionViewDidLoad HowToPage');
   }
 
-
+  //on back button pressed, pop to root
   onClickBack(){
     this.navCtrl.popToRoot()
   }
