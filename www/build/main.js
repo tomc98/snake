@@ -69,6 +69,7 @@ var HomePage = (function () {
         this.birthday = "1998-08-14";
         this.age = 19;
         this.botCount = 3;
+        this.highScore = 129;
     }
     //currently not used
     HomePage.prototype.ionViewDidLoad = function () {
@@ -76,7 +77,13 @@ var HomePage = (function () {
     };
     //on play button pressed, go to game
     HomePage.prototype.onClickPlay = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__game_game__["a" /* GamePage */]);
+        var parameters = {
+            enableBots: true,
+            botCount: this.botCount,
+            username: this.username,
+            highScore: this.highScore
+        };
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__game_game__["a" /* GamePage */], parameters);
     };
     //on leader board button pressed, go there
     HomePage.prototype.onClickLeaderBoard = function () {
@@ -131,9 +138,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 // import { Firebase } from '@ionic-native/firebase';
 var GamePage = (function () {
-    function GamePage(navCtrl, /*private nativeAudio: NativeAudio,*/ plt) {
+    function GamePage(navCtrl, /*private nativeAudio: NativeAudio,*/ plt, navParams) {
         this.navCtrl = navCtrl;
         this.plt = plt;
+        this.navParams = navParams;
         //globally used values
         this.screenWidth = window.innerWidth;
         this.screenHeight = window.innerHeight;
@@ -143,9 +151,16 @@ var GamePage = (function () {
         this.fruitC = "blue";
         this.fruitS = 20;
         this.colors = ["#FF8800", "#0088FF", "#88FF88", "rgb(88, 0, 255)"];
+        this.botColour = "#555555";
         this.lives = 3;
         this.down = false;
-        this.snake = [[window.innerWidth / 2, window.innerHeight / 2, this.getColor(0)], [window.innerWidth / 2, window.innerHeight / 2, this.getColor(0)]];
+        this.userSnake = [[window.innerWidth / 2, window.innerHeight / 2, this.getColor(0)], [window.innerWidth / 2, window.innerHeight / 2, this.getColor(0)]];
+        this.snakes = [this.userSnake];
+        var parameters = navParams.data;
+        this.username = parameters.username;
+        this.highScore = parameters.highScore;
+        this.enableBots = parameters.enableBots;
+        this.botCount = parameters.botCount;
     }
     //executes once all views have been initialised 
     GamePage.prototype.ngAfterViewInit = function () {
@@ -162,7 +177,7 @@ var GamePage = (function () {
         //setup refresh interval
         this.theInt = setInterval(function () { _this.render(); }, 1000 / 60);
         //reset game to start
-        this.resetGameState();
+        this.setupGameState();
         this.loadSound();
     };
     //load sounds
@@ -184,19 +199,19 @@ var GamePage = (function () {
             //if position is defined
             if (this.posx != null) {
                 //get and update next position
-                var yo = this.getNextPosition(this.posx, this.posy, this.snake[0][0], this.snake[0][1], 10);
-                this.snake[0][0] = yo[0];
-                this.snake[0][1] = yo[1];
+                var yo = this.getNextPosition(this.posx, this.posy, this.userSnake[0][0], this.userSnake[0][1], 10);
+                this.userSnake[0][0] = yo[0];
+                this.userSnake[0][1] = yo[1];
                 //draw head
-                this.drawCircle(this.snake[0][0], this.snake[0][1], 5, this.snake[0][2]);
+                this.drawCircle(this.userSnake[0][0], this.userSnake[0][1], 5, this.userSnake[0][2]);
                 //for each following body circle
-                for (var i = 1; i < this.snake.length; i++) {
+                for (var i = 1; i < this.userSnake.length; i++) {
                     //get and update next position
-                    yo = this.getNextPosition(this.snake[i - 1][0], this.snake[i - 1][1], this.snake[i][0], this.snake[i][1], 10);
-                    this.snake[i][0] = yo[0];
-                    this.snake[i][1] = yo[1];
+                    yo = this.getNextPosition(this.userSnake[i - 1][0], this.userSnake[i - 1][1], this.userSnake[i][0], this.userSnake[i][1], 10);
+                    this.userSnake[i][0] = yo[0];
+                    this.userSnake[i][1] = yo[1];
                     //draw body circle
-                    this.drawCircle(this.snake[i][0], this.snake[i][1], 5, this.snake[i][2]);
+                    this.drawCircle(this.userSnake[i][0], this.userSnake[i][1], 5, this.userSnake[i][2]);
                 }
             }
             this.updateFruit();
@@ -212,11 +227,17 @@ var GamePage = (function () {
         }
     };
     //reset the games state and values
-    GamePage.prototype.resetGameState = function () {
+    GamePage.prototype.setupGameState = function () {
         this.points = 0;
         this.makeFruit();
         this.lives = 3;
-        this.snake = [[window.innerWidth / 2, window.innerHeight / 2, this.getColor(0)], [window.innerWidth / 2, window.innerHeight / 2, this.getColor(0)]];
+        this.userSnake = [[window.innerWidth / 2, window.innerHeight / 2, this.getColor(0)], [window.innerWidth / 2, window.innerHeight / 2, this.getColor(0)]];
+        this.snakes = [this.userSnake];
+        if (this.enableBots) {
+            for (var i = 0; i < this.botCount; i++) {
+                var snake = [[window.innerWidth / 2, window.innerHeight / 2, this.botColour], [window.innerWidth / 2, window.innerHeight / 2, this.botColour]];
+            }
+        }
     };
     //draw circle onto canvas
     GamePage.prototype.drawCircle = function (x, y, r, c) {
@@ -261,15 +282,15 @@ var GamePage = (function () {
     GamePage.prototype.checkSelfIntercept = function () {
         //setup relevant values
         var size = 10;
-        var frontx = this.snake[0][0];
-        var fronty = this.snake[0][1];
+        var frontx = this.userSnake[0][0];
+        var fronty = this.userSnake[0][1];
         var x;
         var y;
         var distanceQuad;
         //test if each of the body circles touch the first head circle
-        for (var i = 2; i < this.snake.length; i++) {
-            x = this.snake[i][0];
-            y = this.snake[i][1];
+        for (var i = 2; i < this.userSnake.length; i++) {
+            x = this.userSnake[i][0];
+            y = this.userSnake[i][1];
             distanceQuad = (x - frontx) * (x - frontx) + (y - fronty) * (y - fronty);
             if (distanceQuad <= (size * size)) {
                 //console.log("you lose")
@@ -297,8 +318,8 @@ var GamePage = (function () {
     GamePage.prototype.checkEat = function () {
         //get relevant data
         var size = this.fruitS + 5;
-        var frontx = this.snake[0][0];
-        var fronty = this.snake[0][1];
+        var frontx = this.userSnake[0][0];
+        var fronty = this.userSnake[0][1];
         //calculate distance between head and fruit
         var distanceQuad;
         distanceQuad = (this.fruitX - frontx) * (this.fruitX - frontx) + (this.fruitY - fronty) * (this.fruitY - fronty);
@@ -323,10 +344,10 @@ var GamePage = (function () {
         //if fruit has been eaten
         if (this.checkEat()) {
             //append new body circle to snake
-            var last = this.snake.length - 1;
-            var xSnake = this.snake[last][0];
-            var ySnake = this.snake[last][1];
-            this.snake.push([xSnake, ySnake, this.fruitC]);
+            var last = this.userSnake.length - 1;
+            var xSnake = this.userSnake[last][0];
+            var ySnake = this.userSnake[last][1];
+            this.userSnake.push([xSnake, ySnake, this.fruitC]);
             //generate new fruit and update points
             this.makeFruit();
             this.points += 1;
@@ -407,9 +428,10 @@ var GamePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-game',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/'<!-- canvas to display th egame -->\n\n<canvas (move)="test($event)" width={{screenWidth}} height={{screenHeight}} #myCanvas></canvas>\n\n\n\n<!-- score and lives display -->\n\n<p class="stats">\n\n	<span style="float:left;">Score: {{points}}</span>\n\n	<span style="float:right;">Lives: {{lives}}</span>\n\n</p>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _c || Object])
     ], GamePage);
     return GamePage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=game.js.map

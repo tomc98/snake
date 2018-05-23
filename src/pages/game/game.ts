@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import {Platform, ViewController} from 'ionic-angular';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { LostPage } from '../lost/lost';
 
 // import { Firebase } from '@ionic-native/firebase';
@@ -10,29 +10,46 @@ import { LostPage } from '../lost/lost';
   templateUrl: 'game.html'
 })
 export class GamePage {
-    @ViewChild('myCanvas') myCanvas;
+  @ViewChild('myCanvas') myCanvas;
 
-    //globally used values
-    screenWidth= window.innerWidth;
-    screenHeight= window.innerHeight;
-    points = 0;
-    ctx: any;
-    posx: any;
-    posy: any;
-    fruitX = window.innerWidth/5;
-    fruitY = innerHeight/5;
-    fruitC = "blue";
-    fruitS = 20;
-    colors = ["#FF8800", "#0088FF", "#88FF88", "rgb(88, 0, 255)"]
-    lives = 3;
-    down = false;
-    theInt : any;
-    snake = [[window.innerWidth/2, window.innerHeight/2, this.getColor(0)],[window.innerWidth/2, window.innerHeight/2, this.getColor(0)]];
-    
-    constructor(public navCtrl: NavController, /*private nativeAudio: NativeAudio,*/ public plt: Platform) {
+  //globally used values
+  screenWidth= window.innerWidth;
+  screenHeight= window.innerHeight;
+  points = 0;
+  ctx: any;
+  posx: any;
+  posy: any;
+  fruitX = window.innerWidth/5;
+  fruitY = innerHeight/5;
+  fruitC = "blue";
+  fruitS = 20;
+  colors = ["#FF8800", "#0088FF", "#88FF88", "rgb(88, 0, 255)"]
+  botColour = "#555555";
+  lives = 3;
+  down = false;
+  theInt : any;
+  userSnake = [[window.innerWidth/2, window.innerHeight/2, this.getColor(0)],[window.innerWidth/2, window.innerHeight/2, this.getColor(0)]];
+  snakes = [this.userSnake]
+  
+  username:string;
+  highScore:number;
+  enableBots:boolean;
+  botCount:number;
+
+  constructor(public navCtrl: NavController, /*private nativeAudio: NativeAudio,*/ public plt: Platform, public navParams: NavParams) {
+
+    var parameters = navParams.data
+
+    this.username = parameters.username;
+    this.highScore = parameters.highScore;
+    this.enableBots = parameters.enableBots;
+    this.botCount = parameters.botCount;
 
   }
 
+
+
+  
   //executes once all views have been initialised 
   ngAfterViewInit() {
 
@@ -51,7 +68,7 @@ export class GamePage {
     this.theInt = setInterval(() => {this.render();}, 1000/60);
 
     //reset game to start
-    this.resetGameState();
+    this.setupGameState();
     this.loadSound();
   }
 
@@ -78,23 +95,23 @@ export class GamePage {
       //if position is defined
       if(this.posx!=null){
         //get and update next position
-        var yo = this.getNextPosition(this.posx, this.posy, this.snake[0][0], this.snake[0][1], 10)
-        this.snake[0][0] = yo[0];
-        this.snake[0][1] = yo[1];
+        var yo = this.getNextPosition(this.posx, this.posy, this.userSnake[0][0], this.userSnake[0][1], 10)
+        this.userSnake[0][0] = yo[0];
+        this.userSnake[0][1] = yo[1];
 
         //draw head
-        this.drawCircle(this.snake[0][0], this.snake[0][1], 5, this.snake[0][2]);
+        this.drawCircle(this.userSnake[0][0], this.userSnake[0][1], 5, this.userSnake[0][2]);
 
         //for each following body circle
-        for(var i = 1; i<this.snake.length; i++){
+        for(var i = 1; i<this.userSnake.length; i++){
           
           //get and update next position
-          yo = this.getNextPosition(this.snake[i-1][0], this.snake[i-1][1], this.snake[i][0], this.snake[i][1], 10)
-          this.snake[i][0] = yo[0];
-          this.snake[i][1] = yo[1];
+          yo = this.getNextPosition(this.userSnake[i-1][0], this.userSnake[i-1][1], this.userSnake[i][0], this.userSnake[i][1], 10)
+          this.userSnake[i][0] = yo[0];
+          this.userSnake[i][1] = yo[1];
           
           //draw body circle
-          this.drawCircle(this.snake[i][0], this.snake[i][1], 5, this.snake[i][2]);
+          this.drawCircle(this.userSnake[i][0], this.userSnake[i][1], 5, this.userSnake[i][2]);
         }
       }
 
@@ -115,11 +132,20 @@ export class GamePage {
   }
 
   //reset the games state and values
-  resetGameState(){
+  setupGameState(){
     this.points = 0;
     this.makeFruit();
     this.lives = 3;
-    this.snake = [[window.innerWidth/2, window.innerHeight/2, this.getColor(0)],[window.innerWidth/2, window.innerHeight/2, this.getColor(0)]];
+    this.userSnake = [[window.innerWidth/2, window.innerHeight/2, this.getColor(0)],[window.innerWidth/2, window.innerHeight/2, this.getColor(0)]];
+
+    this.snakes = [this.userSnake];
+
+    if(this.enableBots){
+      for(var i = 0; i < this.botCount; i++){
+        var snake = [[window.innerWidth/2, window.innerHeight/2, this.botColour],[window.innerWidth/2, window.innerHeight/2, this.botColour]];
+      }
+    }
+
   }
 
   //draw circle onto canvas
@@ -174,16 +200,16 @@ export class GamePage {
 
     //setup relevant values
     var size = 10
-    var frontx: any = this.snake[0][0]
-    var fronty: any = this.snake[0][1]
+    var frontx: any = this.userSnake[0][0]
+    var fronty: any = this.userSnake[0][1]
     var x: any;
     var y: any;
     var distanceQuad;
 
     //test if each of the body circles touch the first head circle
-    for(var i = 2; i<this.snake.length; i++){
-      x = this.snake[i][0]
-      y = this.snake[i][1]
+    for(var i = 2; i<this.userSnake.length; i++){
+      x = this.userSnake[i][0]
+      y = this.userSnake[i][1]
       distanceQuad = (x-frontx)*(x-frontx)+(y-fronty)*(y-fronty);
       if(distanceQuad <= (size*size)){
         //console.log("you lose")
@@ -216,8 +242,8 @@ export class GamePage {
 
     //get relevant data
     var size = this.fruitS+5;
-    var frontx: any = this.snake[0][0];
-    var fronty: any = this.snake[0][1];
+    var frontx: any = this.userSnake[0][0];
+    var fronty: any = this.userSnake[0][1];
 
     //calculate distance between head and fruit
     var distanceQuad;
@@ -252,10 +278,10 @@ export class GamePage {
     if(this.checkEat()){
 
       //append new body circle to snake
-      var last = this.snake.length - 1;
-      var xSnake = this.snake[last][0];
-      var ySnake = this.snake[last][1];
-      this.snake.push([xSnake, ySnake, this.fruitC]);
+      var last = this.userSnake.length - 1;
+      var xSnake = this.userSnake[last][0];
+      var ySnake = this.userSnake[last][1];
+      this.userSnake.push([xSnake, ySnake, this.fruitC]);
 
       //generate new fruit and update points
       this.makeFruit();

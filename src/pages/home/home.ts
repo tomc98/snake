@@ -16,6 +16,7 @@ export class HomePage {
   birthday:string = "1998-08-14";
   age:number = 19;
   botCount:number = 3;
+  highScore:number = 129;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -27,7 +28,13 @@ export class HomePage {
 
   //on play button pressed, go to game
   onClickPlay(){
-    this.navCtrl.push(GamePage);
+    var parameters = {
+      enableBots: true,
+      botCount: this.botCount,
+      username: this.username,
+      highScore: this.highScore
+    }
+    this.navCtrl.push(GamePage, parameters);
   }
 
   //on leader board button pressed, go there
