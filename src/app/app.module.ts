@@ -13,6 +13,7 @@ import { LostPage } from '../pages/lost/lost';
 import { LeaderBoardPage } from '../pages/leader-board/leader-board';
 import { AccountPage } from '../pages/account/account';
 //import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { NativeAudio } from '@ionic-native/native-audio';
 
@@ -29,7 +30,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

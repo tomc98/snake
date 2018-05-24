@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the AccountPage page.
@@ -19,15 +20,29 @@ export class AccountPage {
   username:string = "TechSupport420";
   birthday:string = "";
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
-    //retrieve values from navigation params
-    this.username = navParams.data.username;
-    this.birthday = navParams.data.birthday;
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public storage: Storage) {
+    
+    this.loadPreferences();
   }
 
   //currently not used
   ionViewDidLoad() {
     //console.log('ionViewDidLoad AccountPage');
+  }
+
+  loadPreferences(){
+    this.storage.get('user').then((val) => {
+      if(val.username == null){
+        this.username = '';
+      }else{
+        this.username = val.username;
+      }
+
+      if(val.birthday != null){
+        this.birthday = val.birthday;
+      }
+
+    });
   }
 
   //on delete button pressed, show deletion comfirmatoin dialog
@@ -44,7 +59,21 @@ export class AccountPage {
         },{
           text: 'Delete',
           handler: () => {
-            //TODO actually delete
+            //delete username, birthday, highscores and leaderboard entry
+            this.storage.set('user', {username: null, birthday: null})
+
+            this.storage.set('highscores', []);
+
+            this.storage.get('leaderboard').then((val) => {
+              for(var i = 0; i < val.length; i++){
+                if(val[i].username == this.username){
+                  val.splice(i);
+                  break;
+                }
+              }
+
+              this.storage.set('leaderboard', val);
+            })
 
             //return to home page
             this.navCtrl.popToRoot()
@@ -59,6 +88,9 @@ export class AccountPage {
 
   //on save button pressed
   onClickSave(){
+
+    this.storage.set('user', {username: this.username, birthday: this.birthday})
+
     this.navCtrl.popToRoot()
   }
 
