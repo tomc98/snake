@@ -492,16 +492,21 @@ var LostPage = (function () {
             var newHighscoreObject = { datetime: null, score: _this.points };
             var highscoreObject = { datetime: null, score: _this.points };
             // if a previous highscore was set use it instead
-            if (val.length > 0) {
+            if (val.length == 0) {
+                highscoreObject = newHighscoreObject;
+                val.push(newHighscoreObject);
+            }
+            else {
                 highscoreObject = val[val.length - 1];
             }
             // if this score is better add it to the list
             if (_this.points > highscoreObject.score) {
                 val.push(newHighscoreObject);
+                highscoreObject = newHighscoreObject;
             }
             //get the highest highscore into the display variable
             _this.highscore = highscoreObject.score;
-            // override highscores with possibly update list
+            // override highscores with update list
             storage.set('highscores', val);
         });
     }

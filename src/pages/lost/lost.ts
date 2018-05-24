@@ -28,23 +28,27 @@ export class LostPage {
     //retrieve high score from storage
     storage.get('highscores').then((val) => {
 
-      var newHighscoreObject = {datetime: null, score: this.points}
-      var highscoreObject = {datetime: null, score: this.points}
+      var newHighscoreObject = {datetime: null, score: this.points};
+      var highscoreObject = {datetime: null, score: this.points};
 
       // if a previous highscore was set use it instead
-      if(val.length > 0){
+      if(val.length == 0){
+        highscoreObject = newHighscoreObject
+        val.push(newHighscoreObject)
+      }else{
         highscoreObject = val[val.length-1];
       }
 
       // if this score is better add it to the list
       if(this.points > highscoreObject.score){
         val.push(newHighscoreObject)
+        highscoreObject = newHighscoreObject
       }
 
       //get the highest highscore into the display variable
       this.highscore = highscoreObject.score;
 
-      // override highscores with possibly update list
+      // override highscores with update list
       storage.set('highscores', val);
     });
   }
