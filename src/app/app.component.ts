@@ -16,8 +16,6 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       
       //leaderboard holds all users highscore as:
       //[
@@ -35,9 +33,9 @@ export class MyApp {
       //  {datetime:x, score, y},
       //  ...
       //]
-      storage.get('highscores').then((val) => {
+      storage.get('highscorehistory').then((val) => {
         if(val == null){
-          storage.set('highscores', []);
+          storage.set('highscorehistory', []);
         }
       });
 
@@ -45,7 +43,7 @@ export class MyApp {
       //{username: name, birthday: bday}
       storage.get('user').then((val) => {
         if(val == null){
-          storage.set('user', {username:null, birthday:null});
+          storage.set('user', {username: null, birthday: null, highscore: 0});
         }
       });
 

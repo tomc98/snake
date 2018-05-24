@@ -21,9 +21,9 @@
 		<table class="text">
 			<tr>
 				<td>
-					<!-- score and highscore -->
+					<!-- score and highscore if user account is setup -->
 					<p>You Scored {{points}}</p>
-					<p>Highscore: {{highscore}}</p>
+					<p *ngIf="highscore!=null">Highscore: {{highscore}}</p>
 				</td>
 			</tr>
 		</table>

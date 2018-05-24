@@ -60,8 +60,9 @@ export class AccountPage {
           text: 'Delete',
           handler: () => {
             //delete username, birthday, highscores and leaderboard entry
-            this.storage.set('user', {username: null, birthday: null})
+            this.storage.set('user', {username: null, birthday: null, highscore: 0})
 
+            //delete highscore history
             this.storage.set('highscores', []);
 
             this.storage.get('leaderboard').then((val) => {
@@ -89,7 +90,7 @@ export class AccountPage {
   //on save button pressed
   onClickSave(){
 
-    this.storage.set('user', {username: this.username, birthday: this.birthday})
+    this.storage.set('user', {username: this.username, birthday: this.birthday, highscore: 0})
 
     this.navCtrl.popToRoot()
   }

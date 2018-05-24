@@ -27,19 +27,19 @@ export class HomePage {
   }
 
   loadPreferences(){
-    this.storage.get('user').then((val) => {
+    this.storage.get('user').then((user) => {
       
-      if(val.username == null){
+      if(user.username == null){
         this.username = 'username';
       }else{
-        this.username = val.username;
+        this.username = user.username;
       }
 
-      if(val.birthday == null){
+      if(user.birthday == null){
         this.birthday = null;
         this.age = '';
       }else{
-        this.birthday = val.birthday;
+        this.birthday = user.birthday;
         this.age = '13';
       }
 

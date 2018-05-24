@@ -17,8 +17,8 @@ import { Storage } from '@ionic/storage';
 export class LostPage {
 
   //public variable to show points scored and highscore in html
-  public points = 0;
-  public highscore = 0;
+  public points:string = '0';
+  public highscore:string = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
 
@@ -26,30 +26,29 @@ export class LostPage {
     this.points = navParams.data
 
     //retrieve high score from storage
-    storage.get('highscores').then((val) => {
+    storage.get('user').then((user) => {
 
-      var newHighscoreObject = {datetime: null, score: this.points};
-      var highscoreObject = {datetime: null, score: this.points};
+      // if has a user account
+      if(user.username != null){
+        this.highscore = user.highscore;
 
-      // if a previous highscore was set use it instead
-      if(val.length == 0){
-        highscoreObject = newHighscoreObject
-        val.push(newHighscoreObject)
-      }else{
-        highscoreObject = val[val.length-1];
+        // if this is a new highscore
+        if(this.points > this.highscore){
+          this.highscore = this.points;
+
+          // update and store new highscore
+          user.highscore = this.highscore;
+          storage.set('user', user);
+
+          // add item to highscore history
+          var newHighscoreHistoryItem = {datetime: null, score: this.highscore};
+          storage.get('highscorehistory').then((highscorehistory) => {
+            highscorehistory.push(newHighscoreHistoryItem);
+            storage.set('highscorehistory', highscorehistory);
+          });
+        }
       }
 
-      // if this score is better add it to the list
-      if(this.points > highscoreObject.score){
-        val.push(newHighscoreObject)
-        highscoreObject = newHighscoreObject
-      }
-
-      //get the highest highscore into the display variable
-      this.highscore = highscoreObject.score;
-
-      // override highscores with update list
-      storage.set('highscores', val);
     });
   }
 
