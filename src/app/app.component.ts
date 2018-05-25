@@ -17,33 +17,43 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage) {
     platform.ready().then(() => {
       
-      //leaderboard holds all users highscore as:
-      //[
-      //  {username:'name', score:x},
-      //  ...
-      //]
-      storage.get('leaderboard').then((val) => {
-        if(val == null){
-          storage.set('leaderboard', []);
+      // accounts holds a list of all accounts
+      // [
+      //   {
+      //     username:'name', 
+      //     birthday:'bday', 
+      //     avatar:image, 
+      //     highscore:x, 
+      //     highscorehistory:[
+      //       {
+      //         datetime:time,
+      //         highscore:x
+      //       },
+      //       ...
+      //     ]
+      //   },
+      //   ...
+      // ]
+      storage.get('accounts').then((val) => {
+        if(val == null || true){
+          var defaultUser = {
+            username: 'player1',
+            birthday: null,
+            avatar: null,
+            highscore: 0,
+            highscorehistory: [
+              {datetime: null, highscore: 0}
+            ]
+          };
+          storage.set('accounts', [defaultUser]);
+          storage.set('activeuser', 0);
         }
       });
 
-      //highscores holds the current users highscore history as:
-      //[
-      //  {datetime:x, score, y},
-      //  ...
-      //]
-      storage.get('highscorehistory').then((val) => {
+      // holds id (index) of current user
+      storage.get('activeuser').then((val) => {
         if(val == null){
-          storage.set('highscorehistory', []);
-        }
-      });
-
-      //user holds user settings as:
-      //{username: name, birthday: bday}
-      storage.get('user').then((val) => {
-        if(val == null){
-          storage.set('user', {username: null, birthday: null, highscore: 0});
+          storage.set('activeuser', 0);
         }
       });
 

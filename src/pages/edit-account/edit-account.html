@@ -1,0 +1,49 @@
+<!--
+	Generated template for the EditAccountPage page.
+
+	See http://ionicframework.com/docs/components/#navigation for more info on
+	Ionic pages and navigation.
+-->
+<ion-header>
+</ion-header>
+
+
+<ion-content padding>
+	
+	<!-- all of the page content except for the buttons -->
+	<div class="page_content">
+
+		<!-- Big top title -->
+		<div class = "title">
+			Edit Account
+		</div>
+		
+		<!-- contains middle text based content -->
+		<div class = "text">
+
+			<!-- list of inputs -->
+			<ion-list>
+
+				<!-- Name input -->
+				<ion-item>
+					<ion-label color="turquoise4">Name</ion-label>
+					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>
+				</ion-item>
+
+				<!-- date input -->
+				<ion-item>
+					<ion-label color="turquoise4">Birthday</ion-label>
+					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>
+				</ion-item>
+
+			</ion-list>
+		</div>
+	</div>
+
+	<!-- contains buttom buttons -->
+	<div class="button_container">
+		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>
+		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>
+	</div>
+</ion-content>
+	

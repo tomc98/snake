@@ -3,13 +3,14 @@ import { NavController, NavParams } from 'ionic-angular';
 import { GamePage } from '../game/game';
 import { HowToPage } from '../how-to/how-to';
 import { LeaderBoardPage } from '../leader-board/leader-board';
-import { AccountPage } from '../account/account';
+import { AccountsPage } from '../accounts/accounts';
 import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
 })
+
 export class HomePage {
 
   //values to be displayed on the page
@@ -27,20 +28,23 @@ export class HomePage {
   }
 
   loadPreferences(){
-    this.storage.get('user').then((user) => {
-      
-      if(user.username == null){
-        this.username = 'username';
-      }else{
-        this.username = user.username;
-      }
+    this.storage.get('activeuser').then((activeuser) => {
 
-      if(user.birthday == null){
-        this.birthday = null;
-        this.age = '';
-      }else{
-        this.birthday = user.birthday;
-        this.age = '13';
+      if(activeuser != null){
+
+        this.storage.get('accounts').then((accounts) =>{
+
+          var account = accounts[activeuser];
+
+          this.username = account.username;
+          this.birthday = account.birthday;
+
+          if(this.birthday != null){
+            this.age = '13';
+          }
+
+        });
+
       }
 
     });
@@ -69,6 +73,6 @@ export class HomePage {
 
   //on edit (account) pressed, go there
   onClickEditAccount(){
-    this.navCtrl.push(AccountPage);
+    this.navCtrl.push(AccountsPage);
   }
 }

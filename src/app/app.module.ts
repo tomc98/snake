@@ -11,12 +11,13 @@ import { GamePage } from '../pages/game/game';
 import { HowToPage } from '../pages/how-to/how-to';
 import { LostPage } from '../pages/lost/lost';
 import { LeaderBoardPage } from '../pages/leader-board/leader-board';
-import { AccountPage } from '../pages/account/account';
+import { EditAccountPage } from '../pages/edit-account/edit-account';
+import { AccountsPage } from '../pages/accounts/accounts';
+
 //import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { NativeAudio } from '@ionic-native/native-audio';
-
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
     HowToPage,
     LostPage,
     LeaderBoardPage,
-    AccountPage
+    EditAccountPage,
+    AccountsPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
     HowToPage,
     LostPage,
     LeaderBoardPage,
-    AccountPage
+    EditAccountPage,
+    AccountsPage
   ],
   providers: [
     StatusBar,

@@ -40,12 +40,12 @@ webpackEmptyAsyncContext.id = 152;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game_game__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__how_to_how_to__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__leader_board_leader_board__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__account_account__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__accounts_accounts__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -75,20 +75,16 @@ var HomePage = (function () {
     };
     HomePage.prototype.loadPreferences = function () {
         var _this = this;
-        this.storage.get('user').then(function (user) {
-            if (user.username == null) {
-                _this.username = 'username';
-            }
-            else {
-                _this.username = user.username;
-            }
-            if (user.birthday == null) {
-                _this.birthday = null;
-                _this.age = '';
-            }
-            else {
-                _this.birthday = user.birthday;
-                _this.age = '13';
+        this.storage.get('activeuser').then(function (activeuser) {
+            if (activeuser != null) {
+                _this.storage.get('accounts').then(function (accounts) {
+                    var account = accounts[activeuser];
+                    _this.username = account.username;
+                    _this.birthday = account.birthday;
+                    if (_this.birthday != null) {
+                        _this.age = '13';
+                    }
+                });
             }
         });
     };
@@ -112,11 +108,11 @@ var HomePage = (function () {
     };
     //on edit (account) pressed, go there
     HomePage.prototype.onClickEditAccount = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__account_account__["a" /* AccountPage */]);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__accounts_accounts__["a" /* AccountsPage */]);
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/'<!--\n\n	Generated template for the SplashPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n<ion-content padding>\n\n\n\n	<!-- main content -->\n\n	<div class="page_content">\n\n		\n\n		<!-- big top title -->\n\n		<div class = "title">\n\n			King Snake\n\n		</div>\n\n\n\n		<!-- snake image -->\n\n		<div align="center">\n\n			<img class = "snake"src="assets/imgs/snakepic.png">\n\n		</div>\n\n\n\n		<!-- main texual based content -->\n\n		<div class = "text">\n\n\n\n			<!-- greeting -->\n\n			<p>\n\n				Welcome\n\n			</p>\n\n\n\n			<!-- user details -->\n\n			<table>\n\n				<tr>\n\n					<!-- username -->\n\n					<td>\n\n						{{username}}\n\n					</td>\n\n\n\n					<!-- users age -->\n\n					<td>\n\n						{{age}}\n\n					</td>\n\n\n\n					<!-- user account edit button -->\n\n					<td align="right">\n\n						<button ion-button color="blue1" (click)="onClickEditAccount()">Edit</button>\n\n					</td>\n\n				</tr>\n\n			</table>\n\n\n\n			<!-- bots option -->\n\n			<table>\n\n				<tr>\n\n					<td>\n\n						<!-- checkbox to enable bots -->\n\n						<ion-item>\n\n							<ion-label>Enable Bots</ion-label>\n\n							<ion-checkbox [(ngModel)]="bots"></ion-checkbox>\n\n						</ion-item>\n\n					</td>\n\n					<td align="right">\n\n						<!-- bots count -->\n\n						<ion-item>\n\n							<ion-input type="number" [(ngModel)]=\'botCount\' min="1" max="10" align="right"></ion-input>\n\n						</ion-item>\n\n					</td>\n\n				</tr>\n\n			</table>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/'<!--\n\n	Generated template for the SplashPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n<ion-content padding>\n\n\n\n	<!-- main content -->\n\n	<div class="page_content">\n\n		\n\n		<!-- big top title -->\n\n		<div class = "title">\n\n			King Snake\n\n		</div>\n\n\n\n		<!-- snake image -->\n\n		<div align="center">\n\n			<img class = "snake"src="assets/imgs/snakepic.png">\n\n		</div>\n\n\n\n		<!-- main texual based content -->\n\n		<div class = "text">\n\n\n\n			<!-- greeting -->\n\n			<p>\n\n				Welcome\n\n			</p>\n\n\n\n			<!-- user details -->\n\n			<table>\n\n				<tr>\n\n					<!-- username -->\n\n					<td>\n\n						{{username}}\n\n					</td>\n\n\n\n					<!-- users age -->\n\n					<td>\n\n						{{age}}\n\n					</td>\n\n\n\n					<!-- user account edit button -->\n\n					<td align="right">\n\n						<button ion-button color="blue1" (click)="onClickEditAccount()">Select</button>\n\n					</td>\n\n				</tr>\n\n			</table>\n\n\n\n			<!-- bots option -->\n\n			<table>\n\n				<tr>\n\n					<td>\n\n						<!-- checkbox to enable bots -->\n\n						<ion-item>\n\n							<ion-label>Enable Bots</ion-label>\n\n							<ion-checkbox [(ngModel)]="bots"></ion-checkbox>\n\n						</ion-item>\n\n					</td>\n\n					<td align="right">\n\n						<!-- bots count -->\n\n						<ion-item>\n\n							<ion-input type="number" [(ngModel)]=\'botCount\' min="1" max="10" align="right"></ion-input>\n\n						</ion-item>\n\n					</td>\n\n				</tr>\n\n			</table>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]])
     ], HomePage);
@@ -133,7 +129,7 @@ var HomePage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GamePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lost_lost__ = __webpack_require__(197);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -455,8 +451,8 @@ var GamePage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LostPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -534,7 +530,7 @@ var LostPage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HowToPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -584,7 +580,7 @@ var HowToPage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeaderBoardPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -671,10 +667,11 @@ var LeaderBoardPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__edit_account_edit_account__ = __webpack_require__(201);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -688,42 +685,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
- * Generated class for the AccountPage page.
+ * Generated class for the AccountsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var AccountPage = (function () {
-    function AccountPage(navCtrl, alertCtrl, storage) {
+var AccountsPage = (function () {
+    function AccountsPage(navCtrl, navParams, storage, alertCtrl) {
         this.navCtrl = navCtrl;
-        this.alertCtrl = alertCtrl;
+        this.navParams = navParams;
         this.storage = storage;
-        //values to be displayed on page
-        this.username = "TechSupport420";
-        this.birthday = "";
-        this.loadPreferences();
+        this.alertCtrl = alertCtrl;
+        this.accounts = [];
     }
-    //currently not used
-    AccountPage.prototype.ionViewDidLoad = function () {
-        //console.log('ionViewDidLoad AccountPage');
-    };
-    AccountPage.prototype.loadPreferences = function () {
+    AccountsPage.prototype.ionViewWillEnter = function () {
         var _this = this;
-        this.storage.get('user').then(function (val) {
-            if (val.username == null) {
-                _this.username = '';
-            }
-            else {
-                _this.username = val.username;
-            }
-            if (val.birthday != null) {
-                _this.birthday = val.birthday;
-            }
+        this.storage.get('accounts').then(function (accounts) {
+            _this.accounts = accounts;
         });
     };
+    AccountsPage.prototype.onClickBack = function () {
+        this.navCtrl.pop();
+    };
+    AccountsPage.prototype.onClickSelect = function (i) {
+        this.storage.set('activeuser', i);
+        this.navCtrl.pop();
+    };
+    AccountsPage.prototype.onClickEdit = function (i) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__edit_account_edit_account__["a" /* EditAccountPage */], i);
+    };
+    AccountsPage.prototype.onClickDelete = function (i) {
+    };
+    //TODO port
     //on delete button pressed, show deletion comfirmatoin dialog
-    AccountPage.prototype.onClickDelete = function () {
+    AccountsPage.prototype.onClickDeleteX = function () {
         var _this = this;
         //create comfirmation dialog
         var alert = this.alertCtrl.create({
@@ -742,10 +739,10 @@ var AccountPage = (function () {
                         _this.storage.set('highscores', []);
                         _this.storage.get('leaderboard').then(function (val) {
                             for (var i = 0; i < val.length; i++) {
-                                if (val[i].username == _this.username) {
-                                    val.splice(i);
-                                    break;
-                                }
+                                //if(val[i].username == this.username){
+                                //  val.splice(i);
+                                //  break;
+                                //}
                             }
                             _this.storage.set('leaderboard', val);
                         });
@@ -758,25 +755,17 @@ var AccountPage = (function () {
         //show dialog
         alert.present();
     };
-    //on save button pressed
-    AccountPage.prototype.onClickSave = function () {
-        this.storage.set('user', { username: this.username, birthday: this.birthday, highscore: 0 });
-        this.navCtrl.popToRoot();
-    };
-    //on cancel button pressed
-    AccountPage.prototype.onClickCancel = function () {
-        this.navCtrl.popToRoot();
-    };
-    AccountPage = __decorate([
+    AccountsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\account\account.html"*/'<!--\n\n	Generated template for the AccountPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	\n\n	<!-- all of the page content except for the buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- Big top title -->\n\n		<div class = "title">\n\n			Account\n\n		</div>\n\n		\n\n		<!-- contains middle text based content -->\n\n		<div class = "text">\n\n\n\n			<!-- list of inputs -->\n\n			<ion-list>\n\n\n\n				<!-- Name input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4">Name</ion-label>\n\n					<ion-input placeholder="Name" [(ngModel)]="username"></ion-input>\n\n				</ion-item>\n\n\n\n				<!-- date input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4">Birthday</ion-label>\n\n					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="birthday"></ion-datetime>\n\n				</ion-item>\n\n\n\n			</ion-list>\n\n\n\n			<!-- delete button option -->\n\n			<table>\n\n				<tr>\n\n					<!-- left -->\n\n					<td>\n\n						Delete your account from leader boards\n\n					</td>\n\n\n\n					<!-- right delete button -->\n\n					<td align="right">\n\n						<button ion-button color="turquoise1" (click)="onClickDelete()">Delete</button>\n\n					</td>\n\n				</tr>\n\n			</table>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- contains buttom buttons -->\n\n	<div class="button_container">\n\n		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>\n\n		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>\n\n	</div>\n\n</ion-content>\n\n	'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\account\account.html"*/,
+            selector: 'page-accounts',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\accounts\accounts.html"*/'<!--\n\n  Generated template for the AccountsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	\n\n	<!-- all of the page content except for the buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- Big top title -->\n\n		<div class = "title">\n\n			Accounts\n\n		</div>\n\n		\n\n		<!-- contains middle text based content -->\n\n		<div class = "text">\n\n\n\n			<!-- list of inputs -->\n\n			<ion-list>\n\n\n\n        <ion-item-sliding *ngFor="let account of accounts; index as i">\n\n          <ion-item (click)="onClickSelect(i)">\n\n              <p>{{account.username}}</p>\n\n              <p>Highscore {{account.highscore}}</p>\n\n          </ion-item>\n\n          <ion-item-options>\n\n            <button ion-button color="turquoise1" (click)="onClickEdit(i)">\n\n              Edit\n\n            </button>\n\n            <button ion-button color="red1" (click)="onClickDelete(i)">\n\n              Delete\n\n            </button>\n\n          </ion-item-options>\n\n        </ion-item-sliding>\n\n\n\n        <ion-item>\n\n            <p>Add user</p>\n\n        </ion-item>\n\n\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- contains buttom buttons -->\n\n	<div class="button_container">\n\n		<button ion-button color="turquoise1" (click)="onClickBack()">Back</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\accounts\accounts.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
-    ], AccountPage);
-    return AccountPage;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object])
+    ], AccountsPage);
+    return AccountsPage;
+    var _a, _b, _c, _d;
 }());
 
-//# sourceMappingURL=account.js.map
+//# sourceMappingURL=accounts.js.map
 
 /***/ }),
 
@@ -784,9 +773,73 @@ var AccountPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditAccountPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(32);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+/**
+ * Generated class for the AccountPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var EditAccountPage = (function () {
+    function EditAccountPage(navCtrl, navParams, storage) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.storage = storage;
+        //values to be displayed on page
+        this.activeaccount = null;
+        this.account = null;
+        this.accounts = null;
+        this.activeaccount = navParams.data;
+        storage.get('accounts').then(function (accounts) {
+            _this.accounts = accounts;
+            _this.account = accounts[_this.activeaccount];
+        });
+    }
+    //on save button pressed
+    EditAccountPage.prototype.onClickSave = function () {
+        this.storage.set('accounts', this.accounts);
+        this.navCtrl.popToRoot();
+    };
+    //on cancel button pressed
+    EditAccountPage.prototype.onClickCancel = function () {
+        this.navCtrl.popToRoot();
+    };
+    EditAccountPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-edit_account',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/'<!--\n\n	Generated template for the EditAccountPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	\n\n	<!-- all of the page content except for the buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- Big top title -->\n\n		<div class = "title">\n\n			Edit Account\n\n		</div>\n\n		\n\n		<!-- contains middle text based content -->\n\n		<div class = "text">\n\n\n\n			<!-- list of inputs -->\n\n			<ion-list>\n\n\n\n				<!-- Name input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4">Name</ion-label>\n\n					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>\n\n				</ion-item>\n\n\n\n				<!-- date input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4">Birthday</ion-label>\n\n					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>\n\n				</ion-item>\n\n\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- contains buttom buttons -->\n\n	<div class="button_container">\n\n		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>\n\n		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>\n\n	</div>\n\n</ion-content>\n\n	'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
+    ], EditAccountPage);
+    return EditAccountPage;
+}());
+
+//# sourceMappingURL=edit-account.js.map
+
+/***/ }),
+
+/***/ 202:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(226);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -794,25 +847,26 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 225:
+/***/ 226:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(277);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_game_game__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_how_to_how_to__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_lost_lost__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_leader_board_leader_board__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_account_account__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_storage__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_native_audio__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_edit_account_edit_account__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_accounts_accounts__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_storage__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_native_audio__ = __webpack_require__(281);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -825,6 +879,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 //import { Camera } from '@ionic-native/camera';
+
 
 
 
@@ -847,14 +902,15 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_8__pages_how_to_how_to__["a" /* HowToPage */],
                 __WEBPACK_IMPORTED_MODULE_9__pages_lost_lost__["a" /* LostPage */],
                 __WEBPACK_IMPORTED_MODULE_10__pages_leader_board_leader_board__["a" /* LeaderBoardPage */],
-                __WEBPACK_IMPORTED_MODULE_11__pages_account_account__["a" /* AccountPage */]
+                __WEBPACK_IMPORTED_MODULE_11__pages_edit_account_edit_account__["a" /* EditAccountPage */],
+                __WEBPACK_IMPORTED_MODULE_12__pages_accounts_accounts__["a" /* AccountsPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: []
                 }),
-                __WEBPACK_IMPORTED_MODULE_12__ionic_storage__["a" /* IonicStorageModule */].forRoot()
+                __WEBPACK_IMPORTED_MODULE_13__ionic_storage__["a" /* IonicStorageModule */].forRoot()
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
             entryComponents: [
@@ -864,14 +920,15 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_8__pages_how_to_how_to__["a" /* HowToPage */],
                 __WEBPACK_IMPORTED_MODULE_9__pages_lost_lost__["a" /* LostPage */],
                 __WEBPACK_IMPORTED_MODULE_10__pages_leader_board_leader_board__["a" /* LeaderBoardPage */],
-                __WEBPACK_IMPORTED_MODULE_11__pages_account_account__["a" /* AccountPage */]
+                __WEBPACK_IMPORTED_MODULE_11__pages_edit_account_edit_account__["a" /* EditAccountPage */],
+                __WEBPACK_IMPORTED_MODULE_12__pages_accounts_accounts__["a" /* AccountsPage */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
                 //SmartAudioProvider
-                __WEBPACK_IMPORTED_MODULE_13__ionic_native_native_audio__["a" /* NativeAudio */]
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_native_audio__["a" /* NativeAudio */]
             ]
         })
     ], AppModule);
@@ -882,17 +939,17 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 276:
+/***/ 277:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -914,31 +971,42 @@ var MyApp = (function () {
     function MyApp(platform, statusBar, splashScreen, storage) {
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         platform.ready().then(function () {
-            //leaderboard holds all users highscore as:
-            //[
-            //  {username:'name', score:x},
-            //  ...
-            //]
-            storage.get('leaderboard').then(function (val) {
-                if (val == null) {
-                    storage.set('leaderboard', []);
+            // accounts holds a list of all accounts
+            // [
+            //   {
+            //     username:'name', 
+            //     birthday:'bday', 
+            //     avatar:image, 
+            //     highscore:x, 
+            //     highscorehistory:[
+            //       {
+            //         datetime:time,
+            //         highscore:x
+            //       },
+            //       ...
+            //     ]
+            //   },
+            //   ...
+            // ]
+            storage.get('accounts').then(function (val) {
+                if (val == null || true) {
+                    var defaultUser = {
+                        username: 'player1',
+                        birthday: null,
+                        avatar: null,
+                        highscore: 0,
+                        highscorehistory: [
+                            { datetime: null, highscore: 0 }
+                        ]
+                    };
+                    storage.set('accounts', [defaultUser]);
+                    storage.set('activeuser', 0);
                 }
             });
-            //highscores holds the current users highscore history as:
-            //[
-            //  {datetime:x, score, y},
-            //  ...
-            //]
-            storage.get('highscorehistory').then(function (val) {
+            // holds id (index) of current user
+            storage.get('activeuser').then(function (val) {
                 if (val == null) {
-                    storage.set('highscorehistory', []);
-                }
-            });
-            //user holds user settings as:
-            //{username: name, birthday: bday}
-            storage.get('user').then(function (val) {
-                if (val == null) {
-                    storage.set('user', { username: null, birthday: null, highscore: 0 });
+                    storage.set('activeuser', 0);
                 }
             });
             statusBar.styleDefault();
@@ -957,5 +1025,5 @@ var MyApp = (function () {
 
 /***/ })
 
-},[201]);
+},[202]);
 //# sourceMappingURL=main.js.map

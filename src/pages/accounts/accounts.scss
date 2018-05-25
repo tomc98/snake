@@ -1,0 +1,75 @@
+page-accounts {
+	
+	//everything
+	*{
+		font-family: "Bungee",cursive;
+		font-size: 20px;
+		line-height: 20px;
+	}
+
+	//main content height and position (except bottom buttons)
+	.page_content{
+		min-height: calc(100vh - 250px);
+		max-width: 600px;
+		margin: auto;
+	}
+
+	//main title
+	.title{
+		line-height: 60px;
+		font-size: 60px;
+		padding: 60px;
+		text-align: center;
+		width: 100%;
+		top: 0vh;
+		color: #3E4B4D;
+	}
+
+	//main text
+	.text{
+		margin: 30px;
+		color: #3E4B4D;
+	}
+
+	/*
+	//remove background and border from checkbox and number input
+	ion-item{
+		background: none !important;
+		border: none !important;
+		color: #313D4D !important;
+		padding: 0px !important;
+	}
+	
+	//remove background and border from checkbox and number input
+	ion-item *{
+		border: none !important;
+		box-shadow: none !important;
+	}
+	*/
+
+	//page background and padding
+	.scroll-content{
+		background-color: #a2c4c9;
+		padding: 0px !important;
+	}
+
+	//bottom button layout
+	.button_container{
+		text-align: center;
+		width: 100%;
+		padding: 20px;
+		max-width: 600px;
+		margin: auto;
+	}
+
+	//bottom button
+	.button_container button{
+		text-align: center;
+		height: 80px;
+		width: calc(100% - 40px);
+		max-width: 400px;
+		margin: 5px 0px;
+		border-radius: 10px;
+		font-size: 30px;
+	}
+}

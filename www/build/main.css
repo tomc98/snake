@@ -129293,19 +129293,37 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-page-account * {
+page-accounts {
+  /*
+	//remove background and border from checkbox and number input
+	ion-item{
+		background: none !important;
+		border: none !important;
+		color: #313D4D !important;
+		padding: 0px !important;
+	}
+	
+	//remove background and border from checkbox and number input
+	ion-item *{
+		border: none !important;
+		box-shadow: none !important;
+	}
+	*/
+}
+
+page-accounts * {
   font-family: "Bungee",cursive;
   font-size: 20px;
   line-height: 20px;
 }
 
-page-account .page_content {
+page-accounts .page_content {
   min-height: calc(100vh - 250px);
   max-width: 600px;
   margin: auto;
 }
 
-page-account .title {
+page-accounts .title {
   line-height: 60px;
   font-size: 60px;
   padding: 60px;
@@ -129315,30 +129333,17 @@ page-account .title {
   color: #3E4B4D;
 }
 
-page-account .text {
+page-accounts .text {
   margin: 30px;
   color: #3E4B4D;
 }
 
-page-account ion-item {
-  background: none !important;
-  border: none !important;
-  color: #313D4D !important;
-  padding: 0px !important;
-}
-
-page-account ion-item * {
-  border: none !important;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
-}
-
-page-account .scroll-content {
+page-accounts .scroll-content {
   background-color: #a2c4c9;
   padding: 0px !important;
 }
 
-page-account .button_container {
+page-accounts .button_container {
   text-align: center;
   width: 100%;
   padding: 20px;
@@ -129346,7 +129351,70 @@ page-account .button_container {
   margin: auto;
 }
 
-page-account .button_container button {
+page-accounts .button_container button {
+  text-align: center;
+  height: 80px;
+  width: calc(100% - 40px);
+  max-width: 400px;
+  margin: 5px 0px;
+  border-radius: 10px;
+  font-size: 30px;
+}
+
+page-edit-account * {
+  font-family: "Bungee",cursive;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+page-edit-account .page_content {
+  min-height: calc(100vh - 250px);
+  max-width: 600px;
+  margin: auto;
+}
+
+page-edit-account .title {
+  line-height: 60px;
+  font-size: 60px;
+  padding: 60px;
+  text-align: center;
+  width: 100%;
+  top: 0vh;
+  color: #3E4B4D;
+}
+
+page-edit-account .text {
+  margin: 30px;
+  color: #3E4B4D;
+}
+
+page-edit-account ion-item {
+  background: none !important;
+  border: none !important;
+  color: #313D4D !important;
+  padding: 0px !important;
+}
+
+page-edit-account ion-item * {
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+page-edit-account .scroll-content {
+  background-color: #a2c4c9;
+  padding: 0px !important;
+}
+
+page-edit-account .button_container {
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+page-edit-account .button_container button {
   text-align: center;
   height: 80px;
   width: calc(100% - 40px);
