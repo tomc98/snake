@@ -60,6 +60,7 @@ export class EditAccountPage {
 
       let fileReader = new FileReader();
 
+      // save image in local array but dont save to storage yet
       fileReader.onload = e => {
         this.account.avatar = fileReader.result;
       };

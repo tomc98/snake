@@ -48,9 +48,17 @@
 
         </ion-item-sliding>
 
-        <ion-item class="account_item" (click)="onClickNew()">
-            <p>Add user</p>
-        </ion-item>
+        <ion-item-sliding  class="account_item">
+          
+          <ion-item (click)="onClickNew()">
+              <img src="assets/imgs/add.png"/>
+              <div>
+                <p>Add account</p>
+              </div>
+          </ion-item>
+
+        </ion-item-sliding>
+
 
 			</ion-list>
 		</div>

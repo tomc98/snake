@@ -129324,8 +129324,8 @@ page-accounts .page_content {
 }
 
 page-accounts .title {
-  line-height: 60px;
-  font-size: 60px;
+  line-height: 40px;
+  font-size: 40px;
   padding: 60px;
   text-align: center;
   width: 100%;
@@ -129339,7 +129339,7 @@ page-accounts .text {
 }
 
 page-accounts .account_item {
-  background: #8ab2b8;
+  background: #45818e;
   border-radius: 10px;
   margin-bottom: 10px;
 }
@@ -129366,6 +129366,14 @@ page-accounts .account_item ion-item p {
 
 page-accounts .account_item ion-item * {
   border: none !important;
+}
+
+page-accounts .account_item ion-item-options {
+  border: none !important;
+}
+
+page-accounts .add_account {
+  background: #8ab2b8;
 }
 
 page-accounts .scroll-content {
@@ -129404,8 +129412,8 @@ page-edit-account .page_content {
 }
 
 page-edit-account .title {
-  line-height: 60px;
-  font-size: 60px;
+  line-height: 40px;
+  font-size: 40px;
   padding: 60px;
   text-align: center;
   width: 100%;
@@ -129568,8 +129576,8 @@ page-how-to .page_content {
 }
 
 page-how-to .title {
-  line-height: 60px;
-  font-size: 60px;
+  line-height: 40px;
+  font-size: 40px;
   padding: 60px;
   text-align: center;
   width: 100%;
@@ -129617,8 +129625,8 @@ page-leader-board .page_content {
 }
 
 page-leader-board .title {
-  line-height: 60px;
-  font-size: 60px;
+  line-height: 40px;
+  font-size: 40px;
   padding: 60px;
   text-align: center;
   width: 100%;
@@ -129673,8 +129681,8 @@ page-lost .page_content {
 }
 
 page-lost .title {
-  line-height: 60px;
-  font-size: 60px;
+  line-height: 40px;
+  font-size: 40px;
   font-family: "Bungee",cursive;
   padding: 60px;
   text-align: center;

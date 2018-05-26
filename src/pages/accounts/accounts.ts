@@ -62,6 +62,7 @@ export class AccountsPage {
         },{
           text: 'Delete',
           handler: () => {
+            
             //delete username, birthday, highscores and leaderboard entry
             this.accounts.splice(i, 1);
             this.storage.set('accounts', this.accounts);

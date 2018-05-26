@@ -31,8 +31,6 @@ export class GamePage {
   userSnake = [[window.innerWidth/2, window.innerHeight/2, this.getColor(0)],[window.innerWidth/2, window.innerHeight/2, this.getColor(0)]];
   snakes = [this.userSnake]
   
-  username:string;
-  highScore:number;
   enableBots:boolean;
   botCount:number;
 
@@ -40,16 +38,11 @@ export class GamePage {
 
     var parameters = navParams.data
 
-    this.username = parameters.username;
-    this.highScore = parameters.highScore;
     this.enableBots = parameters.enableBots;
     this.botCount = parameters.botCount;
 
   }
 
-
-
-  
   //executes once all views have been initialised 
   ngAfterViewInit() {
 
@@ -93,25 +86,25 @@ export class GamePage {
       this.drawBackground();
 
       //if position is defined
-      if(this.posx!=null){
+      if(this.posx != null){
         //get and update next position
         var yo = this.getNextPosition(this.posx, this.posy, this.userSnake[0][0], this.userSnake[0][1], 10)
         this.userSnake[0][0] = yo[0];
         this.userSnake[0][1] = yo[1];
 
         //draw head
-        this.drawCircle(this.userSnake[0][0], this.userSnake[0][1], 5, this.userSnake[0][2]);
+        this.drawCircle(this.userSnake[0][0], this.userSnake[0][1], 5, this.getColor(0));
 
         //for each following body circle
-        for(var i = 1; i<this.userSnake.length; i++){
+        for(var i = 1; i<this.snakes[0].length; i++){
           
           //get and update next position
-          yo = this.getNextPosition(this.userSnake[i-1][0], this.userSnake[i-1][1], this.userSnake[i][0], this.userSnake[i][1], 10)
-          this.userSnake[i][0] = yo[0];
-          this.userSnake[i][1] = yo[1];
+          yo = this.getNextPosition(this.snakes[0][i-1][0], this.snakes[0][i-1][1], this.snakes[0][i][0], this.snakes[0][i][1], 10)
+          this.snakes[0][i][0] = yo[0];
+          this.snakes[0][i][1] = yo[1];
           
           //draw body circle
-          this.drawCircle(this.userSnake[i][0], this.userSnake[i][1], 5, this.userSnake[i][2]);
+          this.drawCircle(this.snakes[0][i][0], this.snakes[0][i][1], 5, this.getColor(i * 15));
         }
       }
 
@@ -136,13 +129,13 @@ export class GamePage {
     this.points = 0;
     this.makeFruit();
     this.lives = 3;
-    this.userSnake = [[window.innerWidth/2, window.innerHeight/2, this.getColor(0)],[window.innerWidth/2, window.innerHeight/2, this.getColor(0)]];
+    this.userSnake = [[window.innerWidth/2, window.innerHeight/2],[window.innerWidth/2, window.innerHeight/2]];
 
     this.snakes = [this.userSnake];
 
     if(this.enableBots){
       for(var i = 0; i < this.botCount; i++){
-        var snake = [[window.innerWidth/2, window.innerHeight/2, this.botColour],[window.innerWidth/2, window.innerHeight/2, this.botColour]];
+        var snake = [[window.innerWidth/2, window.innerHeight/2],[window.innerWidth/2, window.innerHeight/2]];
       }
     }
 
@@ -228,7 +221,7 @@ export class GamePage {
     this.fruitX = this.getRandomInt(window.innerWidth/10, (window.innerWidth/10)*9);
     this.fruitY = this.getRandomInt(window.innerHeight/10, (window.innerHeight/10)*9);
     this.fruitS = 20;
-    this.fruitC = this.getColor(this.points * 13)
+    this.fruitC = this.getColor(this.points * 15 + 30)
 
     //other color selections
     //var randomNum = this.getRandomInt(0, this.colors.length -1);
@@ -281,11 +274,11 @@ export class GamePage {
       var last = this.userSnake.length - 1;
       var xSnake = this.userSnake[last][0];
       var ySnake = this.userSnake[last][1];
-      this.userSnake.push([xSnake, ySnake, this.fruitC]);
+      this.snakes[0].push([xSnake, ySnake]);
 
       //generate new fruit and update points
       this.makeFruit();
-      this.points+=1;
+      this.points += 1;
 
       //TODO audio
       //switch(this.getRandomInt(1,3)){
@@ -316,8 +309,8 @@ export class GamePage {
     var r, g, b, s, v, sector, hueInSector, p, q, t;
     
     h %= 360;
-    s = 0.75;
-    v = 1;
+    s = 0.65;
+    v = 0.95;
 
     h /= 60
     sector = Math.floor(h);

@@ -16,8 +16,8 @@ page-accounts {
 
 	//main title
 	.title{
-		line-height: 60px;
-		font-size: 60px;
+		line-height: 40px;
+		font-size: 40px;
 		padding: 60px;
 		text-align: center;
 		width: 100%;
@@ -48,7 +48,7 @@ page-accounts {
 	*/
 
 	.account_item{
-		background: #8ab2b8;
+		background: #45818e;
 		border-radius: 10px;
 		margin-bottom: 10px;
 
@@ -77,6 +77,14 @@ page-accounts {
 
 		}
 
+		ion-item-options{
+			border: none !important;
+		}
+
+	}
+
+	.add_account{
+		background: #8ab2b8;
 	}
 
 	//page background and padding
