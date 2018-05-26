@@ -42,6 +42,11 @@ export class AccountsPage {
     this.navCtrl.push(EditAccountPage, i);
   }
 
+  onClickNew(){
+    this.navCtrl.push(EditAccountPage, -1);
+    
+  }
+
   onClickDelete(i){
 
   }

@@ -17,39 +17,38 @@ import { Storage } from '@ionic/storage';
 export class LostPage {
 
   //public variable to show points scored and highscore in html
-  public points:string = '0';
-  public highscore:string = null;
+  points:string = '0';
+  highscore:string = null;
+  account:any = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
 
     //retrieve data from navigation params
     this.points = navParams.data
 
-    //retrieve high score from storage
-    storage.get('user').then((user) => {
+    this.storage.get('activeuser').then((activeuser) => {
 
-      // if has a user account
-      if(user.username != null){
-        this.highscore = user.highscore;
+      if(activeuser != null){
 
-        // if this is a new highscore
-        if(this.points > this.highscore){
-          this.highscore = this.points;
+        this.storage.get('accounts').then((accounts) =>{
 
-          // update and store new highscore
-          user.highscore = this.highscore;
-          storage.set('user', user);
+          this.account = accounts[activeuser];
 
-          // add item to highscore history
-          var newHighscoreHistoryItem = {datetime: null, score: this.highscore};
-          storage.get('highscorehistory').then((highscorehistory) => {
-            highscorehistory.push(newHighscoreHistoryItem);
-            storage.set('highscorehistory', highscorehistory);
-          });
-        }
+          if(this.points > this.account.highscore){
+            this.account.highscore = this.points;
+            
+            var historyObject = {datetime: new Date().toISOString(), highcore: this.points};
+            this.account.highscorehistory.push(historyObject);
+
+            this.storage.set('accounts', this.account);
+          }
+
+        });
+
       }
 
     });
+    
   }
 
   //not used 

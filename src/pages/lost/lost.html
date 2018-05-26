@@ -23,7 +23,7 @@
 				<td>
 					<!-- score and highscore if user account is setup -->
 					<p>You Scored {{points}}</p>
-					<p *ngIf="highscore!=null">Highscore: {{highscore}}</p>
+					<p *ngIf="account != null">Highscore: {{account.highscore}}</p>
 				</td>
 			</tr>
 		</table>
