@@ -18,36 +18,40 @@
 
 		<!-- snake image -->
 		<div align="center">
-			<img class = "snake"src="assets/imgs/snakepic.png">
+			<img class = "snake" src="assets/imgs/snakepic.png">
 		</div>
 
 		<!-- main texual based content -->
 		<div class = "text">
 
-			<!-- greeting -->
-			<p>
-				Welcome
-			</p>
 
 			<!-- user details -->
 			<table>
 				<tr>
-					<!-- username -->
 					<td>
-						{{username}}
+						<!-- greeting -->
+						Welcome {{account.username}}
 					</td>
 
-					<!-- users age -->
-					<td>
-						{{age}}
-					</td>
-
-					<!-- user account edit button -->
-					<td align="right">
-						<button ion-button color="blue1" (click)="onClickEditAccount()">Select</button>
+					<!-- avatar -->
+					<td align="right" rowspan="2">
+						<img class="avatar" src="{{account.avatar}}" (click)="onClickEditAccount()">
 					</td>
 				</tr>
+
+				<tr>
+					<!-- highcsore -->
+					<td>
+						Highscore: {{account.highscore}}
+					</td>
+				</tr>
+
 			</table>
+
+			<!-- user account edit button -->
+			<p>
+				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>
+			</p>
 
 			<!-- bots option -->
 			<table>

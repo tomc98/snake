@@ -40,7 +40,7 @@ export class LostPage {
             var historyObject = {datetime: new Date().toISOString(), highcore: this.points};
             this.account.highscorehistory.push(historyObject);
 
-            this.storage.set('accounts', this.account);
+            this.storage.set('accounts', accounts);
           }
 
         });
@@ -48,12 +48,7 @@ export class LostPage {
       }
 
     });
-    
-  }
 
-  //not used 
-  ionViewDidLoad() {
-    //console.log('ionViewDidLoad LostPage');
   }
 
   //on back button click pop navigation stack to root

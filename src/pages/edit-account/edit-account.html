@@ -26,17 +26,35 @@
 
 				<!-- Name input -->
 				<ion-item>
-					<ion-label color="turquoise4">Name</ion-label>
+					<ion-label color="turquoise4" stacked>Name</ion-label>
 					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>
 				</ion-item>
 
 				<!-- date input -->
 				<ion-item>
-					<ion-label color="turquoise4">Birthday</ion-label>
+					<ion-label color="turquoise4" stacked>Birthday</ion-label>
 					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>
 				</ion-item>
 
+				<ion-item>
+					<ion-thumbnail item-end>
+						<img src="{{account.avatar}}"/>
+					</ion-thumbnail>
+
+					<ion-label color="turquoise4" stacked>Avatar</ion-label>
+
+					<div class="avatar">
+					</div>
+				</ion-item>
+
 			</ion-list>
+						
+			<input 
+				#fileInput 
+				type="file" 
+				accept="image/*"
+				(change)="avatarSelected(fileInput.files)">
+
 		</div>
 	</div>
 

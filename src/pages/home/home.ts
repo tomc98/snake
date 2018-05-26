@@ -14,11 +14,9 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
 
   //values to be displayed on the page
-  username:string;
-  birthday:string;
-  age:string;
   botCount:number = 3;
-  highScore:number = 129;
+  
+  account = {username:'', highscore: 0};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
   }
@@ -29,24 +27,14 @@ export class HomePage {
 
   loadPreferences(){
     this.storage.get('activeuser').then((activeuser) => {
-      alert(activeuser);
 
-      if(activeuser != null){
+      console.log(activeuser);
 
-        this.storage.get('accounts').then((accounts) =>{
+      this.storage.get('accounts').then((accounts) =>{
 
-          var account = accounts[activeuser];
+        this.account = accounts[activeuser];
 
-          this.username = account.username;
-          this.birthday = account.birthday;
-
-          if(this.birthday != null){
-            this.age = '13';
-          }
-
-        });
-
-      }
+      });
 
     });
   }
@@ -55,9 +43,7 @@ export class HomePage {
   onClickPlay(){
     var parameters = {
       enableBots: true,
-      botCount: this.botCount,
-      username: this.username,
-      highScore: this.highScore
+      botCount: this.botCount
     }
     this.navCtrl.push(GamePage, parameters);
   }

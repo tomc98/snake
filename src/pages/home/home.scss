@@ -38,6 +38,14 @@ page-home {
 		width: 100%;
 	}
 
+	.avatar{
+		border-radius: 10px;
+		width: 80px;
+		height: 80px;
+	}
+
+
+
 	//remove background and border from checkbox and number input
 	ion-item{
 		background: none !important;

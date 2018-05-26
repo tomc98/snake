@@ -18,14 +18,17 @@ import { EditAccountPage } from '../edit-account/edit-account';
 export class AccountsPage {
 
   accounts = [];
+  activeuser = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private alertCtrl: AlertController) {
-
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private alertCtrl: AlertController) {}
 
   ionViewWillEnter() {
     this.storage.get('accounts').then((accounts) => {
       this.accounts = accounts;
+    });
+
+    this.storage.get('activeuser').then((activeuser) => {
+      this.activeuser = activeuser;
     });
   }
 
@@ -48,16 +51,10 @@ export class AccountsPage {
 
   onClickDelete(i){
 
-  }
-
-  //TODO port
-  //on delete button pressed, show deletion comfirmatoin dialog
-  onClickDeleteX(){
-
     //create comfirmation dialog
     let alert = this.alertCtrl.create({
-      title: 'Delete your account',
-      subTitle: 'Do you really want to remove your account from the global leader board',
+      title: "Delete " + this.accounts[i].username + "'s account",
+      subTitle: "Do you really want to delete " + this.accounts[i].username + "'s account and remove it from the leader board?",
       buttons: [
         {
           text: 'Cancel',
@@ -66,24 +63,14 @@ export class AccountsPage {
           text: 'Delete',
           handler: () => {
             //delete username, birthday, highscores and leaderboard entry
-            this.storage.set('user', {username: null, birthday: null, highscore: 0})
+            this.accounts.splice(i, 1);
+            this.storage.set('accounts', this.accounts);
 
-            //delete highscore history
-            this.storage.set('highscores', []);
-
-            this.storage.get('leaderboard').then((val) => {
-              for(var i = 0; i < val.length; i++){
-                //if(val[i].username == this.username){
-                //  val.splice(i);
-                //  break;
-                //}
-              }
-
-              this.storage.set('leaderboard', val);
-            })
-
-            //return to home page
-            this.navCtrl.popToRoot()
+            // if removed account was above removed account, shift selected index up
+            if(i <= this.activeuser){
+              this.storage.set('activeuser', this.activeuser-1);
+            }
+            
           }
         }
       ]

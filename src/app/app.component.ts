@@ -36,30 +36,20 @@ export class MyApp {
       // ]
       storage.get('accounts').then((val) => {
         if(val == null){
+
           var defaultUser = {
             username: 'player1',
             birthday: new Date().toISOString(),
-            avatar: null,
+            avatar: "assets/imgs/default_avatar.png",
             highscore: 0,
             highscorehistory: [
               {datetime: new Date().toISOString(), highscore: 0}
             ]
           };
+
           storage.set('accounts', [defaultUser]);
           storage.set('activeuser', 0);
-        }else{
-          storage.get('activeuser').then((val) => {
-            if(val == null){
-              storage.set('activeuser', null);
-            }
-          });
-        }
-      });
 
-      // holds id (index) of current user
-      storage.get('activeuser').then((val) => {
-        if(val == null){
-          storage.set('activeuser', null);
         }
       });
 

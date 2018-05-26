@@ -31,10 +31,11 @@ export class EditAccountPage {
       // if new account
       if(this.activeaccount == -1){
 
+        // default account
         this.account = {
           username: 'player' + (this.accounts.length+1),
           birthday: new Date().toISOString(),
-          avatar: null,
+          avatar: "assets/imgs/default_avatar.png",
           highscore: 0,
           highscorehistory: [
             {datetime: new Date().toISOString(), highscore: 0}
@@ -50,6 +51,21 @@ export class EditAccountPage {
       }
       
     });
+  }
+
+  avatarSelected(files){
+
+    if(files.length >= 1){
+      var file = files[0];
+
+      let fileReader = new FileReader();
+
+      fileReader.onload = e => {
+        this.account.avatar = fileReader.result;
+      };
+
+      fileReader.readAsDataURL(file);
+    }
   }
 
   //on save button pressed

@@ -129338,6 +129338,36 @@ page-accounts .text {
   color: #3E4B4D;
 }
 
+page-accounts .account_item {
+  background: #8ab2b8;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+page-accounts .account_item ion-item {
+  background: #8ab2b8;
+}
+
+page-accounts .account_item ion-item img {
+  float: left;
+  width: 80px;
+  height: 80px;
+  background: #45818e;
+  border-radius: 10px;
+}
+
+page-accounts .account_item ion-item div {
+  float: left;
+}
+
+page-accounts .account_item ion-item p {
+  padding-left: 20px;
+}
+
+page-accounts .account_item ion-item * {
+  border: none !important;
+}
+
 page-accounts .scroll-content {
   background-color: #a2c4c9;
   padding: 0px !important;
@@ -129386,6 +129416,14 @@ page-edit-account .title {
 page-edit-account .text {
   margin: 30px;
   color: #3E4B4D;
+}
+
+page-edit-account .avatar img {
+  border-radius: 10px;
+}
+
+page-edit-account .avatar * {
+  float: left;
 }
 
 page-edit-account ion-item {
@@ -129467,6 +129505,12 @@ page-home .text {
 
 page-home .text table {
   width: 100%;
+}
+
+page-home .avatar {
+  border-radius: 10px;
+  width: 80px;
+  height: 80px;
 }
 
 page-home ion-item {

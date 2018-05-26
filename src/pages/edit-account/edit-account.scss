@@ -31,6 +31,17 @@ page-edit-account {
 		color: #3E4B4D;
 	}
 
+	.avatar{
+
+		img{
+			border-radius: 10px;
+		}
+
+		*{
+			float: left;
+		}
+	}
+
 	//remove background and border from checkbox and number input
 	ion-item{
 		background: none !important;

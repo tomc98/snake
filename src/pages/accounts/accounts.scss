@@ -47,6 +47,38 @@ page-accounts {
 	}
 	*/
 
+	.account_item{
+		background: #8ab2b8;
+		border-radius: 10px;
+		margin-bottom: 10px;
+
+		ion-item{
+			background: #8ab2b8;
+
+			img{
+				float: left;
+				width: 80px;
+				height: 80px;
+				background: #45818e;
+				border-radius: 10px;
+			}
+
+			div{
+				float: left;
+			}
+
+			p{
+				padding-left: 20px;
+			}
+
+			*{
+				border: none !important;
+			}
+
+		}
+
+	}
+
 	//page background and padding
 	.scroll-content{
 		background-color: #a2c4c9;
