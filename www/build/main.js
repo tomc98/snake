@@ -76,6 +76,7 @@ var HomePage = (function () {
     HomePage.prototype.loadPreferences = function () {
         var _this = this;
         this.storage.get('activeuser').then(function (activeuser) {
+            alert(activeuser);
             if (activeuser != null) {
                 _this.storage.get('accounts').then(function (accounts) {
                     var account = accounts[activeuser];
@@ -114,9 +115,10 @@ var HomePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/'<!--\n\n	Generated template for the SplashPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n<ion-content padding>\n\n\n\n	<!-- main content -->\n\n	<div class="page_content">\n\n		\n\n		<!-- big top title -->\n\n		<div class = "title">\n\n			King Snake\n\n		</div>\n\n\n\n		<!-- snake image -->\n\n		<div align="center">\n\n			<img class = "snake"src="assets/imgs/snakepic.png">\n\n		</div>\n\n\n\n		<!-- main texual based content -->\n\n		<div class = "text">\n\n\n\n			<!-- greeting -->\n\n			<p>\n\n				Welcome\n\n			</p>\n\n\n\n			<!-- user details -->\n\n			<table>\n\n				<tr>\n\n					<!-- username -->\n\n					<td>\n\n						{{username}}\n\n					</td>\n\n\n\n					<!-- users age -->\n\n					<td>\n\n						{{age}}\n\n					</td>\n\n\n\n					<!-- user account edit button -->\n\n					<td align="right">\n\n						<button ion-button color="blue1" (click)="onClickEditAccount()">Select</button>\n\n					</td>\n\n				</tr>\n\n			</table>\n\n\n\n			<!-- bots option -->\n\n			<table>\n\n				<tr>\n\n					<td>\n\n						<!-- checkbox to enable bots -->\n\n						<ion-item>\n\n							<ion-label>Enable Bots</ion-label>\n\n							<ion-checkbox [(ngModel)]="bots"></ion-checkbox>\n\n						</ion-item>\n\n					</td>\n\n					<td align="right">\n\n						<!-- bots count -->\n\n						<ion-item>\n\n							<ion-input type="number" [(ngModel)]=\'botCount\' min="1" max="10" align="right"></ion-input>\n\n						</ion-item>\n\n					</td>\n\n				</tr>\n\n			</table>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]) === "function" && _c || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -808,31 +810,46 @@ var EditAccountPage = (function () {
         this.navParams = navParams;
         this.storage = storage;
         //values to be displayed on page
-        this.activeaccount = null;
-        this.account = null;
-        this.accounts = null;
+        this.activeaccount = -1;
+        this.account = { username: '', birthday: '' };
         this.activeaccount = navParams.data;
         storage.get('accounts').then(function (accounts) {
             _this.accounts = accounts;
-            _this.account = accounts[_this.activeaccount];
+            // if new account
+            if (_this.activeaccount == -1) {
+                _this.account = {
+                    username: 'player' + (_this.accounts.length + 1),
+                    birthday: new Date().toISOString(),
+                    avatar: null,
+                    highscore: 0,
+                    highscorehistory: [
+                        { datetime: new Date().toISOString(), highscore: 0 }
+                    ]
+                };
+                _this.accounts.push(_this.account);
+            }
+            else {
+                _this.account = _this.accounts[_this.activeaccount];
+            }
         });
     }
     //on save button pressed
     EditAccountPage.prototype.onClickSave = function () {
         this.storage.set('accounts', this.accounts);
-        this.navCtrl.popToRoot();
+        this.navCtrl.pop();
     };
     //on cancel button pressed
     EditAccountPage.prototype.onClickCancel = function () {
-        this.navCtrl.popToRoot();
+        this.navCtrl.pop();
     };
     EditAccountPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-edit_account',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/'<!--\n\n	Generated template for the EditAccountPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	\n\n	<!-- all of the page content except for the buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- Big top title -->\n\n		<div class = "title">\n\n			Edit Account\n\n		</div>\n\n		\n\n		<!-- contains middle text based content -->\n\n		<div class = "text">\n\n\n\n			<!-- list of inputs -->\n\n			<ion-list>\n\n\n\n				<!-- Name input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4">Name</ion-label>\n\n					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>\n\n				</ion-item>\n\n\n\n				<!-- date input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4">Birthday</ion-label>\n\n					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>\n\n				</ion-item>\n\n\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- contains buttom buttons -->\n\n	<div class="button_container">\n\n		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>\n\n		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>\n\n	</div>\n\n</ion-content>\n\n	'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/,
+            selector: 'page-edit-account',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/'<!--\n\n	Generated template for the EditAccountPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	\n\n	<!-- all of the page content except for the buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- Big top title -->\n\n		<div class = "title">\n\n			Edit Account\n\n		</div>\n\n		\n\n		<!-- contains middle text based content -->\n\n		<div class = "text">\n\n\n\n			<!-- list of inputs -->\n\n			<ion-list>\n\n\n\n				<!-- Name input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4">Name</ion-label>\n\n					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>\n\n				</ion-item>\n\n\n\n				<!-- date input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4">Birthday</ion-label>\n\n					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>\n\n				</ion-item>\n\n\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- contains buttom buttons -->\n\n	<div class="button_container">\n\n		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>\n\n		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>\n\n	</div>\n\n</ion-content>\n\n	'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _c || Object])
     ], EditAccountPage);
     return EditAccountPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=edit-account.js.map

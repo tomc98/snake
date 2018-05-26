@@ -25,7 +25,7 @@ export class EditAccountPage {
     this.activeaccount = navParams.data;
 
     storage.get('accounts').then((accounts) => {
-      
+
       this.accounts = accounts;
 
       // if new account

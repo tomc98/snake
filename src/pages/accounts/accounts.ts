@@ -44,7 +44,6 @@ export class AccountsPage {
 
   onClickNew(){
     this.navCtrl.push(EditAccountPage, -1);
-    
   }
 
   onClickDelete(i){

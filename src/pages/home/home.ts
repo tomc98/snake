@@ -29,6 +29,7 @@ export class HomePage {
 
   loadPreferences(){
     this.storage.get('activeuser').then((activeuser) => {
+      alert(activeuser);
 
       if(activeuser != null){
 
