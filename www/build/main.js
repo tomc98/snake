@@ -151,16 +151,12 @@ var GamePage = (function () {
         //globally used values
         this.screenWidth = window.innerWidth;
         this.screenHeight = window.innerHeight;
-        this.pfWidth = window.innerWidth / 10;
-        this.pfHeight = window.innerHeight / 10;
         this.points = 0;
         this.mouse = { x: 0, y: 0 };
         this.down = false;
         this.fruit = { x: window.innerWidth / 5, y: innerHeight / 5, color: 'red', size: 20 };
         this.botColour = "#555555";
         this.lives = 3;
-        this.loop = 0;
-        this.lastUpdate = 0;
         this.fruitColorDegreeGap = 15;
         this.backgroundColor = { h: 257, s: 0.22, v: 0.84 };
         this.falshColor = { h: 257, s: 0.22, v: 0.84 };
@@ -185,7 +181,6 @@ var GamePage = (function () {
         var _this = this;
         //init canvas
         this.ctx = this.myCanvas.nativeElement.getContext("2d");
-        this.pfCtx = this.pfCanvas.nativeElement.getContext("2d");
         //init mouse/touch inputs
         var hammer = new window['Hammer'](this.myCanvas.nativeElement);
         hammer.get('pan').set({ direction: window['Hammer'].DIRECTION_ALL });
@@ -225,11 +220,6 @@ var GamePage = (function () {
         }
     };
     GamePage.prototype.update = function () {
-        this.loop++;
-        //var date = new Date();
-        //var time = date.getTime();
-        //console.log(time - this.lastUpdate);
-        //this.lastUpdate = time;
         this.render();
         if (this.checkIntercept())
             this.lives = 0;
@@ -346,8 +336,8 @@ var GamePage = (function () {
                 }
             }
             //console.log("target set");
-            //this.drawCircle(target.x, target.y, 3, "#ff0000");
-            //this.drawCircle(exit.x, exit.y, 3, "#0000ff");
+            // this.drawCircle(target.x, target.y, 3, "#ff0000");
+            // this.drawCircle(exit.x, exit.y, 3, "#0000ff");
             this.snakes[s][0] = target;
         }
     };
@@ -408,7 +398,7 @@ var GamePage = (function () {
         this.drawFruit();
     };
     GamePage.prototype.getPathPoints = function () {
-        var margin = 40;
+        var margin = 50;
         var marginSquared = margin * margin;
         // list of path and snake points pairs, x, y is point snake can travel, sx, sy is the snake 
         // body point it corresponds to
@@ -674,14 +664,18 @@ var GamePage = (function () {
                 // if player go tthe fruit award the point
                 if (s == 0) {
                     this.points += 1;
+                    if (this.enableComputer) {
+                        this.lives += 1;
+                    }
                     //this.falshColor = {h: this.backgroundColor.h, s: 0.3, v: 0.90};
                     //this.flashIntensity = 1;
-                    this.falshColor = { h: this.backgroundColor.h, s: this.backgroundColor.s, v: 0.80 };
-                    this.flashIntensity = 1;
-                }
-                else {
                     //this.falshColor = {h: this.backgroundColor.h, s: this.backgroundColor.s, v: 0.80};
                     //this.flashIntensity = 1;
+                }
+                else {
+                    this.lives -= 1;
+                    this.falshColor = { h: this.backgroundColor.h, s: this.backgroundColor.s, v: 0.75 };
+                    this.flashIntensity = 1;
                 }
                 //generate new fruit and update points
                 this.makeFruit();
@@ -756,13 +750,9 @@ var GamePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('myCanvas'),
         __metadata("design:type", Object)
     ], GamePage.prototype, "myCanvas", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('pfCanvas'),
-        __metadata("design:type", Object)
-    ], GamePage.prototype, "pfCanvas", void 0);
     GamePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-game',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/'<!-- canvas to display the game -->\n\n<canvas (move)="test($event)" width={{screenWidth}} height={{screenHeight}} #myCanvas></canvas>\n\n<canvas class="float" width={{pfWidth}} height={{pfHeight}} #pfCanvas></canvas>\n\n\n\n<!-- score and lives display -->\n\n<p class="stats">\n\n	<span style="float:left;">Score: {{points}}</span>\n\n	<span style="float:right;">Lives: {{lives}}</span>\n\n</p>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/
+            selector: 'page-game',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/'<!-- canvas to display the game -->\n\n<canvas (move)="test($event)" width={{screenWidth}} height={{screenHeight}} #myCanvas></canvas>\n\n\n\n<!-- score and lives display -->\n\n<p class="stats">\n\n	<span style="float:left;">Score: {{points}}</span>\n\n	<span style="float:right;">Lives: {{lives}}</span>\n\n</p>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _c || Object])
     ], GamePage);

@@ -11,13 +11,10 @@ import { LostPage } from '../lost/lost';
 })
 export class GamePage {
   @ViewChild('myCanvas') myCanvas;
-  @ViewChild('pfCanvas') pfCanvas;
 
   //globally used values
   screenWidth= window.innerWidth;
   screenHeight= window.innerHeight;
-  pfWidth= window.innerWidth/10;
-  pfHeight= window.innerHeight/10;
   points = 0;
   ctx: any;
   pfCtx: any;
@@ -30,8 +27,6 @@ export class GamePage {
   botColour = "#555555";
   lives = 3;
   theInt : any;
-  loop = 0;
-  lastUpdate = 0;
 
   fruitColorDegreeGap = 15;
   backgroundColor = {h: 257, s: 0.22, v: 0.84};
@@ -66,7 +61,6 @@ export class GamePage {
 
     //init canvas
     this.ctx = this.myCanvas.nativeElement.getContext("2d");
-    this.pfCtx = this.pfCanvas.nativeElement.getContext("2d");
 
     //init mouse/touch inputs
     let hammer = new window['Hammer'](this.myCanvas.nativeElement);
@@ -116,11 +110,6 @@ export class GamePage {
   }
 
   update(){
-    this.loop ++;
-    //var date = new Date();
-    //var time = date.getTime();
-    //console.log(time - this.lastUpdate);
-    //this.lastUpdate = time;
 
     this.render();
 
@@ -275,8 +264,8 @@ export class GamePage {
       }
 
       //console.log("target set");
-      //this.drawCircle(target.x, target.y, 3, "#ff0000");
-      //this.drawCircle(exit.x, exit.y, 3, "#0000ff");
+      // this.drawCircle(target.x, target.y, 3, "#ff0000");
+      // this.drawCircle(exit.x, exit.y, 3, "#0000ff");
       this.snakes[s][0] = target;
 
     }
@@ -355,7 +344,7 @@ export class GamePage {
 
   getPathPoints(){
 
-    var margin = 40;
+    var margin = 50;
     var marginSquared = margin * margin;
     
     // list of path and snake points pairs, x, y is point snake can travel, sx, sy is the snake 
@@ -702,14 +691,19 @@ export class GamePage {
         // if player go tthe fruit award the point
         if(s == 0){
           this.points += 1;
+          if(this.enableComputer){
+            this.lives += 1;
+          }
 
           //this.falshColor = {h: this.backgroundColor.h, s: 0.3, v: 0.90};
           //this.flashIntensity = 1;
-          this.falshColor = {h: this.backgroundColor.h, s: this.backgroundColor.s, v: 0.80};
-          this.flashIntensity = 1;
-        }else{
           //this.falshColor = {h: this.backgroundColor.h, s: this.backgroundColor.s, v: 0.80};
           //this.flashIntensity = 1;
+        }else{
+
+          this.lives -= 1;
+          this.falshColor = {h: this.backgroundColor.h, s: this.backgroundColor.s, v: 0.75};
+          this.flashIntensity = 1;
         }
 
         //generate new fruit and update points
