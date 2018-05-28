@@ -110,11 +110,12 @@ var HomePage = (function () {
     ], HomePage.prototype, "checkboxEnableBots", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/'<!--\n\n	Generated template for the SplashPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n<ion-content padding>\n\n\n\n	<!-- main content -->\n\n	<div class="page_content">\n\n		\n\n		<!-- big top title -->\n\n		<div class = "title">\n\n			King Snake\n\n		</div>\n\n\n\n		<!-- snake image -->\n\n		<div align="center" style="display:none;">\n\n			<img class = "snake" src="assets/imgs/snakepic.png">\n\n		</div>\n\n\n\n		<!-- main texual based content -->\n\n		<div class = "text">\n\n\n\n\n\n			<!-- user details -->\n\n			<table>\n\n				<tr>\n\n					<td>\n\n						<!-- greeting -->\n\n						Welcome {{account.username}}\n\n					</td>\n\n\n\n					<!-- avatar -->\n\n					<td align="right" rowspan="2">\n\n						<img class="avatar" src="{{account.avatar}}" (click)="onClickEditAccount()">\n\n					</td>\n\n				</tr>\n\n\n\n				<tr>\n\n					<!-- highcsore -->\n\n					<td>\n\n						Highscore: {{account.highscore}}\n\n					</td>\n\n				</tr>\n\n\n\n			</table>\n\n\n\n			<!-- user account edit button -->\n\n			<p>\n\n				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>\n\n			</p>\n\n\n\n			<ion-list>\n\n				<!-- checkbox to enable bots -->\n\n				<ion-item>\n\n					<ion-label>Enable Computer</ion-label>\n\n					<ion-checkbox #checkboxEnableComputer></ion-checkbox>\n\n				</ion-item>\n\n\n\n				<!-- bots count -->\n\n				<ion-item>\n\n						<ion-label>Difficulty</ion-label>\n\n					<ion-input type="number" [(ngModel)]=\'computerDifficulty\' min="1" max="10"></ion-input>\n\n				</ion-item>\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/'<!--\n\n	Generated template for the SplashPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n<ion-content padding>\n\n\n\n	<!-- main content -->\n\n	<div class="page_content">\n\n		\n\n		<!-- big top title -->\n\n		<div class = "title">\n\n			King Snake\n\n		</div>\n\n\n\n		<!-- snake image -->\n\n		<div align="center" style="display:none;">\n\n			<img class = "snake" src="assets/imgs/snakepic.png">\n\n		</div>\n\n\n\n		<!-- main texual based content -->\n\n		<div class = "text">\n\n\n\n\n\n			<!-- user details -->\n\n			<table>\n\n				<tr>\n\n					<td>\n\n						<!-- greeting -->\n\n						Welcome {{account.username}}\n\n					</td>\n\n\n\n					<!-- avatar -->\n\n					<td align="right" rowspan="2">\n\n						<img class="avatar" src="{{account.avatar}}" (click)="onClickEditAccount()">\n\n					</td>\n\n				</tr>\n\n\n\n				<tr>\n\n					<!-- highcsore -->\n\n					<td>\n\n						Highscore: {{account.highscore}}\n\n					</td>\n\n				</tr>\n\n\n\n			</table>\n\n\n\n			<!-- user account edit button -->\n\n			<p>\n\n				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>\n\n			</p>\n\n\n\n			<ion-list>\n\n				<!-- checkbox to enable bots -->\n\n				<ion-item>\n\n					<ion-label>Enable Computer</ion-label>\n\n					<ion-checkbox #checkboxEnableComputer></ion-checkbox>\n\n				</ion-item>\n\n\n\n				<!-- bots count -->\n\n				<ion-item>\n\n						<ion-label>Difficulty</ion-label>\n\n					<ion-input type="number" [(ngModel)]=\'computerDifficulty\' min="1" max="10" align="right"></ion-input>\n\n				</ion-item>\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]) === "function" && _c || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -210,14 +211,18 @@ var GamePage = (function () {
         this.makeFruit();
         this.lives = 3;
         if (this.enableComputer) {
-            var x = Math.random() * window.innerWidth;
-            var y = Math.random() * window.innerHeight;
-            this.snakes.push([
+            this.spawnBot(1);
+        }
+    };
+    GamePage.prototype.spawnBot = function (index) {
+        var x = Math.random() * window.innerWidth;
+        var y = Math.random() * window.innerHeight;
+        this.snakes[index] =
+            [
                 { x: x, y: y },
                 { x: x, y: y },
                 { x: x, y: y }
-            ]);
-        }
+            ];
     };
     GamePage.prototype.update = function () {
         this.render();
@@ -251,15 +256,16 @@ var GamePage = (function () {
         //console.log("updateBotTargets()");
         //this.drawObsticaleMap();
         var pathPoints = this.getPathPoints();
-        // for(let point of pathPoints){
-        //   this.drawCircle(point.x, point.y, 2, "#888888");
-        //   this.ctx.strokeWidth = 1;
-        //   this.ctx.strokeStyle = '#888888';
-        //   this.ctx.beginPath();
-        //   this.ctx.moveTo(point.x, point.y);
-        //   this.ctx.lineTo(point.sx, point.sy);
-        //   this.ctx.stroke();
-        // }
+        for (var _i = 0, pathPoints_1 = pathPoints; _i < pathPoints_1.length; _i++) {
+            var point = pathPoints_1[_i];
+            this.drawCircle(point.x, point.y, 2, "#888888");
+            this.ctx.strokeWidth = 1;
+            this.ctx.strokeStyle = '#888888';
+            this.ctx.beginPath();
+            this.ctx.moveTo(point.x, point.y);
+            this.ctx.lineTo(point.sx, point.sy);
+            this.ctx.stroke();
+        }
         for (var s = 1; s < this.snakes.length; s++) {
             //console.log("  for snake " + s);
             //Do A* path search using path points and avoid passing through snakes
@@ -276,8 +282,8 @@ var GamePage = (function () {
             }
             var queue = new PriorityQueue(function (a, b) { return a.lengthTotal < b.lengthTotal; });
             // possible starting points
-            for (var _i = 0, pathPoints_1 = pathPoints; _i < pathPoints_1.length; _i++) {
-                var start = pathPoints_1[_i];
+            for (var _a = 0, pathPoints_2 = pathPoints; _a < pathPoints_2.length; _a++) {
+                var start = pathPoints_2[_a];
                 //console.log("    for start");
                 // if head is practically at that point dont consider it as a start
                 if (length(head, start) > 20) {
@@ -303,14 +309,14 @@ var GamePage = (function () {
                 //  console.log("    with next element " + queue.peek().lengthTotal);
                 //this.drawCircle(path.x, path.y, 3, "#00ff00");
                 looped++;
-                if (looped > 150) {
+                if (looped > 100) {
                     console.log("No path found");
                     //clearInterval(this.theInt);
-                    target = { x: this.snakes[s][0].x, y: this.snakes[s][0].y };
-                    break;
+                    //target = {x: this.snakes[s][0].x, y: this.snakes[s][0].y};
+                    //break;
                 }
                 // check if current point leads directly to the fruit or no path is found
-                if (this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || looped > 150) {
+                if (this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || looped > 100) {
                     //console.log("      exit has line of sight to fruit");
                     //console.log("      target = queue element");
                     target.x = path.inX;
@@ -319,8 +325,8 @@ var GamePage = (function () {
                     exit.y = path.y;
                     break;
                 }
-                for (var _a = 0, pathPoints_2 = pathPoints; _a < pathPoints_2.length; _a++) {
-                    var next = pathPoints_2[_a];
+                for (var _b = 0, pathPoints_3 = pathPoints; _b < pathPoints_3.length; _b++) {
+                    var next = pathPoints_3[_b];
                     //console.log("      for next");
                     if (this.hasFreeLineOfSightTo(path, next, pathPoints)) {
                         //console.log("        added " + (path.length + length(path, next) + length(next, this.fruit)));
@@ -336,8 +342,8 @@ var GamePage = (function () {
                 }
             }
             //console.log("target set");
-            // this.drawCircle(target.x, target.y, 3, "#ff0000");
-            // this.drawCircle(exit.x, exit.y, 3, "#0000ff");
+            this.drawCircle(target.x, target.y, 3, "#ff0000");
+            this.drawCircle(exit.x, exit.y, 3, "#0000ff");
             this.snakes[s][0] = target;
         }
     };
@@ -398,7 +404,7 @@ var GamePage = (function () {
         this.drawFruit();
     };
     GamePage.prototype.getPathPoints = function () {
-        var margin = 50;
+        var margin = 20;
         var marginSquared = margin * margin;
         // list of path and snake points pairs, x, y is point snake can travel, sx, sy is the snake 
         // body point it corresponds to
@@ -419,6 +425,10 @@ var GamePage = (function () {
             var scale = Math.sqrt(marginSquared / (vectorSecondOutStraight.x * vectorSecondOutStraight.x + vectorSecondOutStraight.y * vectorSecondOutStraight.y));
             vectorSecondOutStraight.x *= scale;
             vectorSecondOutStraight.y *= scale;
+            if (s > 0) {
+                vectorSecondOutStraight.x *= 3;
+                vectorSecondOutStraight.y *= 3;
+            }
             // vectorSecondOutLeft = vectorSecondOutStraight rotated 90 degrees clockwise
             var vectorSecondOutLeft = {
                 x: -vectorSecondOutStraight.y,
@@ -434,7 +444,8 @@ var GamePage = (function () {
             var pointOutSecondStreight = { x: second.x + vectorSecondOutStraight.x, y: second.y + vectorSecondOutStraight.y };
             var pointOutSecondRight = { x: second.x + vectorSecondOutRight.x, y: second.y + vectorSecondOutRight.y };
             points.push({ x: pointOutSecondLeft.x, y: pointOutSecondLeft.y, sx: second.x, sy: second.y });
-            //points.push({x: pointOutSecondStreight.x, y: pointOutSecondStreight.y, sx: second.x, sy: second.y});
+            if (s == 0)
+                points.push({ x: pointOutSecondStreight.x, y: pointOutSecondStreight.y, sx: second.x, sy: second.y });
             points.push({ x: pointOutSecondRight.x, y: pointOutSecondRight.y, sx: second.x, sy: second.y });
             // vectorLastOutStraight = (secondlast - last) / 2
             var vectorLastOutStraight = {
@@ -466,9 +477,13 @@ var GamePage = (function () {
                 var previous = this.snakes[s][i - 1];
                 var current = this.snakes[s][i];
                 var next = this.snakes[s][i + 1];
-                var vectorPrevious = { x: 100 * current.x - 100 * previous.x, y: 100 * current.y - 100 * previous.y };
-                var vectorNext = { x: 100 * current.x - 100 * next.x, y: 100 * current.y - 100 * next.y };
-                var vectorMiddleTimes2 = { x: vectorPrevious.x + vectorNext.x, y: vectorPrevious.y + vectorNext.y };
+                var vectorPrevious = { x: 1000 * current.x - 1000 * previous.x, y: 1000 * current.y - 1000 * previous.y };
+                var vectorNext = { x: 1000 * current.x - 1000 * next.x, y: 1000 * current.y - 1000 * next.y };
+                var distancePrevious = Math.sqrt(vectorPrevious.x * vectorPrevious.x + vectorPrevious.y * vectorPrevious.y);
+                var distancNext = Math.sqrt(vectorNext.x * vectorNext.x + vectorNext.y * vectorNext.y);
+                var unitVectorPrevious = { x: vectorPrevious.x / distancePrevious, y: vectorPrevious.y / distancePrevious };
+                var unitVectorNext = { x: vectorNext.x / distancNext, y: vectorNext.y / distancNext };
+                var vectorMiddleTimes2 = { x: unitVectorPrevious.x + unitVectorNext.x, y: unitVectorPrevious.y + unitVectorNext.y };
                 var scale = Math.sqrt(marginSquared / (vectorMiddleTimes2.x * vectorMiddleTimes2.x + vectorMiddleTimes2.y * vectorMiddleTimes2.y));
                 vectorMiddleTimes2.x *= scale;
                 vectorMiddleTimes2.y *= scale;
@@ -476,26 +491,12 @@ var GamePage = (function () {
                     x: current.x + vectorMiddleTimes2.x,
                     y: current.y + vectorMiddleTimes2.y,
                 };
-                // var pointOutPrevious = {x: 3 * current.x - 2 * previous.x, y: 3 * current.y - 2 * previous.y};
-                // var pointOutNext     = {x: 3 * current.x - 2 * next.x,     y: 3 * current.y - 2 * next.y    };
-                // var midPoint = {x: (pointOutPrevious.x + pointOutNext.x) /2, y: (pointOutPrevious.y + pointOutNext.y) / 2};
-                // var midPoint = {//equivilant to the previous three commented statements
-                //   x: 3 * current.x - previous.x - next.x, 
-                //   y: 3 * current.y - previous.y - next.y,
-                // };
                 points.push({
                     x: midPoint.x,
                     y: midPoint.y,
                     sx: current.x,
                     sy: current.y
                 });
-                // var vectorPrevious = {x: current.x - previous.x, y: current.y - previous.y};
-                // var vectorNext     = {x: current.x - next.x,     y: current.y - next.y    };
-                // var lengthPrevious = Math.sqrt(vectorPrevious.x * vectorPrevious.x + vectorPrevious.y * vectorPrevious.y);
-                // var lengthNext     = Math.sqrt(vectorNext.x     * vectorNext.x     + vectorNext.y     * vectorNext.y    );
-                // var dotMul = vectorPrevious.x * vectorNext.x + vectorPrevious.y * vectorNext.y;
-                // var angle = Math.acos(dotMul/lengthNext/lengthPrevious)
-                // var vectorMiddle = {x: margin * Math.cos(angle), y: margin * Math.sin(angle)};
             }
         }
         return points;
@@ -604,7 +605,7 @@ var GamePage = (function () {
                         else if (this.snakes[s].length > 3) {
                             //console.log(this.loop + " " + s + " intesects with " + t + " at " + i);
                             //clearInterval(this.theInt);
-                            this.snakes[s].splice(3, this.snakes[s].length - 3);
+                            this.spawnBot(s);
                         }
                     }
                 }

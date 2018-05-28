@@ -96,17 +96,22 @@ export class GamePage {
     this.lives = 3;
 
     if(this.enableComputer){
-      var x = Math.random() * window.innerWidth;
-      var y = Math.random() * window.innerHeight;
-
-      this.snakes.push(
-        [
-          {x: x, y: y}, // target for snake, not displayed
-          {x: x, y: y}, 
-          {x: x, y: y}
-        ]
-      );
+      this.spawnBot(1);
     }
+  }
+
+  spawnBot(index){
+    var x = Math.random() * window.innerWidth;
+    var y = Math.random() * window.innerHeight;
+
+    this.snakes[index] = 
+      [
+        {x: x, y: y}, // target for snake, not displayed
+        {x: x, y: y}, 
+        {x: x, y: y}
+      ]
+    ;
+
   }
 
   update(){
@@ -157,16 +162,16 @@ export class GamePage {
     //this.drawObsticaleMap();
     var pathPoints = this.getPathPoints();
 
-    // for(let point of pathPoints){
-    //   this.drawCircle(point.x, point.y, 2, "#888888");
+    for(let point of pathPoints){
+      this.drawCircle(point.x, point.y, 2, "#888888");
 
-    //   this.ctx.strokeWidth = 1;
-    //   this.ctx.strokeStyle = '#888888';
-    //   this.ctx.beginPath();
-    //   this.ctx.moveTo(point.x, point.y);
-    //   this.ctx.lineTo(point.sx, point.sy);
-    //   this.ctx.stroke();
-    // }
+      this.ctx.strokeWidth = 1;
+      this.ctx.strokeStyle = '#888888';
+      this.ctx.beginPath();
+      this.ctx.moveTo(point.x, point.y);
+      this.ctx.lineTo(point.sx, point.sy);
+      this.ctx.stroke();
+    }
 
 
     for(var s = 1; s < this.snakes.length; s++){
@@ -223,15 +228,15 @@ export class GamePage {
         //this.drawCircle(path.x, path.y, 3, "#00ff00");
 
         looped++;
-        if(looped > 150){
+        if(looped > 100){
           console.log("No path found");
           //clearInterval(this.theInt);
-          target = {x: this.snakes[s][0].x, y: this.snakes[s][0].y};
-          break;
+          //target = {x: this.snakes[s][0].x, y: this.snakes[s][0].y};
+          //break;
         }
 
         // check if current point leads directly to the fruit or no path is found
-        if(this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || looped > 150){
+        if(this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || looped > 100){
           //console.log("      exit has line of sight to fruit");
           //console.log("      target = queue element");
 
@@ -264,8 +269,8 @@ export class GamePage {
       }
 
       //console.log("target set");
-      // this.drawCircle(target.x, target.y, 3, "#ff0000");
-      // this.drawCircle(exit.x, exit.y, 3, "#0000ff");
+      this.drawCircle(target.x, target.y, 3, "#ff0000");
+      this.drawCircle(exit.x, exit.y, 3, "#0000ff");
       this.snakes[s][0] = target;
 
     }
@@ -344,7 +349,7 @@ export class GamePage {
 
   getPathPoints(){
 
-    var margin = 50;
+    var margin = 20;
     var marginSquared = margin * margin;
     
     // list of path and snake points pairs, x, y is point snake can travel, sx, sy is the snake 
@@ -370,6 +375,10 @@ export class GamePage {
       var scale = Math.sqrt(marginSquared / (vectorSecondOutStraight.x * vectorSecondOutStraight.x + vectorSecondOutStraight.y * vectorSecondOutStraight.y));
       vectorSecondOutStraight.x *= scale;
       vectorSecondOutStraight.y *= scale;
+      if(s > 0){
+        vectorSecondOutStraight.x *= 3;
+        vectorSecondOutStraight.y *= 3;
+      }
 
       // vectorSecondOutLeft = vectorSecondOutStraight rotated 90 degrees clockwise
       var vectorSecondOutLeft = {
@@ -389,7 +398,8 @@ export class GamePage {
       var pointOutSecondRight    = {x: second.x + vectorSecondOutRight.x,    y: second.y + vectorSecondOutRight.y   };
 
       points.push({x: pointOutSecondLeft.x,     y: pointOutSecondLeft.y,     sx: second.x, sy: second.y});
-      //points.push({x: pointOutSecondStreight.x, y: pointOutSecondStreight.y, sx: second.x, sy: second.y});
+      if(s == 0)
+        points.push({x: pointOutSecondStreight.x, y: pointOutSecondStreight.y, sx: second.x, sy: second.y});
       points.push({x: pointOutSecondRight.x,    y: pointOutSecondRight.y,    sx: second.x, sy: second.y});
 
 
@@ -431,10 +441,14 @@ export class GamePage {
         var current  = this.snakes[s][i];
         var next     = this.snakes[s][i+1];
         
-        var vectorPrevious = {x: 100 * current.x - 100 * previous.x, y: 100 * current.y - 100 * previous.y};
-        var vectorNext     = {x: 100 * current.x - 100 * next.x,     y: 100 * current.y - 100 * next.y    };
+        var vectorPrevious   = {x: 1000 * current.x - 1000 * previous.x, y: 1000 * current.y - 1000 * previous.y};
+        var vectorNext       = {x: 1000 * current.x - 1000 * next.x,     y: 1000 * current.y - 1000 * next.y    };
+        var distancePrevious = Math.sqrt(vectorPrevious.x * vectorPrevious.x + vectorPrevious.y * vectorPrevious.y);
+        var distancNext      = Math.sqrt(vectorNext.x     * vectorNext.x     + vectorNext.y     * vectorNext.y);
+        var unitVectorPrevious = {x: vectorPrevious.x / distancePrevious, y: vectorPrevious.y / distancePrevious};
+        var unitVectorNext     = {x: vectorNext.x     / distancNext,      y: vectorNext.y     / distancNext};
 
-        var vectorMiddleTimes2 = {x: vectorPrevious.x + vectorNext.x, y: vectorPrevious.y + vectorNext.y};
+        var vectorMiddleTimes2 = {x: unitVectorPrevious.x + unitVectorNext.x, y: unitVectorPrevious.y + unitVectorNext.y};
 
         var scale = Math.sqrt(marginSquared / (vectorMiddleTimes2.x * vectorMiddleTimes2.x + vectorMiddleTimes2.y * vectorMiddleTimes2.y));
         vectorMiddleTimes2.x *= scale;
@@ -445,15 +459,6 @@ export class GamePage {
           y: current.y + vectorMiddleTimes2.y,
         };
 
-          
-        // var pointOutPrevious = {x: 3 * current.x - 2 * previous.x, y: 3 * current.y - 2 * previous.y};
-        // var pointOutNext     = {x: 3 * current.x - 2 * next.x,     y: 3 * current.y - 2 * next.y    };
-        // var midPoint = {x: (pointOutPrevious.x + pointOutNext.x) /2, y: (pointOutPrevious.y + pointOutNext.y) / 2};
-        // var midPoint = {//equivilant to the previous three commented statements
-        //   x: 3 * current.x - previous.x - next.x, 
-        //   y: 3 * current.y - previous.y - next.y,
-        // };
-
         points.push(
           {
             x: midPoint.x, 
@@ -462,19 +467,6 @@ export class GamePage {
             sy: current.y
           }
         );
-
-        // var vectorPrevious = {x: current.x - previous.x, y: current.y - previous.y};
-        // var vectorNext     = {x: current.x - next.x,     y: current.y - next.y    };
-
-        // var lengthPrevious = Math.sqrt(vectorPrevious.x * vectorPrevious.x + vectorPrevious.y * vectorPrevious.y);
-        // var lengthNext     = Math.sqrt(vectorNext.x     * vectorNext.x     + vectorNext.y     * vectorNext.y    );
-        // var dotMul = vectorPrevious.x * vectorNext.x + vectorPrevious.y * vectorNext.y;
-        
-        // var angle = Math.acos(dotMul/lengthNext/lengthPrevious)
-
-
-
-        // var vectorMiddle = {x: margin * Math.cos(angle), y: margin * Math.sin(angle)};
       }
     }
 
@@ -610,8 +602,7 @@ export class GamePage {
               //console.log(this.loop + " " + s + " intesects with " + t + " at " + i);
               
               //clearInterval(this.theInt);
-              
-              this.snakes[s].splice(3, this.snakes[s].length-3);
+              this.spawnBot(s);
 
             }
 
