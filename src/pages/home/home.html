@@ -53,24 +53,19 @@
 				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>
 			</p>
 
-			<!-- bots option -->
-			<table>
-				<tr>
-					<td>
-						<!-- checkbox to enable bots -->
-						<ion-item>
-							<ion-label>Enable Bots</ion-label>
-							<ion-checkbox [(ngModel)]="bots"></ion-checkbox>
-						</ion-item>
-					</td>
-					<td align="right">
-						<!-- bots count -->
-						<ion-item>
-							<ion-input type="number" [(ngModel)]='botCount' min="1" max="10" align="right"></ion-input>
-						</ion-item>
-					</td>
-				</tr>
-			</table>
+			<ion-list>
+				<!-- checkbox to enable bots -->
+				<ion-item>
+					<ion-label>Enable Computer</ion-label>
+					<ion-checkbox #checkboxEnableComputer></ion-checkbox>
+				</ion-item>
+
+				<!-- bots count -->
+				<ion-item>
+						<ion-label>Difficulty</ion-label>
+					<ion-input type="number" [(ngModel)]='computerDifficulty' min="1" max="10"></ion-input>
+				</ion-item>
+			</ion-list>
 		</div>
 	</div>
 

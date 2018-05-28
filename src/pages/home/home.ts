@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GamePage } from '../game/game';
 import { HowToPage } from '../how-to/how-to';
@@ -13,10 +13,12 @@ import { Storage } from '@ionic/storage';
 
 export class HomePage {
 
+  @ViewChild('checkboxEnableBots') checkboxEnableBots;
+
   //values to be displayed on the page
-  botCount:number = 3;
+  computerDifficulty:number = 5;
   
-  account = {username:'', highscore: 0};
+  account = {username: '', highscore: 0};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
   }
@@ -41,10 +43,13 @@ export class HomePage {
 
   //on play button pressed, go to game
   onClickPlay(){
+
     var parameters = {
-      enableBots: true,
-      botCount: this.botCount
+      //enableComputer: this.checkboxEnableBots.checked,
+      enableComputer: true,
+      computerDifficulty: this.computerDifficulty
     }
+
     this.navCtrl.push(GamePage, parameters);
   }
 

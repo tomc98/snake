@@ -129484,6 +129484,12 @@ page-game .stats span {
   font-family: "Bungee",cursive;
 }
 
+page-game .float {
+  position: absolute;
+  top: 0px;
+  left: 200px;
+}
+
 page-home * {
   font-family: "Bungee",cursive;
   font-size: 20px;
