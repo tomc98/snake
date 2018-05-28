@@ -132,7 +132,7 @@ export class GamePage {
 
         for(var i = 1; i < this.snakes[s].length; i++){
 
-          var speed = s > 0 && i == 1 ? this.computerDifficulty / 2 + 5 : 10;
+          var speed = s > 0 && i == 1 ? this.computerDifficulty / 1.5 + 5 : 10;
 
           //get and update next position of each snake
           var nextPos = this.getNextPosition(this.snakes[s][i-1].x, this.snakes[s][i-1].y, this.snakes[s][i].x, this.snakes[s][i].y, speed, s > 0 && i == 1);
