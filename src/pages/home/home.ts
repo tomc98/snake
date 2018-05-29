@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 
 export class HomePage {
 
-  @ViewChild('checkboxEnableBots') checkboxEnableBots;
+  @ViewChild('checkboxEnableComputer') checkboxEnableComputer;
 
   //values to be displayed on the page
   computerDifficulty:number = 5;
@@ -45,8 +45,7 @@ export class HomePage {
   onClickPlay(){
 
     var parameters = {
-      //enableComputer: this.checkboxEnableBots.checked,
-      enableComputer: true,
+      enableComputer: this.checkboxEnableComputer.checked,
       computerDifficulty: this.computerDifficulty
     }
 

@@ -44,6 +44,7 @@ export class GamePage {
   
   enableComputer:boolean = false;
   computerDifficulty:number;
+  computerSpeed:number = this.screenHeight / 1000;
 
   constructor(public navCtrl: NavController, /*private nativeAudio: NativeAudio,*/ public plt: Platform, public navParams: NavParams) {
 
@@ -54,6 +55,7 @@ export class GamePage {
 
     console.log("enableBots: " + this.enableComputer);
     console.log("botCount: " + this.computerDifficulty);
+
   }
 
   //executes once all views have been initialised 
@@ -137,7 +139,7 @@ export class GamePage {
 
         for(var i = 1; i < this.snakes[s].length; i++){
 
-          var speed = s > 0 && i == 1 ? this.computerDifficulty / 1.5 + 5 : 10;
+          var speed = s > 0 && i == 1 ? (this.computerDifficulty / 1.5 + 5) * this.computerSpeed : 10;
 
           //get and update next position of each snake
           var nextPos = this.getNextPosition(this.snakes[s][i-1].x, this.snakes[s][i-1].y, this.snakes[s][i].x, this.snakes[s][i].y, speed, s > 0 && i == 1);
@@ -162,16 +164,16 @@ export class GamePage {
     //this.drawObsticaleMap();
     var pathPoints = this.getPathPoints();
 
-    for(let point of pathPoints){
-      this.drawCircle(point.x, point.y, 2, "#888888");
+    // for(let point of pathPoints){
+    //   this.drawCircle(point.x, point.y, 2, "#888888");
 
-      this.ctx.strokeWidth = 1;
-      this.ctx.strokeStyle = '#888888';
-      this.ctx.beginPath();
-      this.ctx.moveTo(point.x, point.y);
-      this.ctx.lineTo(point.sx, point.sy);
-      this.ctx.stroke();
-    }
+    //   this.ctx.strokeWidth = 1;
+    //   this.ctx.strokeStyle = '#888888';
+    //   this.ctx.beginPath();
+    //   this.ctx.moveTo(point.x, point.y);
+    //   this.ctx.lineTo(point.sx, point.sy);
+    //   this.ctx.stroke();
+    // }
 
 
     for(var s = 1; s < this.snakes.length; s++){
@@ -269,8 +271,8 @@ export class GamePage {
       }
 
       //console.log("target set");
-      this.drawCircle(target.x, target.y, 3, "#ff0000");
-      this.drawCircle(exit.x, exit.y, 3, "#0000ff");
+      // this.drawCircle(target.x, target.y, 3, "#ff0000");
+      // this.drawCircle(exit.x, exit.y, 3, "#0000ff");
       this.snakes[s][0] = target;
 
     }

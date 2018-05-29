@@ -86,8 +86,7 @@ var HomePage = (function () {
     //on play button pressed, go to game
     HomePage.prototype.onClickPlay = function () {
         var parameters = {
-            //enableComputer: this.checkboxEnableBots.checked,
-            enableComputer: true,
+            enableComputer: this.checkboxEnableComputer.checked,
             computerDifficulty: this.computerDifficulty
         };
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__game_game__["a" /* GamePage */], parameters);
@@ -105,17 +104,16 @@ var HomePage = (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__accounts_accounts__["a" /* AccountsPage */]);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('checkboxEnableBots'),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('checkboxEnableComputer'),
         __metadata("design:type", Object)
-    ], HomePage.prototype, "checkboxEnableBots", void 0);
+    ], HomePage.prototype, "checkboxEnableComputer", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/'<!--\n\n	Generated template for the SplashPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n<ion-content padding>\n\n\n\n	<!-- main content -->\n\n	<div class="page_content">\n\n		\n\n		<!-- big top title -->\n\n		<div class = "title">\n\n			King Snake\n\n		</div>\n\n\n\n		<!-- snake image -->\n\n		<div align="center" style="display:none;">\n\n			<img class = "snake" src="assets/imgs/snakepic.png">\n\n		</div>\n\n\n\n		<!-- main texual based content -->\n\n		<div class = "text">\n\n\n\n\n\n			<!-- user details -->\n\n			<table>\n\n				<tr>\n\n					<td>\n\n						<!-- greeting -->\n\n						Welcome {{account.username}}\n\n					</td>\n\n\n\n					<!-- avatar -->\n\n					<td align="right" rowspan="2">\n\n						<img class="avatar" src="{{account.avatar}}" (click)="onClickEditAccount()">\n\n					</td>\n\n				</tr>\n\n\n\n				<tr>\n\n					<!-- highcsore -->\n\n					<td>\n\n						Highscore: {{account.highscore}}\n\n					</td>\n\n				</tr>\n\n\n\n			</table>\n\n\n\n			<!-- user account edit button -->\n\n			<p>\n\n				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>\n\n			</p>\n\n\n\n			<ion-list>\n\n				<!-- checkbox to enable bots -->\n\n				<ion-item>\n\n					<ion-label>Enable Computer</ion-label>\n\n					<ion-checkbox #checkboxEnableComputer></ion-checkbox>\n\n				</ion-item>\n\n\n\n				<!-- bots count -->\n\n				<ion-item>\n\n						<ion-label>Difficulty</ion-label>\n\n					<ion-input type="number" [(ngModel)]=\'computerDifficulty\' min="1" max="10" align="right"></ion-input>\n\n				</ion-item>\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]])
     ], HomePage);
     return HomePage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -171,6 +169,7 @@ var GamePage = (function () {
             ]
         ];
         this.enableComputer = false;
+        this.computerSpeed = this.screenHeight / 1000;
         var parameters = navParams.data;
         this.enableComputer = parameters.enableComputer;
         this.computerDifficulty = parameters.computerDifficulty;
@@ -239,7 +238,7 @@ var GamePage = (function () {
             this.updateBotTargets();
             for (var s = 0; s < this.snakes.length; s++) {
                 for (var i = 1; i < this.snakes[s].length; i++) {
-                    var speed = s > 0 && i == 1 ? this.computerDifficulty / 1.5 + 5 : 10;
+                    var speed = s > 0 && i == 1 ? (this.computerDifficulty / 1.5 + 5) * this.computerSpeed : 10;
                     //get and update next position of each snake
                     var nextPos = this.getNextPosition(this.snakes[s][i - 1].x, this.snakes[s][i - 1].y, this.snakes[s][i].x, this.snakes[s][i].y, speed, s > 0 && i == 1);
                     this.snakes[s][i].x = nextPos.x;
@@ -256,16 +255,15 @@ var GamePage = (function () {
         //console.log("updateBotTargets()");
         //this.drawObsticaleMap();
         var pathPoints = this.getPathPoints();
-        for (var _i = 0, pathPoints_1 = pathPoints; _i < pathPoints_1.length; _i++) {
-            var point = pathPoints_1[_i];
-            this.drawCircle(point.x, point.y, 2, "#888888");
-            this.ctx.strokeWidth = 1;
-            this.ctx.strokeStyle = '#888888';
-            this.ctx.beginPath();
-            this.ctx.moveTo(point.x, point.y);
-            this.ctx.lineTo(point.sx, point.sy);
-            this.ctx.stroke();
-        }
+        // for(let point of pathPoints){
+        //   this.drawCircle(point.x, point.y, 2, "#888888");
+        //   this.ctx.strokeWidth = 1;
+        //   this.ctx.strokeStyle = '#888888';
+        //   this.ctx.beginPath();
+        //   this.ctx.moveTo(point.x, point.y);
+        //   this.ctx.lineTo(point.sx, point.sy);
+        //   this.ctx.stroke();
+        // }
         for (var s = 1; s < this.snakes.length; s++) {
             //console.log("  for snake " + s);
             //Do A* path search using path points and avoid passing through snakes
@@ -282,8 +280,8 @@ var GamePage = (function () {
             }
             var queue = new PriorityQueue(function (a, b) { return a.lengthTotal < b.lengthTotal; });
             // possible starting points
-            for (var _a = 0, pathPoints_2 = pathPoints; _a < pathPoints_2.length; _a++) {
-                var start = pathPoints_2[_a];
+            for (var _i = 0, pathPoints_1 = pathPoints; _i < pathPoints_1.length; _i++) {
+                var start = pathPoints_1[_i];
                 //console.log("    for start");
                 // if head is practically at that point dont consider it as a start
                 if (length(head, start) > 20) {
@@ -325,8 +323,8 @@ var GamePage = (function () {
                     exit.y = path.y;
                     break;
                 }
-                for (var _b = 0, pathPoints_3 = pathPoints; _b < pathPoints_3.length; _b++) {
-                    var next = pathPoints_3[_b];
+                for (var _a = 0, pathPoints_2 = pathPoints; _a < pathPoints_2.length; _a++) {
+                    var next = pathPoints_2[_a];
                     //console.log("      for next");
                     if (this.hasFreeLineOfSightTo(path, next, pathPoints)) {
                         //console.log("        added " + (path.length + length(path, next) + length(next, this.fruit)));
@@ -342,8 +340,8 @@ var GamePage = (function () {
                 }
             }
             //console.log("target set");
-            this.drawCircle(target.x, target.y, 3, "#ff0000");
-            this.drawCircle(exit.x, exit.y, 3, "#0000ff");
+            // this.drawCircle(target.x, target.y, 3, "#ff0000");
+            // this.drawCircle(exit.x, exit.y, 3, "#0000ff");
             this.snakes[s][0] = target;
         }
     };
@@ -755,10 +753,9 @@ var GamePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-game',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/'<!-- canvas to display the game -->\n\n<canvas (move)="test($event)" width={{screenWidth}} height={{screenHeight}} #myCanvas></canvas>\n\n\n\n<!-- score and lives display -->\n\n<p class="stats">\n\n	<span style="float:left;">Score: {{points}}</span>\n\n	<span style="float:right;">Lives: {{lives}}</span>\n\n</p>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], GamePage);
     return GamePage;
-    var _a, _b, _c;
 }());
 
 var PriorityQueue = (function () {
