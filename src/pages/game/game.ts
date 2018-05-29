@@ -9,24 +9,25 @@ import { LostPage } from '../lost/lost';
   selector: 'page-game',
   templateUrl: 'game.html'
 })
+
 export class GamePage {
   @ViewChild('myCanvas') myCanvas;
 
   //globally used values
-  screenWidth= window.innerWidth;
-  screenHeight= window.innerHeight;
-  points = 0;
+  screenWidth:number = window.innerWidth;
+  screenHeight:number = window.innerHeight;
+  points:number = 0;
   ctx: any;
   pfCtx: any;
 
-  mouse = {x: 0, y: 0};
-  down = false;
+  //mouse = {x: 0, y: 0};
 
   fruit = {x: window.innerWidth/5, y: innerHeight/5, color: 'red', size: 20};
 
-  botColour = "#555555";
-  lives = 3;
-  theInt : any;
+  botColour:string = "#555555";
+  lives:number = 3;
+  updateInterval: any;
+  updateAiInterval: any;
 
   fruitColorDegreeGap = 15;
   backgroundColor = {h: 257, s: 0.22, v: 0.84};
@@ -34,13 +35,7 @@ export class GamePage {
   flashIntensity: number = 0;
 
   // all snakes including bots if any
-  snakes = [
-    [
-      {x: window.innerWidth/2, y: window.innerHeight/2}, // this is the target location (mouse) and is not drawn
-      {x: window.innerWidth/2, y: window.innerHeight/2}, 
-      {x: window.innerWidth/2, y: window.innerHeight/2}
-    ]
-  ];
+  snakes = [];
   
   enableComputer:boolean = false;
   computerDifficulty:number;
@@ -72,11 +67,13 @@ export class GamePage {
       this.panUpdate(event.center.x, event.center.y);
     });
 
-    //setup refresh interval
-    this.theInt = setInterval(() => {this.update();}, 1000/60);
-
     //reset game to start
     this.setupGameState();
+    this.updateBotTargets();
+
+    //setup refresh interval
+    this.updateInterval = setInterval(() => {this.update();}, 1000/60);
+
     this.loadSound();
   }
 
@@ -96,6 +93,13 @@ export class GamePage {
     this.points = 0;
     this.makeFruit();
     this.lives = 3;
+
+
+    this.snakes[0] = [
+      {x: window.innerWidth/2, y: window.innerHeight/2}, // this is the target location (mouse) and is not drawn
+      {x: window.innerWidth/2, y: window.innerHeight/2}, 
+      {x: window.innerWidth/2, y: window.innerHeight/2}
+    ];
 
     if(this.enableComputer){
       this.spawnBot(1);
@@ -127,7 +131,8 @@ export class GamePage {
       //if player died
 
       //stop update interval
-      clearInterval(this.theInt);
+      clearInterval(this.updateInterval);
+      clearInterval(this.updateAiInterval);
 
       //navigate to lost page
       this.navCtrl.push(LostPage, this.points);
@@ -142,11 +147,8 @@ export class GamePage {
           var speed = s > 0 && i == 1 ? (this.computerDifficulty / 1.5 + 5) * this.computerSpeed : 10;
 
           //get and update next position of each snake
-          var nextPos = this.getNextPosition(this.snakes[s][i-1].x, this.snakes[s][i-1].y, this.snakes[s][i].x, this.snakes[s][i].y, speed, s > 0 && i == 1);
+          this.snakes[s][i] = this.getNextPosition(this.snakes[s][i-1].x, this.snakes[s][i-1].y, this.snakes[s][i].x, this.snakes[s][i].y, speed, s > 0 && i == 1);
           
-          this.snakes[s][i].x = nextPos.x;
-          this.snakes[s][i].y = nextPos.y;
-
         }
       }
 
@@ -159,7 +161,6 @@ export class GamePage {
 
   // update targets for bots
   updateBotTargets(){
-    //console.log("updateBotTargets()");
 
     //this.drawObsticaleMap();
     var pathPoints = this.getPathPoints();
@@ -232,7 +233,7 @@ export class GamePage {
         looped++;
         if(looped > 100){
           console.log("No path found");
-          //clearInterval(this.theInt);
+          //clearInterval(this.updateInterval);
           //target = {x: this.snakes[s][0].x, y: this.snakes[s][0].y};
           //break;
         }
@@ -603,7 +604,7 @@ export class GamePage {
 
               //console.log(this.loop + " " + s + " intesects with " + t + " at " + i);
               
-              //clearInterval(this.theInt);
+              //clearInterval(this.updateInterval);
               this.spawnBot(s);
 
             }

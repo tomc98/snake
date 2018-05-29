@@ -151,8 +151,7 @@ var GamePage = (function () {
         this.screenWidth = window.innerWidth;
         this.screenHeight = window.innerHeight;
         this.points = 0;
-        this.mouse = { x: 0, y: 0 };
-        this.down = false;
+        //mouse = {x: 0, y: 0};
         this.fruit = { x: window.innerWidth / 5, y: innerHeight / 5, color: 'red', size: 20 };
         this.botColour = "#555555";
         this.lives = 3;
@@ -161,13 +160,7 @@ var GamePage = (function () {
         this.falshColor = { h: 257, s: 0.22, v: 0.84 };
         this.flashIntensity = 0;
         // all snakes including bots if any
-        this.snakes = [
-            [
-                { x: window.innerWidth / 2, y: window.innerHeight / 2 },
-                { x: window.innerWidth / 2, y: window.innerHeight / 2 },
-                { x: window.innerWidth / 2, y: window.innerHeight / 2 }
-            ]
-        ];
+        this.snakes = [];
         this.enableComputer = false;
         this.computerSpeed = this.screenHeight / 1000;
         var parameters = navParams.data;
@@ -188,10 +181,11 @@ var GamePage = (function () {
             //process pan event
             _this.panUpdate(event.center.x, event.center.y);
         });
-        //setup refresh interval
-        this.theInt = setInterval(function () { _this.update(); }, 1000 / 60);
         //reset game to start
         this.setupGameState();
+        this.updateBotTargets();
+        //setup refresh interval
+        this.updateInterval = setInterval(function () { _this.update(); }, 1000 / 60);
         this.loadSound();
     };
     //load sounds
@@ -209,6 +203,11 @@ var GamePage = (function () {
         this.points = 0;
         this.makeFruit();
         this.lives = 3;
+        this.snakes[0] = [
+            { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+            { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+            { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+        ];
         if (this.enableComputer) {
             this.spawnBot(1);
         }
@@ -230,7 +229,8 @@ var GamePage = (function () {
         if (this.lives == 0) {
             //if player died
             //stop update interval
-            clearInterval(this.theInt);
+            clearInterval(this.updateInterval);
+            clearInterval(this.updateAiInterval);
             //navigate to lost page
             this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__lost_lost__["a" /* LostPage */], this.points);
         }
@@ -240,9 +240,7 @@ var GamePage = (function () {
                 for (var i = 1; i < this.snakes[s].length; i++) {
                     var speed = s > 0 && i == 1 ? (this.computerDifficulty / 1.5 + 5) * this.computerSpeed : 10;
                     //get and update next position of each snake
-                    var nextPos = this.getNextPosition(this.snakes[s][i - 1].x, this.snakes[s][i - 1].y, this.snakes[s][i].x, this.snakes[s][i].y, speed, s > 0 && i == 1);
-                    this.snakes[s][i].x = nextPos.x;
-                    this.snakes[s][i].y = nextPos.y;
+                    this.snakes[s][i] = this.getNextPosition(this.snakes[s][i - 1].x, this.snakes[s][i - 1].y, this.snakes[s][i].x, this.snakes[s][i].y, speed, s > 0 && i == 1);
                 }
             }
             this.updateFruit();
@@ -252,7 +250,6 @@ var GamePage = (function () {
     };
     // update targets for bots
     GamePage.prototype.updateBotTargets = function () {
-        //console.log("updateBotTargets()");
         //this.drawObsticaleMap();
         var pathPoints = this.getPathPoints();
         // for(let point of pathPoints){
@@ -309,7 +306,7 @@ var GamePage = (function () {
                 looped++;
                 if (looped > 100) {
                     console.log("No path found");
-                    //clearInterval(this.theInt);
+                    //clearInterval(this.updateInterval);
                     //target = {x: this.snakes[s][0].x, y: this.snakes[s][0].y};
                     //break;
                 }
@@ -602,7 +599,7 @@ var GamePage = (function () {
                         }
                         else if (this.snakes[s].length > 3) {
                             //console.log(this.loop + " " + s + " intesects with " + t + " at " + i);
-                            //clearInterval(this.theInt);
+                            //clearInterval(this.updateInterval);
                             this.spawnBot(s);
                         }
                     }
@@ -753,9 +750,10 @@ var GamePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-game',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/'<!-- canvas to display the game -->\n\n<canvas (move)="test($event)" width={{screenWidth}} height={{screenHeight}} #myCanvas></canvas>\n\n\n\n<!-- score and lives display -->\n\n<p class="stats">\n\n	<span style="float:left;">Score: {{points}}</span>\n\n	<span style="float:right;">Lives: {{lives}}</span>\n\n</p>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _c || Object])
     ], GamePage);
     return GamePage;
+    var _a, _b, _c;
 }());
 
 var PriorityQueue = (function () {
@@ -937,9 +935,10 @@ var HowToPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-how-to',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\how-to\how-to.html"*/'<!--\n\n	Generated template for the HowToPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n	<!-- main content except bottom buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- big top buttons -->\n\n		<div class = "title">\n\n			How To Play\n\n		</div>\n\n		\n\n		<!-- main text based content - how to instructions -->\n\n		<div class = "text">\n\n			<p>\n\n				Here you\'ll be tought how to play a basic af game\n\n			</p>\n\n			<p>\n\n				Drag you finger or cusor to the location your snake shall slithers to\n\n			</p>\n\n			<p>\n\n				You need to consume all points before they disappear\n\n			</p>\n\n			<p>\n\n				Once you\'ve gained a point it will be appended to you snake\n\n			</p>\n\n			<p>\n\n				But beware you cannot consume your self! Otherwise it would be way to simple\n\n			</p>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="yellow1" (click)="onClickBack()">Back</button>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\how-to\how-to.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
     ], HowToPage);
     return HowToPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=how-to.js.map
@@ -1026,9 +1025,10 @@ var LeaderBoardPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-leader-board',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\leader-board\leader-board.html"*/'<!--\n\n	Generated template for the LeaderBoardPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	\n\n	<!-- main content except buttom buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- bit top title -->\n\n		<div class = "title">\n\n			Leader Board\n\n		</div>\n\n\n\n		<!-- main text based content -->\n\n		<div class="text">\n\n\n\n			<!-- section title -->\n\n			<h3>\n\n				Highscore chart\n\n			</h3>\n\n			\n\n			<!-- chart image -->\n\n			<img src="assets/imgs/chart.png">\n\n\n\n			<!-- section title -->\n\n			<h3>\n\n				Global highscores\n\n			</h3>\n\n\n\n			<!-- leader board output table with header row -->\n\n			<table id="leader_board_table">\n\n				<tr>\n\n					<td>\n\n						Name\n\n					</td>\n\n					<td>\n\n						Score\n\n					</td>\n\n				</tr>\n\n			</table>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="orange1" (click)="onClickBack()">Back</button>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\leader-board\leader-board.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
     ], LeaderBoardPage);
     return LeaderBoardPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=leader-board.js.map
