@@ -112,7 +112,11 @@ var HomePage = (function () {
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             selector: 'page-home',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/'<!--\n\n	Generated template for the SplashPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n<ion-content padding>\n\n\n\n	<!-- main content -->\n\n	<div class="page_content">\n\n		\n\n		<!-- big top title -->\n\n		<div class = "title">\n\n			King Snake\n\n		</div>\n\n\n\n		<!-- snake image -->\n\n		<div align="center" style="display:none;">\n\n			<img class = "snake" src="assets/imgs/snakepic.png">\n\n		</div>\n\n\n\n		<!-- main texual based content -->\n\n		<div class = "text">\n\n\n\n\n\n			<!-- user details -->\n\n			<table>\n\n				<tr>\n\n					<td>\n\n						<!-- greeting -->\n\n						Welcome {{account.username}}\n\n					</td>\n\n\n\n					<!-- avatar -->\n\n					<td align="right" rowspan="2">\n\n						<img class="avatar" src="{{account.avatar}}" (click)="onClickEditAccount()">\n\n					</td>\n\n				</tr>\n\n\n\n				<tr>\n\n					<!-- highcsore -->\n\n					<td>\n\n						Highscore: {{account.highscore}}\n\n					</td>\n\n				</tr>\n\n\n\n			</table>\n\n\n\n			<!-- user account edit button -->\n\n			<p>\n\n				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>\n\n			</p>\n\n\n\n			<ion-list>\n\n				<!-- checkbox to enable computer -->\n\n				<ion-item class="difficulty_input">\n\n					<ion-label>Enable Computer</ion-label>\n\n					<ion-checkbox #checkboxEnableComputer></ion-checkbox>\n\n				</ion-item>\n\n\n\n				<!-- computer difficulty -->\n\n				<ion-item class="difficulty_input">\n\n					<ion-label>Difficulty:</ion-label>\n\n					<ion-input type="number" [(ngModel)]=\'computerDifficulty\' min="1" max="10" align="right"></ion-input>\n\n				</ion-item>\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/,
+=======
+            selector: 'page-home',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/home/home.html"*/'<!--\n	Generated template for the SplashPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n<ion-content padding>\n\n	<!-- main content -->\n	<div class="page_content">\n		\n		<!-- big top title -->\n		<div class = "title">\n			King Snake\n		</div>\n\n		<!-- snake image -->\n		<div align="center" style="display:none;">\n			<img class = "snake" src="assets/imgs/snakepic.png">\n		</div>\n\n		<!-- main texual based content -->\n		<div class = "text">\n\n\n			<!-- user details -->\n			<table>\n				<tr>\n					<td>\n						<!-- greeting -->\n						Welcome {{account.username}}\n					</td>\n\n					<!-- avatar -->\n					<td align="right" rowspan="2">\n						<img class="avatar" src="{{account.avatar}}" (click)="onClickEditAccount()">\n					</td>\n				</tr>\n\n				<tr>\n					<!-- highcsore -->\n					<td>\n						Highscore: {{account.highscore}}\n					</td>\n				</tr>\n\n			</table>\n\n			<!-- user account edit button -->\n			<p>\n				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>\n			</p>\n\n			<ion-list>\n				<!-- checkbox to enable computer -->\n				<ion-item class="difficulty_input">\n					<ion-label>Enable Computer</ion-label>\n					<ion-checkbox #checkboxEnableComputer></ion-checkbox>\n				</ion-item>\n\n				<!-- computer difficulty -->\n				<ion-item class="difficulty_input">\n					<ion-label>Difficulty:</ion-label>\n					<ion-input type="number" [(ngModel)]=\'computerDifficulty\' min="1" max="10" align="right"></ion-input>\n				</ion-item>\n			</ion-list>\n		</div>\n	</div>\n\n	<!-- bottom button layout -->\n	<div class="button_container">\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n	</div>\n\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/home/home.html"*/,
+>>>>>>> Stashed changes
 =======
             selector: 'page-home',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/home/home.html"*/'<!--\n	Generated template for the SplashPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n<ion-content padding>\n\n	<!-- main content -->\n	<div class="page_content">\n		\n		<!-- big top title -->\n		<div class = "title">\n			King Snake\n		</div>\n\n		<!-- snake image -->\n		<div align="center" style="display:none;">\n			<img class = "snake" src="assets/imgs/snakepic.png">\n		</div>\n\n		<!-- main texual based content -->\n		<div class = "text">\n\n\n			<!-- user details -->\n			<table>\n				<tr>\n					<td>\n						<!-- greeting -->\n						Welcome {{account.username}}\n					</td>\n\n					<!-- avatar -->\n					<td align="right" rowspan="2">\n						<img class="avatar" src="{{account.avatar}}" (click)="onClickEditAccount()">\n					</td>\n				</tr>\n\n				<tr>\n					<!-- highcsore -->\n					<td>\n						Highscore: {{account.highscore}}\n					</td>\n				</tr>\n\n			</table>\n\n			<!-- user account edit button -->\n			<p>\n				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>\n			</p>\n\n			<ion-list>\n				<!-- checkbox to enable computer -->\n				<ion-item class="difficulty_input">\n					<ion-label>Enable Computer</ion-label>\n					<ion-checkbox #checkboxEnableComputer></ion-checkbox>\n				</ion-item>\n\n				<!-- computer difficulty -->\n				<ion-item class="difficulty_input">\n					<ion-label>Difficulty:</ion-label>\n					<ion-input type="number" [(ngModel)]=\'computerDifficulty\' min="1" max="10" align="right"></ion-input>\n				</ion-item>\n			</ion-list>\n		</div>\n	</div>\n\n	<!-- bottom button layout -->\n	<div class="button_container">\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n	</div>\n\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/home/home.html"*/,
 >>>>>>> Stashed changes
@@ -173,7 +177,10 @@ var GamePage = (function () {
         this.enableComputer = false;
         this.computerSpeed = this.screenHeight / 1000;
         this.maxAiTime = 10;
+<<<<<<< Updated upstream
         // recieve computer mode related parameters
+=======
+>>>>>>> Stashed changes
         var parameters = navParams.data;
         this.enableComputer = parameters.enableComputer;
         this.computerDifficulty = parameters.computerDifficulty;
@@ -261,7 +268,11 @@ var GamePage = (function () {
     // update targets for bots
     GamePage.prototype.updateBotTargets = function () {
         var startTime = new Date().getTime();
+<<<<<<< Updated upstream
         //generate points the ai can navigate through
+=======
+        //this.drawObsticaleMap();
+>>>>>>> Stashed changes
         var pathPoints = this.getPathPoints();
         // for eahc ai snake
         for (var s = 1; s < this.snakes.length; s++) {
@@ -298,11 +309,24 @@ var GamePage = (function () {
             }
             // find all consequtive moves
             while (queue.size() > 0) {
+<<<<<<< Updated upstream
                 // object of a specific path
                 var path = queue.pop();
                 var elapsedTime = new Date().getTime() - startTime;
                 // check if current point leads directly to the fruit or if the algorithim has run out of time
                 if (this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || elapsedTime > this.maxAiTime) {
+=======
+                looped++;
+                var path = queue.pop();
+                var elapsedTime = new Date().getTime() - startTime;
+                if (elapsedTime > this.maxAiTime) {
+                    console.log("Path not found after " + looped);
+                }
+                // check if current point leads directly to the fruit or no path is found
+                if (this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || elapsedTime > this.maxAiTime) {
+                    //console.log("      exit has line of sight to fruit");
+                    //console.log("      target = queue element");
+>>>>>>> Stashed changes
                     target.x = path.inX;
                     target.y = path.inY;
                     exit.x = path.x;
@@ -865,12 +889,18 @@ var LostPage = (function () {
         this.account = null;
         //retrieve data from navigation params
         this.points = navParams.data;
+        //retieve stored data in phone
         this.storage.get('activeuser').then(function (activeuser) {
             if (activeuser != null) {
                 _this.storage.get('accounts').then(function (accounts) {
                     _this.account = accounts[activeuser];
+                    //check if this was a highscore
                     if (_this.points > _this.account.highscore) {
                         _this.account.highscore = _this.points;
+<<<<<<< Updated upstream
+=======
+                        //add to personal highscore list
+>>>>>>> Stashed changes
                         _this.account.highscorehistory.push({ datetime: new Date().toISOString(), highscore: _this.points });
                         _this.storage.set('accounts', accounts);
                     }
@@ -975,6 +1005,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var LeaderBoardPage = (function () {
+    //gets the current user and stores it
     function LeaderBoardPage(navCtrl, navParams, storage) {
         var _this = this;
         this.navCtrl = navCtrl;
@@ -987,20 +1018,33 @@ var LeaderBoardPage = (function () {
         storage.get("activeuser").then(function (val) {
             _this.indexOfCurrentPlayer = val;
         });
+        //get all the account data and stores it
         storage.get("accounts").then(function (val) {
             _this.staticLoeaderBoardData = val;
+            //now we always have the current player stuff, even after account data
             _this.currentPlayer = _this.staticLoeaderBoardData[_this.indexOfCurrentPlayer];
+<<<<<<< Updated upstream
+=======
+            //sorts the leader board
+>>>>>>> Stashed changes
             _this.staticLoeaderBoardData = _this.staticLoeaderBoardData.sort(function (a, b) { return b.highscore - a.highscore; });
+            //runs chart function
             _this.displayChart();
             console.log(_this.staticLoeaderBoardData);
         });
     }
+    //displays chart and adds data to it
     LeaderBoardPage.prototype.displayChart = function () {
+        //get the current player's highscore history along with dates
         for (var i = 0; i < this.currentPlayer.highscorehistory.length; i++) {
             this.playerScores.push(this.currentPlayer.highscorehistory[i].highscore);
             var datetime = new Date(this.currentPlayer.highscorehistory[i].datetime);
             this.playerScoreDates.push(datetime.getDate() + "/" + (datetime.getMonth() + 1));
         }
+<<<<<<< Updated upstream
+=======
+        //specifies what is to be displayed and how
+>>>>>>> Stashed changes
         this.chart = new __WEBPACK_IMPORTED_MODULE_3_chart_js__["Chart"](this.canvas.nativeElement, {
             type: 'line',
             data: {
@@ -1029,9 +1073,6 @@ var LeaderBoardPage = (function () {
     LeaderBoardPage.prototype.onClickBack = function () {
         this.navCtrl.popToRoot();
     };
-    //adds the leader board data to the html table
-    LeaderBoardPage.prototype.populateTable = function () {
-    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('scoreChart'),
         __metadata("design:type", Object)
@@ -1039,7 +1080,11 @@ var LeaderBoardPage = (function () {
     LeaderBoardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             selector: 'page-leader-board',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\leader-board\leader-board.html"*/'<!--\n\n	Generated template for the LeaderBoardPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n	<!-- main content except buttom buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- bit top title -->\n\n		<div class = "title">\n\n			Leader Board\n\n		</div>\n\n\n\n		<!-- main text based content -->\n\n		<div class="text">\n\n\n\n			<!-- section title -->\n\n			<h3>\n\n				Your highscore chart\n\n			</h3>\n\n\n\n			<!-- chart -->\n\n			<canvas #scoreChart height=300></canvas>\n\n\n\n			<!-- section title -->\n\n			<h3>\n\n				Global highscores\n\n			</h3>\n\n\n\n			<!-- leader board output table with header row -->\n\n			<ion-list>\n\n				<ion-item class="leaderboard_item">\n\n					<p style="float:left">Username</p>\n\n					<p style="float:right">Highscore</p>\n\n				</ion-item>\n\n				<ion-item *ngFor=\'let leader of staticLoeaderBoardData; index as i\' class="leaderboard_item">\n\n					<p style="float:left">{{i+1}}. &nbsp; {{leader.username}}</p>\n\n					<p style="float:right">{{leader.highscore}}</p>\n\n				</ion-item>\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="orange1" (click)="onClickBack()">Back</button>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\leader-board\leader-board.html"*/,
+=======
+            selector: 'page-leader-board',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/leader-board/leader-board.html"*/'<!--\n	Generated template for the LeaderBoardPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n\n\n<ion-content padding>\n\n	<!-- main content except buttom buttons -->\n	<div class="page_content">\n\n		<!-- bit top title -->\n		<div class = "title">\n			Leader Board\n		</div>\n\n		<!-- main text based content -->\n		<div class="text">\n\n			<!-- section title -->\n			<h3>\n				Your highscore chart\n			</h3>\n\n			<!-- chart -->\n			<canvas #scoreChart height=300></canvas>\n\n			<!-- section title -->\n			<h3>\n				Global highscores\n			</h3>\n\n			<!-- leader board output table with header row -->\n			<ion-list>\n				<ion-item class="leaderboard_item">\n					<p style="float:left">Username</p>\n					<p style="float:right">Highscore</p>\n				</ion-item>\n				<ion-item *ngFor=\'let leader of staticLoeaderBoardData; index as i\' class="leaderboard_item">\n					<p style="float:left">{{i+1}}. &nbsp; {{leader.username}}</p>\n					<p style="float:right">{{leader.highscore}}</p>\n				</ion-item>\n			</ion-list>\n		</div>\n	</div>\n\n	<!-- bottom button layout -->\n	<div class="button_container">\n		<button ion-button color="orange1" (click)="onClickBack()">Back</button>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/leader-board/leader-board.html"*/,
+>>>>>>> Stashed changes
 =======
             selector: 'page-leader-board',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/leader-board/leader-board.html"*/'<!--\n	Generated template for the LeaderBoardPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n\n\n<ion-content padding>\n\n	<!-- main content except buttom buttons -->\n	<div class="page_content">\n\n		<!-- bit top title -->\n		<div class = "title">\n			Leader Board\n		</div>\n\n		<!-- main text based content -->\n		<div class="text">\n\n			<!-- section title -->\n			<h3>\n				Your highscore chart\n			</h3>\n\n			<!-- chart -->\n			<canvas #scoreChart height=300></canvas>\n\n			<!-- section title -->\n			<h3>\n				Global highscores\n			</h3>\n\n			<!-- leader board output table with header row -->\n			<ion-list>\n				<ion-item class="leaderboard_item">\n					<p style="float:left">Username</p>\n					<p style="float:right">Highscore</p>\n				</ion-item>\n				<ion-item *ngFor=\'let leader of staticLoeaderBoardData; index as i\' class="leaderboard_item">\n					<p style="float:left">{{i+1}}. &nbsp; {{leader.username}}</p>\n					<p style="float:right">{{leader.highscore}}</p>\n				</ion-item>\n			</ion-list>\n		</div>\n	</div>\n\n	<!-- bottom button layout -->\n	<div class="button_container">\n		<button ion-button color="orange1" (click)="onClickBack()">Back</button>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/leader-board/leader-board.html"*/,
 >>>>>>> Stashed changes
@@ -1088,11 +1133,14 @@ var AccountsPage = (function () {
         this.navParams = navParams;
         this.storage = storage;
         this.alertCtrl = alertCtrl;
+        //account arrays
         this.accounts = [];
         this.activeuser = null;
     }
+    //when page loads
     AccountsPage.prototype.ionViewWillEnter = function () {
         var _this = this;
+        //gets accounts from device
         this.storage.get('accounts').then(function (accounts) {
             _this.accounts = accounts;
         });
@@ -1100,19 +1148,24 @@ var AccountsPage = (function () {
             _this.activeuser = activeuser;
         });
     };
+    //goes back to home page
     AccountsPage.prototype.onClickBack = function () {
         this.navCtrl.pop();
     };
+    //sets active user to clicked one, then goes back to home
     AccountsPage.prototype.onClickSelect = function (i) {
         this.storage.set('activeuser', i);
         this.navCtrl.pop();
     };
+    //goes into edit for account
     AccountsPage.prototype.onClickEdit = function (i) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__edit_account_edit_account__["a" /* EditAccountPage */], i);
     };
+    //makes new account and goes to edit page with it selected
     AccountsPage.prototype.onClickNew = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__edit_account_edit_account__["a" /* EditAccountPage */], -1);
     };
+    //deletes the account
     AccountsPage.prototype.onClickDelete = function (i) {
         var _this = this;
         //create comfirmation dialog
@@ -1189,6 +1242,7 @@ var EditAccountPage = (function () {
         this.activeaccount = -1;
         this.account = { username: '', birthday: '' };
         this.activeaccount = navParams.data;
+        //retieve accounts
         storage.get('accounts').then(function (accounts) {
             _this.accounts = accounts;
             // if new account
@@ -1210,8 +1264,10 @@ var EditAccountPage = (function () {
             }
         });
     }
+    //selects avatar picture
     EditAccountPage.prototype.avatarSelected = function (files) {
         var _this = this;
+        //check if have picture
         if (files.length >= 1) {
             var file = files[0];
             var fileReader_1 = new FileReader();
@@ -1234,7 +1290,11 @@ var EditAccountPage = (function () {
     EditAccountPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             selector: 'page-edit-account',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/'<!--\n\n	Generated template for the EditAccountPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n	<!-- all of the page content except for the buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- Big top title -->\n\n		<div class = "title">\n\n			Edit Account\n\n		</div>\n\n\n\n		<!-- contains middle text based content -->\n\n		<div class = "text">\n\n\n\n			<!-- list of inputs -->\n\n			<ion-list>\n\n\n\n				<!-- Name input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4" stacked>Name</ion-label>\n\n					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>\n\n				</ion-item>\n\n\n\n				<!-- date input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4" stacked>Birthday</ion-label>\n\n					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>\n\n				</ion-item>\n\n\n\n				<ion-item>\n\n					<ion-thumbnail item-end>\n\n						<img class="rounded" src="{{account.avatar}}"/>\n\n					</ion-thumbnail>\n\n\n\n					<ion-label color="turquoise4" stacked>Avatar</ion-label>\n\n\n\n					<div class="avatar">\n\n					</div>\n\n				</ion-item>\n\n\n\n			</ion-list>\n\n\n\n			<label class="myFakeUploadButton" for="myFileInput" ion-button>Change Photo</label>\n\n			<input\n\n				#fileInput\n\n				type="file"\n\n				accept="image/*"\n\n				(change)="avatarSelected(fileInput.files)"\n\n				id="myFileInput">\n\n\n\n		</div>\n\n	</div>\n\n\n\n	<!-- contains buttom buttons -->\n\n	<div class="button_container">\n\n		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>\n\n		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/,
+=======
+            selector: 'page-edit-account',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/edit-account/edit-account.html"*/'<!--\n	Generated template for the EditAccountPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n\n\n<ion-content padding>\n\n	<!-- all of the page content except for the buttons -->\n	<div class="page_content">\n\n		<!-- Big top title -->\n		<div class = "title">\n			Edit Account\n		</div>\n\n		<!-- contains middle text based content -->\n		<div class = "text">\n\n			<!-- list of inputs -->\n			<ion-list>\n\n				<!-- Name input -->\n				<ion-item>\n					<ion-label color="turquoise4" stacked>Name</ion-label>\n					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>\n				</ion-item>\n\n				<!-- date input -->\n				<ion-item>\n					<ion-label color="turquoise4" stacked>Birthday</ion-label>\n					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>\n				</ion-item>\n\n				<ion-item>\n					<ion-thumbnail item-end>\n						<img class="rounded" src="{{account.avatar}}"/>\n					</ion-thumbnail>\n\n					<ion-label color="turquoise4" stacked>Avatar</ion-label>\n\n					<div class="avatar">\n					</div>\n				</ion-item>\n\n			</ion-list>\n\n			<label class="myFakeUploadButton" for="myFileInput" ion-button>Change Photo</label>\n			<input\n				#fileInput\n				type="file"\n				accept="image/*"\n				(change)="avatarSelected(fileInput.files)"\n				id="myFileInput">\n\n		</div>\n	</div>\n\n	<!-- contains buttom buttons -->\n	<div class="button_container">\n		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>\n		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/edit-account/edit-account.html"*/,
+>>>>>>> Stashed changes
 =======
             selector: 'page-edit-account',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/edit-account/edit-account.html"*/'<!--\n	Generated template for the EditAccountPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n\n\n<ion-content padding>\n\n	<!-- all of the page content except for the buttons -->\n	<div class="page_content">\n\n		<!-- Big top title -->\n		<div class = "title">\n			Edit Account\n		</div>\n\n		<!-- contains middle text based content -->\n		<div class = "text">\n\n			<!-- list of inputs -->\n			<ion-list>\n\n				<!-- Name input -->\n				<ion-item>\n					<ion-label color="turquoise4" stacked>Name</ion-label>\n					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>\n				</ion-item>\n\n				<!-- date input -->\n				<ion-item>\n					<ion-label color="turquoise4" stacked>Birthday</ion-label>\n					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>\n				</ion-item>\n\n				<ion-item>\n					<ion-thumbnail item-end>\n						<img class="rounded" src="{{account.avatar}}"/>\n					</ion-thumbnail>\n\n					<ion-label color="turquoise4" stacked>Avatar</ion-label>\n\n					<div class="avatar">\n					</div>\n				</ion-item>\n\n			</ion-list>\n\n			<label class="myFakeUploadButton" for="myFileInput" ion-button>Change Photo</label>\n			<input\n				#fileInput\n				type="file"\n				accept="image/*"\n				(change)="avatarSelected(fileInput.files)"\n				id="myFileInput">\n\n		</div>\n	</div>\n\n	<!-- contains buttom buttons -->\n	<div class="button_container">\n		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>\n		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/edit-account/edit-account.html"*/,
 >>>>>>> Stashed changes

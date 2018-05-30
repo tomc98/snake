@@ -24,6 +24,7 @@ export class EditAccountPage {
 
     this.activeaccount = navParams.data;
 
+    //retieve accounts
     storage.get('accounts').then((accounts) => {
 
       this.accounts = accounts;
@@ -53,8 +54,9 @@ export class EditAccountPage {
     });
   }
 
+  //selects avatar picture
   avatarSelected(files){
-
+    //check if have picture
     if(files.length >= 1){
       var file = files[0];
 

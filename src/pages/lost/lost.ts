@@ -26,6 +26,7 @@ export class LostPage {
     //retrieve data from navigation params
     this.points = navParams.data
 
+    //retieve stored data in phone
     this.storage.get('activeuser').then((activeuser) => {
 
       if(activeuser != null){
@@ -33,10 +34,10 @@ export class LostPage {
         this.storage.get('accounts').then((accounts) =>{
 
           this.account = accounts[activeuser];
-
+          //check if this was a highscore
           if(this.points > this.account.highscore){
             this.account.highscore = this.points;
-
+            //add to personal highscore list
             this.account.highscorehistory.push({datetime: new Date().toISOString(), highscore: this.points});
 
             this.storage.set('accounts', accounts);
