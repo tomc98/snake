@@ -16,14 +16,14 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage) {
     platform.ready().then(() => {
-      
+
       // accounts holds a list of all accounts
       // [
       //   {
-      //     username:'name', 
-      //     birthday:'bday', 
-      //     avatar:image, 
-      //     highscore:x, 
+      //     username:'name',
+      //     birthday:'bday',
+      //     avatar:image,
+      //     highscore:x,
       //     highscorehistory:[
       //       {
       //         datetime:time,
@@ -43,7 +43,7 @@ export class MyApp {
             avatar: "assets/imgs/default_avatar.png",
             highscore: 0,
             highscorehistory: [
-              {datetime: new Date().toISOString(), highscore: 0}
+              {datetime: new Date().getDate() +"-"+ new Date().getMonth(), highscore: 0}
             ]
           };
 

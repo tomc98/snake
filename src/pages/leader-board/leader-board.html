@@ -9,7 +9,7 @@
 
 
 <ion-content padding>
-	
+
 	<!-- main content except buttom buttons -->
 	<div class="page_content">
 
@@ -25,9 +25,9 @@
 			<h3>
 				Highscore chart
 			</h3>
-			
-			<!-- chart image -->
-			<img src="assets/imgs/chart.png">
+
+			<!-- chart -->
+			<canvas #scoreChart height=300></canvas>
 
 			<!-- section title -->
 			<h3>
@@ -35,16 +35,16 @@
 			</h3>
 
 			<!-- leader board output table with header row -->
-			<table id="leader_board_table">
-				<tr>
-					<td>
-						Name
-					</td>
-					<td>
-						Score
-					</td>
-				</tr>
-			</table>
+			<ion-list>
+				<ion-item>
+					<p style="float:left">USERNAME</p>
+					<p style="float:right">SCORE</p>
+				</ion-item>
+				<ion-item *ngFor='let leader of staticLoeaderBoardData; index as i'>
+					<p style="float:left">{{i+1}} &nbsp; {{leader.username}}</p>
+					<p style="float:right">{{leader.highscore}}</p>
+				</ion-item>
+			</ion-list>
 		</div>
 	</div>
 

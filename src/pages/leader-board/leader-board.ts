@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Chart } from 'chart.js';
 
 /**
  * Generated class for the LeaderBoardPage page.
@@ -13,40 +14,64 @@ import { Storage } from '@ionic/storage';
   selector: 'page-leader-board',
   templateUrl: 'leader-board.html',
 })
-export class LeaderBoardPage {
 
+
+
+export class LeaderBoardPage {
+  @ViewChild('scoreChart') canvas;
+  chart: any;
   //dummy leader board list data
   staticLoeaderBoardData = [];
-  sortedData = [];
-  low = 0;
-  table:HTMLTableElement = <HTMLTableElement>document.getElementById("leader_board_table");
+  indexOfCurrentPlayer;
+  currentPlayer;
+  playerScores = [];
+  playerScoreDates = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+    storage.get("activeuser").then((val) => {
+      this.indexOfCurrentPlayer = val;
+    });
+
     storage.get("accounts").then((val) => {
       this.staticLoeaderBoardData = val;
+      this.currentPlayer = this.staticLoeaderBoardData[this.indexOfCurrentPlayer];
       // console.log(this.staticLoeaderBoardData);
+      this.staticLoeaderBoardData = this.staticLoeaderBoardData.sort(function(a, b){return b.highscore - a.highscore});
+      this.displayChart();
+      console.log(this.staticLoeaderBoardData);
     });
-    this.sortData();
   }
 
-  sortData(){
-    this.low = 0;
-    while (this.staticLoeaderBoardData.length != this.sortedData.length){
-      for(var i = 0; i<=this.staticLoeaderBoardData.length; i++){
-        if (this.staticLoeaderBoardData[i].highscore == this.low){
-          this.sortedData.splice(0, 0, this.staticLoeaderBoardData[i]);
+  displayChart(){
+    for (var i = 0; i < this.currentPlayer.highscorehistory.length; i++){
+      this.playerScores.push(this.currentPlayer.highscorehistory[i].highscore);
+      this.playerScoreDates.push(this.currentPlayer.highscorehistory[i].datetime);
+    }
+    console.log(this.playerScoreDates);
+    this.chart = new Chart(this.canvas.nativeElement, {
+      type: 'line',
+      data: {
+        labels: this.playerScoreDates,
+        datasets:[{
+          label:'scores',
+          data: this.playerScores,
+        }]
+      },
+      options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
         }
       }
-      this.low += 1;
-      console.log("lol");
-    }
+    });
   }
 
   //insert leader board data into the page once html is loaded
   ionViewDidLoad() {
     console.log('ionViewDidLoad LeaderBoardPage');
-    this.sortData();
-    this.populateTable();
   }
 
   //on back button pressed, pop to root
@@ -56,21 +81,6 @@ export class LeaderBoardPage {
 
   //adds the leader board data to the html table
   populateTable(){
-  console.log("what?");
-    this.low = 0;
-    //for data entry
-    while(this.low < this.sortedData.length){
 
-      var row = this.table.insertRow();
-
-      var name = row.insertCell();
-      name.innerHTML = <string>this.sortedData[this.low].username;
-
-      var score = row.insertCell();
-      score.innerHTML = <string>this.sortedData[this.low].highscore;
-      console.log("in");
-      console.log("between");
-      this.low += 1;
-    }
   }
 }
