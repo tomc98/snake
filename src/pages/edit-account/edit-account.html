@@ -9,7 +9,7 @@
 
 
 <ion-content padding>
-	
+
 	<!-- all of the page content except for the buttons -->
 	<div class="page_content">
 
@@ -17,7 +17,7 @@
 		<div class = "title">
 			Edit Account
 		</div>
-		
+
 		<!-- contains middle text based content -->
 		<div class = "text">
 
@@ -48,12 +48,14 @@
 				</ion-item>
 
 			</ion-list>
-						
-			<input 
-				#fileInput 
-				type="file" 
+
+			<label class="myFakeUploadButton" for="myFileInput" ion-button>Change Photo</label>
+			<input
+				#fileInput
+				type="file"
 				accept="image/*"
-				(change)="avatarSelected(fileInput.files)">
+				(change)="avatarSelected(fileInput.files)"
+				id="myFileInput">
 
 		</div>
 	</div>
@@ -64,4 +66,3 @@
 		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>
 	</div>
 </ion-content>
-	

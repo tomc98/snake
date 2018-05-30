@@ -1,4 +1,10 @@
-@import url("https://fonts.googleapis.com/css?family=Bungee");
+@font-face {
+  font-family: 'bungee';
+  font-size: 20px;
+  line-height: 20px;
+  src: url("../assets/fonts/bungee/Bungee-Regular.otf");
+}
+
 .ion-ios-add:before {
   content: "\f102";
 }
@@ -129404,6 +129410,11 @@ page-edit-account * {
   font-family: "Bungee",cursive;
   font-size: 20px;
   line-height: 20px;
+}
+
+page-edit-account #myFileInput {
+  position: absolute;
+  opacity: 0;
 }
 
 page-edit-account .page_content {

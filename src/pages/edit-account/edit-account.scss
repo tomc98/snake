@@ -1,11 +1,16 @@
 page-edit-account {
-	
+
 	//everything
 	*{
 		font-family: "Bungee",cursive;
 		font-size: 20px;
 		line-height: 20px;
 	}
+
+	#myFileInput{
+  position: absolute;
+  opacity: 0;
+}
 
 	//main content height and position (except bottom buttons)
 	.page_content{
@@ -50,7 +55,7 @@ page-edit-account {
 		color: #313D4D !important;
 		padding: 0px !important;
 	}
-	
+
 	//remove background and border from checkbox and number input
 	ion-item *{
 		border: none !important;

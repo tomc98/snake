@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Bungee');
+// @import url('https://fonts.googleapis.com/css?family=Bungee');
 
 page-home {
 
@@ -32,7 +32,7 @@ page-home {
 		color: #313D4D;
 		/*padding-bottom: 300px;*/
 	}
-	
+
 	//preference tables
 	.text table{
 		width: 100%;
@@ -53,7 +53,7 @@ page-home {
 		color: #313D4D !important;
 		padding: 0px;
 	}
-	
+
 	//remove background and border from checkbox and number input
 	ion-item *{
 		box-shadow: none !important;
