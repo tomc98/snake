@@ -20,15 +20,15 @@ export class GamePage {
   ctx: any;
   pfCtx: any;
 
-  //mouse = {x: 0, y: 0};
-
+  // current fruit location, size and color
   fruit = {x: window.innerWidth/5, y: innerHeight/5, color: 'red', size: 20};
 
+  
   botColour:string = "#555555";
   lives:number = 3;
   updateInterval: any;
-  updateAiInterval: any;
 
+  // variables for flashing the background when the ai gets a fruit
   fruitColorDegreeGap = 15;
   backgroundColor = {h: 257, s: 0.22, v: 0.84};
   falshColor = {h: 257, s: 0.22, v: 0.84};
@@ -37,6 +37,7 @@ export class GamePage {
   // all snakes including bots if any
   snakes = [];
   
+  // variables related to computer ai
   enableComputer:boolean = false;
   computerDifficulty:number;
   computerSpeed:number = this.screenHeight / 1000;
@@ -44,13 +45,11 @@ export class GamePage {
 
   constructor(public navCtrl: NavController, /*private nativeAudio: NativeAudio,*/ public plt: Platform, public navParams: NavParams) {
 
+    // recieve computer mode related parameters
     var parameters = navParams.data
 
     this.enableComputer = parameters.enableComputer;
     this.computerDifficulty = parameters.computerDifficulty;
-
-    console.log("enableBots: " + this.enableComputer);
-    console.log("botCount: " + this.computerDifficulty);
 
   }
 
@@ -74,19 +73,6 @@ export class GamePage {
 
     //setup refresh interval
     this.updateInterval = setInterval(() => {this.update();}, 1000/60);
-
-    this.loadSound();
-  }
-
-  //load sounds
-  //TODO implement
-  loadSound(){
-    //if (this.plt.is('android')) {
-    //    this.nativeAudio.preloadSimple('pop', '../../assets/sounds/pop.mp3').then();
-    //    this.nativeAudio.preloadSimple('1bite', '../../assets/sounds/1bite.mp3').then();
-    //    this.nativeAudio.preloadSimple('2bite', '../../assets/sounds/2bite.mp3').then();
-    //    this.nativeAudio.preloadSimple('3bite', '../../assets/sounds/3bite.mp3').then();
-    //}
   }
 
   //reset the games state and values
@@ -95,18 +81,21 @@ export class GamePage {
     this.makeFruit();
     this.lives = 3;
 
-
+    // user snake
     this.snakes[0] = [
       {x: window.innerWidth/2, y: window.innerHeight/2}, // this is the target location (mouse) and is not drawn
       {x: window.innerWidth/2, y: window.innerHeight/2}, 
       {x: window.innerWidth/2, y: window.innerHeight/2}
     ];
 
+    // AI snake if enabled
     if(this.enableComputer){
       this.spawnBot(1);
     }
   }
 
+  // spawns a new snake at a new random location
+  // if the index specified already has a snake it is replaced
   spawnBot(index){
     var x = Math.random() * window.innerWidth;
     var y = Math.random() * window.innerHeight;
@@ -121,38 +110,46 @@ export class GamePage {
 
   }
 
+  // update snake positions, ai targets, fruits and stats
   update(){
 
+    // draw everything onto the canvas
     this.render();
 
+    // if the player snake eate themselves or another snake, they die
     if(this.checkIntercept())
       this.lives = 0;
 
+    // if they die, terminate the update loop and go to the end screen
     if(this.lives == 0){
       //if player died
 
       //stop update interval
       clearInterval(this.updateInterval);
-      clearInterval(this.updateAiInterval);
 
       //navigate to lost page
       this.navCtrl.push(LostPage, this.points);
       
     }else{
+      // update bots targets
       this.updateBotTargets();
 
+      // for each snake
       for(var s = 0; s < this.snakes.length; s++){
 
+        // for each body circle
         for(var i = 1; i < this.snakes[s].length; i++){
 
+          // moving speed depends on player or bot difficulty setting
           var speed = s > 0 && i == 1 ? (this.computerDifficulty / 1.5 + 5) * this.computerSpeed : 10;
 
-          //get and update next position of each snake
+          //get and update next position of each snake circle
           this.snakes[s][i] = this.getNextPosition(this.snakes[s][i-1].x, this.snakes[s][i-1].y, this.snakes[s][i].x, this.snakes[s][i].y, speed, s > 0 && i == 1);
           
         }
       }
 
+      // update fruit 
       this.updateFruit();
 
       //shrink fruit item and draw it
@@ -164,21 +161,10 @@ export class GamePage {
   updateBotTargets(){
     var startTime = new Date().getTime();
 
-    //this.drawObsticaleMap();
+    //generate points the ai can navigate through
     var pathPoints = this.getPathPoints();
 
-    // for(let point of pathPoints){
-    //   this.drawCircle(point.x, point.y, 2, "#888888");
-
-    //   this.ctx.strokeWidth = 1;
-    //   this.ctx.strokeStyle = '#888888';
-    //   this.ctx.beginPath();
-    //   this.ctx.moveTo(point.x, point.y);
-    //   this.ctx.lineTo(point.sx, point.sy);
-    //   this.ctx.stroke();
-    // }
-
-
+    // for eahc ai snake
     for(var s = 1; s < this.snakes.length; s++){
       //console.log("  for snake " + s);
 
@@ -188,23 +174,20 @@ export class GamePage {
       var exit = {x: 0, y: 0};
       var length = (a, b) => Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 
+      // if snake has line of sight to fruit go there directly
       if(this.hasFreeLineOfSightTo(head, this.fruit, pathPoints)){
-        //console.log("    has direct view of fruit");
-        //console.log("    target = fruit");
-        
-        //this.drawCircle(this.fruit.x, this.fruit.y, 3, "#ff0000");
         this.snakes[s][0] = {x: this.fruit.x, y: this.fruit.y};
-
         continue;
       }
 
+      // otherwise start A* search
       var queue = new PriorityQueue((a, b) => a.lengthTotal < b.lengthTotal);
 
       // possible starting points
       for(let start of pathPoints){
-        //console.log("    for start");
 
-        // if head is practically at that point dont consider it as a start
+        // if head is practically at that point don't consider it as a start, otherwise add 
+        // possible starting point
         if(length(head, start) > 20){
           if(this.hasFreeLineOfSightTo(head, start, pathPoints)){
             queue.push(
@@ -221,21 +204,16 @@ export class GamePage {
         }
       }
 
-      var looped = 0;
       // find all consequtive moves
       while(queue.size() > 0){
-        looped++;
         
+        // object of a specific path
         var path = queue.pop();
 
         var elapsedTime = new Date().getTime() - startTime;
-        if(elapsedTime > this.maxAiTime){
-          console.log("Path not found after " + looped);
-        }
-        // check if current point leads directly to the fruit or no path is found
+
+        // check if current point leads directly to the fruit or if the algorithim has run out of time
         if(this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || elapsedTime > this.maxAiTime){
-          //console.log("      exit has line of sight to fruit");
-          //console.log("      target = queue element");
 
           target.x = path.inX;
           target.y = path.inY;
@@ -245,12 +223,13 @@ export class GamePage {
           break;
         }
 
+        // for each possible next point to navigate to
         for(let next of pathPoints){
-          //console.log("      for next");
 
+          // if that point can be navigated to
           if(this.hasFreeLineOfSightTo(path, next, pathPoints)){
-            //console.log("        added " + (path.length + length(path, next) + length(next, this.fruit)));
 
+            // add new path to queue
             queue.push(
               {
                 x: next.x, 
@@ -265,16 +244,14 @@ export class GamePage {
         }
       }
 
-      //console.log("target set");
-      // this.drawCircle(target.x, target.y, 3, "#ff0000");
-      // this.drawCircle(exit.x, exit.y, 3, "#0000ff");
+      // update target
       this.snakes[s][0] = target;
 
     }
   }
 
+  // check if there are any obsicales or snakes between the points (from, to)
   hasFreeLineOfSightTo(from, to, obsicales){
-    //console.log("hasFreeLineOfSight()");
 
     // check if line from head to start is to close to a snake body (between path points and 
     // corresponding snake body)
@@ -303,6 +280,7 @@ export class GamePage {
   // determine if line from a1 to a2 intersects with line from b1 to b2
   instersects(a1, a2, b1, b2){
 
+    //calculate determinants to determine the result
     //                  (Bx   - Ax)   * (Y    - Ay)   - (By   - Ay)   * (X    - Ax)   > 0
     var determinantA1 = (b2.x - b1.x) * (a1.y - b1.y) - (b2.y - b1.y) * (a1.x - b1.x) > 0;
     var determinantA2 = (b2.x - b1.x) * (a2.y - b1.y) - (b2.y - b1.y) * (a2.x - b1.x) >= 0;
@@ -330,11 +308,6 @@ export class GamePage {
       for(var i = 1; i < this.snakes[s].length; i++){
         //draw body circle
         this.drawCircle(this.snakes[s][i].x, this.snakes[s][i].y, 5, this.botColour);
-        
-        // this.ctx.beginPath();
-        // this.ctx.moveTo(prev.x, prev.y);
-        // this.ctx.lineTo(this.snakes[s][i].x, this.snakes[s][i].y);
-        // this.ctx.stroke();
 
         prev = this.snakes[s][i];
       }
@@ -344,8 +317,10 @@ export class GamePage {
     
   }
 
+  // generate points that the ai snake can navigate through 
   getPathPoints(){
 
+    // distance to keep away from snakes 
     var margin = 20;
     var marginSquared = margin * margin;
     
@@ -353,8 +328,10 @@ export class GamePage {
     // body point it corresponds to
     var points = [];
 
+    // for eahc snake
     for(var s = 0; s < this.snakes.length; s++){
 
+      // if teh snake is too short its not considered in the calculations
       if(this.snakes[s].length <= 3)
         continue;
 
@@ -399,7 +376,6 @@ export class GamePage {
         points.push({x: pointOutSecondStreight.x, y: pointOutSecondStreight.y, sx: second.x, sy: second.y});
       points.push({x: pointOutSecondRight.x,    y: pointOutSecondRight.y,    sx: second.x, sy: second.y});
 
-
       // vectorLastOutStraight = (secondlast - last) / 2
       var vectorLastOutStraight = {
         x: (secondlast.x - last.x) / -2, 
@@ -430,10 +406,11 @@ export class GamePage {
       points.push({x: pointOutLastStreight.x, y: pointOutLastStreight.y, sx: last.x, sy: last.y});
       points.push({x: pointOutLastRight.x,    y: pointOutLastRight.y,    sx: last.x, sy: last.y});
 
-
       // for each body circle except first second and last
       for(var i = 3; i < this.snakes[s].length-1; i++){
 
+        // get the current, previous and next snake points and calulate a points near the current 
+        // one thats useful for navigations
         var previous = this.snakes[s][i-1];
         var current  = this.snakes[s][i];
         var next     = this.snakes[s][i+1];
@@ -456,6 +433,7 @@ export class GamePage {
           y: current.y + vectorMiddleTimes2.y,
         };
 
+        // add useful navigation point
         points.push(
           {
             x: midPoint.x, 
@@ -781,6 +759,7 @@ export class GamePage {
 
 }
 
+// priority queue implementation using a heap
 class PriorityQueue{
 
   comparator;
@@ -789,22 +768,27 @@ class PriorityQueue{
   indexLeft = i => (i << 1) + 1;
   indexRight = i => (i + 1) << 1;
 
+  // constructor with comparitor for specific objects
   constructor(comparator = (a, b) => a > b){
     this.comparator = comparator;
   }
 
+  // number of elements in queue
   size(){
     return this.heap.length;
   }
 
+  // if the queue is empty
   isEmpty(){
     return this.size() == 0;
   }
 
+  // return but not remove smallest element
   peek(){
     return this.heap[0];
   }
 
+  // add element and sort it into the queue
   push(...values){
     for(let value of values){
       this.heap.push(value);
@@ -814,6 +798,7 @@ class PriorityQueue{
     return this.size();
   }
 
+  // remove and return the smallest element
   pop(){
     const poppedValue = this.heap[0];
     const last = this.size() - 1;
@@ -828,29 +813,33 @@ class PriorityQueue{
     return poppedValue;
   }
 
-  greater(i, j){
+  // use comparitor
+  smaller(i, j){
     return this.comparator(this.heap[i], this.heap[j]);
   }
 
+  // swap two elements in queue
   swap(i, j){
     [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
   }
 
+  // perform a shift up 
   siftUp(){
     let node = this.size() - 1;
-    while (node > 0 && this.greater(node, this.indexParent(node))) {
+    while (node > 0 && this.smaller(node, this.indexParent(node))) {
       this.swap(node, this.indexParent(node));
       node = this.indexParent(node);
     }
   }
 
+  // perform a shift down
   siftDown() {
     var node = 0;
     while(
-      (this.indexLeft(node) < this.size() && this.greater(this.indexLeft(node), node)) ||
-      (this.indexRight(node) < this.size() && this.greater(this.indexRight(node), node))
+      (this.indexLeft(node) < this.size() && this.smaller(this.indexLeft(node), node)) ||
+      (this.indexRight(node) < this.size() && this.smaller(this.indexRight(node), node))
     ){
-      var maxChild = (this.indexRight(node) < this.size() && this.greater(this.indexRight(node), this.indexLeft(node))) ? this.indexRight(node) : this.indexLeft(node);
+      var maxChild = (this.indexRight(node) < this.size() && this.smaller(this.indexRight(node), this.indexLeft(node))) ? this.indexRight(node) : this.indexLeft(node);
       this.swap(node, maxChild);
       node = maxChild;
     }

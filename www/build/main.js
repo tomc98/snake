@@ -109,7 +109,7 @@ var HomePage = (function () {
     ], HomePage.prototype, "checkboxEnableComputer", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/home/home.html"*/'<!--\n	Generated template for the SplashPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n<ion-content padding>\n\n	<!-- main content -->\n	<div class="page_content">\n		\n		<!-- big top title -->\n		<div class = "title">\n			King Snake\n		</div>\n\n		<!-- snake image -->\n		<div align="center" style="display:none;">\n			<img class = "snake" src="assets/imgs/snakepic.png">\n		</div>\n\n		<!-- main texual based content -->\n		<div class = "text">\n\n\n			<!-- user details -->\n			<table>\n				<tr>\n					<td>\n						<!-- greeting -->\n						Welcome {{account.username}}\n					</td>\n\n					<!-- avatar -->\n					<td align="right" rowspan="2">\n						<img class="avatar" src="{{account.avatar}}" (click)="onClickEditAccount()">\n					</td>\n				</tr>\n\n				<tr>\n					<!-- highcsore -->\n					<td>\n						Highscore: {{account.highscore}}\n					</td>\n				</tr>\n\n			</table>\n\n			<!-- user account edit button -->\n			<p>\n				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>\n			</p>\n\n			<ion-list>\n				<!-- checkbox to enable bots -->\n				<ion-item>\n					<ion-label>Enable Computer</ion-label>\n					<ion-checkbox #checkboxEnableComputer></ion-checkbox>\n				</ion-item>\n\n				<!-- bots count -->\n				<ion-item>\n						<ion-label>Difficulty</ion-label>\n					<ion-input type="number" [(ngModel)]=\'computerDifficulty\' min="1" max="10" align="right"></ion-input>\n				</ion-item>\n			</ion-list>\n		</div>\n	</div>\n\n	<!-- bottom button layout -->\n	<div class="button_container">\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n	</div>\n\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/home/home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/'<!--\n\n	Generated template for the SplashPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n<ion-content padding>\n\n\n\n	<!-- main content -->\n\n	<div class="page_content">\n\n		\n\n		<!-- big top title -->\n\n		<div class = "title">\n\n			King Snake\n\n		</div>\n\n\n\n		<!-- snake image -->\n\n		<div align="center" style="display:none;">\n\n			<img class = "snake" src="assets/imgs/snakepic.png">\n\n		</div>\n\n\n\n		<!-- main texual based content -->\n\n		<div class = "text">\n\n\n\n\n\n			<!-- user details -->\n\n			<table>\n\n				<tr>\n\n					<td>\n\n						<!-- greeting -->\n\n						Welcome {{account.username}}\n\n					</td>\n\n\n\n					<!-- avatar -->\n\n					<td align="right" rowspan="2">\n\n						<img class="avatar" src="{{account.avatar}}" (click)="onClickEditAccount()">\n\n					</td>\n\n				</tr>\n\n\n\n				<tr>\n\n					<!-- highcsore -->\n\n					<td>\n\n						Highscore: {{account.highscore}}\n\n					</td>\n\n				</tr>\n\n\n\n			</table>\n\n\n\n			<!-- user account edit button -->\n\n			<p>\n\n				<button ion-button color="blue1" (click)="onClickEditAccount()">Change</button>\n\n			</p>\n\n\n\n			<ion-list>\n\n				<!-- checkbox to enable computer -->\n\n				<ion-item class="difficulty_input">\n\n					<ion-label>Enable Computer</ion-label>\n\n					<ion-checkbox #checkboxEnableComputer></ion-checkbox>\n\n				</ion-item>\n\n\n\n				<!-- computer difficulty -->\n\n				<ion-item class="difficulty_input">\n\n					<ion-label>Difficulty:</ion-label>\n\n					<ion-input type="number" [(ngModel)]=\'computerDifficulty\' min="1" max="10" align="right"></ion-input>\n\n				</ion-item>\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="blue1" (click)="onClickPlay()">Play</button>\n\n		<button ion-button color="blue2" (click)="onClickLeaderBoard()">Leader Board</button>\n\n		<button ion-button color="blue3" (click)="onClickHowToPlay()">How To Play</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\home\home.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]])
     ], HomePage);
@@ -151,23 +151,25 @@ var GamePage = (function () {
         this.screenWidth = window.innerWidth;
         this.screenHeight = window.innerHeight;
         this.points = 0;
-        //mouse = {x: 0, y: 0};
+        // current fruit location, size and color
         this.fruit = { x: window.innerWidth / 5, y: innerHeight / 5, color: 'red', size: 20 };
         this.botColour = "#555555";
         this.lives = 3;
+        // variables for flashing the background when the ai gets a fruit
         this.fruitColorDegreeGap = 15;
         this.backgroundColor = { h: 257, s: 0.22, v: 0.84 };
         this.falshColor = { h: 257, s: 0.22, v: 0.84 };
         this.flashIntensity = 0;
         // all snakes including bots if any
         this.snakes = [];
+        // variables related to computer ai
         this.enableComputer = false;
         this.computerSpeed = this.screenHeight / 1000;
+        this.maxAiTime = 10;
+        // recieve computer mode related parameters
         var parameters = navParams.data;
         this.enableComputer = parameters.enableComputer;
         this.computerDifficulty = parameters.computerDifficulty;
-        console.log("enableBots: " + this.enableComputer);
-        console.log("botCount: " + this.computerDifficulty);
     }
     //executes once all views have been initialised 
     GamePage.prototype.ngAfterViewInit = function () {
@@ -186,32 +188,25 @@ var GamePage = (function () {
         this.updateBotTargets();
         //setup refresh interval
         this.updateInterval = setInterval(function () { _this.update(); }, 1000 / 60);
-        this.loadSound();
-    };
-    //load sounds
-    //TODO implement
-    GamePage.prototype.loadSound = function () {
-        //if (this.plt.is('android')) {
-        //    this.nativeAudio.preloadSimple('pop', '../../assets/sounds/pop.mp3').then();
-        //    this.nativeAudio.preloadSimple('1bite', '../../assets/sounds/1bite.mp3').then();
-        //    this.nativeAudio.preloadSimple('2bite', '../../assets/sounds/2bite.mp3').then();
-        //    this.nativeAudio.preloadSimple('3bite', '../../assets/sounds/3bite.mp3').then();
-        //}
     };
     //reset the games state and values
     GamePage.prototype.setupGameState = function () {
         this.points = 0;
         this.makeFruit();
         this.lives = 3;
+        // user snake
         this.snakes[0] = [
             { x: window.innerWidth / 2, y: window.innerHeight / 2 },
             { x: window.innerWidth / 2, y: window.innerHeight / 2 },
             { x: window.innerWidth / 2, y: window.innerHeight / 2 }
         ];
+        // AI snake if enabled
         if (this.enableComputer) {
             this.spawnBot(1);
         }
     };
+    // spawns a new snake at a new random location
+    // if the index specified already has a snake it is replaced
     GamePage.prototype.spawnBot = function (index) {
         var x = Math.random() * window.innerWidth;
         var y = Math.random() * window.innerHeight;
@@ -222,27 +217,35 @@ var GamePage = (function () {
                 { x: x, y: y }
             ];
     };
+    // update snake positions, ai targets, fruits and stats
     GamePage.prototype.update = function () {
+        // draw everything onto the canvas
         this.render();
+        // if the player snake eate themselves or another snake, they die
         if (this.checkIntercept())
             this.lives = 0;
+        // if they die, terminate the update loop and go to the end screen
         if (this.lives == 0) {
             //if player died
             //stop update interval
             clearInterval(this.updateInterval);
-            clearInterval(this.updateAiInterval);
             //navigate to lost page
             this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__lost_lost__["a" /* LostPage */], this.points);
         }
         else {
+            // update bots targets
             this.updateBotTargets();
+            // for each snake
             for (var s = 0; s < this.snakes.length; s++) {
+                // for each body circle
                 for (var i = 1; i < this.snakes[s].length; i++) {
+                    // moving speed depends on player or bot difficulty setting
                     var speed = s > 0 && i == 1 ? (this.computerDifficulty / 1.5 + 5) * this.computerSpeed : 10;
-                    //get and update next position of each snake
+                    //get and update next position of each snake circle
                     this.snakes[s][i] = this.getNextPosition(this.snakes[s][i - 1].x, this.snakes[s][i - 1].y, this.snakes[s][i].x, this.snakes[s][i].y, speed, s > 0 && i == 1);
                 }
             }
+            // update fruit 
             this.updateFruit();
             //shrink fruit item and draw it
             this.shrinkFruit();
@@ -250,17 +253,10 @@ var GamePage = (function () {
     };
     // update targets for bots
     GamePage.prototype.updateBotTargets = function () {
-        //this.drawObsticaleMap();
+        var startTime = new Date().getTime();
+        //generate points the ai can navigate through
         var pathPoints = this.getPathPoints();
-        // for(let point of pathPoints){
-        //   this.drawCircle(point.x, point.y, 2, "#888888");
-        //   this.ctx.strokeWidth = 1;
-        //   this.ctx.strokeStyle = '#888888';
-        //   this.ctx.beginPath();
-        //   this.ctx.moveTo(point.x, point.y);
-        //   this.ctx.lineTo(point.sx, point.sy);
-        //   this.ctx.stroke();
-        // }
+        // for eahc ai snake
         for (var s = 1; s < this.snakes.length; s++) {
             //console.log("  for snake " + s);
             //Do A* path search using path points and avoid passing through snakes
@@ -268,19 +264,18 @@ var GamePage = (function () {
             var target = { x: this.fruit.x, y: this.fruit.y };
             var exit = { x: 0, y: 0 };
             var length = function (a, b) { return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)); };
+            // if snake has line of sight to fruit go there directly
             if (this.hasFreeLineOfSightTo(head, this.fruit, pathPoints)) {
-                //console.log("    has direct view of fruit");
-                //console.log("    target = fruit");
-                //this.drawCircle(this.fruit.x, this.fruit.y, 3, "#ff0000");
                 this.snakes[s][0] = { x: this.fruit.x, y: this.fruit.y };
                 continue;
             }
+            // otherwise start A* search
             var queue = new PriorityQueue(function (a, b) { return a.lengthTotal < b.lengthTotal; });
             // possible starting points
             for (var _i = 0, pathPoints_1 = pathPoints; _i < pathPoints_1.length; _i++) {
                 var start = pathPoints_1[_i];
-                //console.log("    for start");
-                // if head is practically at that point dont consider it as a start
+                // if head is practically at that point don't consider it as a start, otherwise add 
+                // possible starting point
                 if (length(head, start) > 20) {
                     if (this.hasFreeLineOfSightTo(head, start, pathPoints)) {
                         queue.push({
@@ -294,37 +289,25 @@ var GamePage = (function () {
                     }
                 }
             }
-            var looped = 0;
             // find all consequtive moves
             while (queue.size() > 0) {
-                //console.log("    while has queue " + queue.size());
+                // object of a specific path
                 var path = queue.pop();
-                //console.log("    with first element " + path.lengthTotal);
-                //if(queue.size() > 0)
-                //  console.log("    with next element " + queue.peek().lengthTotal);
-                //this.drawCircle(path.x, path.y, 3, "#00ff00");
-                looped++;
-                if (looped > 100) {
-                    console.log("No path found");
-                    //clearInterval(this.updateInterval);
-                    //target = {x: this.snakes[s][0].x, y: this.snakes[s][0].y};
-                    //break;
-                }
-                // check if current point leads directly to the fruit or no path is found
-                if (this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || looped > 100) {
-                    //console.log("      exit has line of sight to fruit");
-                    //console.log("      target = queue element");
+                var elapsedTime = new Date().getTime() - startTime;
+                // check if current point leads directly to the fruit or if the algorithim has run out of time
+                if (this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || elapsedTime > this.maxAiTime) {
                     target.x = path.inX;
                     target.y = path.inY;
                     exit.x = path.x;
                     exit.y = path.y;
                     break;
                 }
+                // for each possible next point to navigate to
                 for (var _a = 0, pathPoints_2 = pathPoints; _a < pathPoints_2.length; _a++) {
                     var next = pathPoints_2[_a];
-                    //console.log("      for next");
+                    // if that point can be navigated to
                     if (this.hasFreeLineOfSightTo(path, next, pathPoints)) {
-                        //console.log("        added " + (path.length + length(path, next) + length(next, this.fruit)));
+                        // add new path to queue
                         queue.push({
                             x: next.x,
                             y: next.y,
@@ -336,14 +319,12 @@ var GamePage = (function () {
                     }
                 }
             }
-            //console.log("target set");
-            // this.drawCircle(target.x, target.y, 3, "#ff0000");
-            // this.drawCircle(exit.x, exit.y, 3, "#0000ff");
+            // update target
             this.snakes[s][0] = target;
         }
     };
+    // check if there are any obsicales or snakes between the points (from, to)
     GamePage.prototype.hasFreeLineOfSightTo = function (from, to, obsicales) {
-        //console.log("hasFreeLineOfSight()");
         // check if line from head to start is to close to a snake body (between path points and 
         // corresponding snake body)
         for (var _i = 0, obsicales_1 = obsicales; _i < obsicales_1.length; _i++) {
@@ -367,6 +348,7 @@ var GamePage = (function () {
     };
     // determine if line from a1 to a2 intersects with line from b1 to b2
     GamePage.prototype.instersects = function (a1, a2, b1, b2) {
+        //calculate determinants to determine the result
         //                  (Bx   - Ax)   * (Y    - Ay)   - (By   - Ay)   * (X    - Ax)   > 0
         var determinantA1 = (b2.x - b1.x) * (a1.y - b1.y) - (b2.y - b1.y) * (a1.x - b1.x) > 0;
         var determinantA2 = (b2.x - b1.x) * (a2.y - b1.y) - (b2.y - b1.y) * (a2.x - b1.x) >= 0;
@@ -389,22 +371,22 @@ var GamePage = (function () {
             for (var i = 1; i < this.snakes[s].length; i++) {
                 //draw body circle
                 this.drawCircle(this.snakes[s][i].x, this.snakes[s][i].y, 5, this.botColour);
-                // this.ctx.beginPath();
-                // this.ctx.moveTo(prev.x, prev.y);
-                // this.ctx.lineTo(this.snakes[s][i].x, this.snakes[s][i].y);
-                // this.ctx.stroke();
                 prev = this.snakes[s][i];
             }
         }
         this.drawFruit();
     };
+    // generate points that the ai snake can navigate through 
     GamePage.prototype.getPathPoints = function () {
+        // distance to keep away from snakes 
         var margin = 20;
         var marginSquared = margin * margin;
         // list of path and snake points pairs, x, y is point snake can travel, sx, sy is the snake 
         // body point it corresponds to
         var points = [];
+        // for eahc snake
         for (var s = 0; s < this.snakes.length; s++) {
+            // if teh snake is too short its not considered in the calculations
             if (this.snakes[s].length <= 3)
                 continue;
             // calculate three path points for each of start and end of snake
@@ -469,6 +451,8 @@ var GamePage = (function () {
             points.push({ x: pointOutLastRight.x, y: pointOutLastRight.y, sx: last.x, sy: last.y });
             // for each body circle except first second and last
             for (var i = 3; i < this.snakes[s].length - 1; i++) {
+                // get the current, previous and next snake points and calulate a points near the current 
+                // one thats useful for navigations
                 var previous = this.snakes[s][i - 1];
                 var current = this.snakes[s][i];
                 var next = this.snakes[s][i + 1];
@@ -486,6 +470,7 @@ var GamePage = (function () {
                     x: current.x + vectorMiddleTimes2.x,
                     y: current.y + vectorMiddleTimes2.y,
                 };
+                // add useful navigation point
                 points.push({
                     x: midPoint.x,
                     y: midPoint.y,
@@ -748,14 +733,16 @@ var GamePage = (function () {
     ], GamePage.prototype, "myCanvas", void 0);
     GamePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-game',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/game/game.html"*/'<!-- canvas to display the game -->\n<canvas (move)="test($event)" width={{screenWidth}} height={{screenHeight}} #myCanvas></canvas>\n\n<!-- score and lives display -->\n<p class="stats">\n	<span style="float:left;">Score: {{points}}</span>\n	<span style="float:right;">Lives: {{lives}}</span>\n</p>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/game/game.html"*/
+            selector: 'page-game',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/'<!-- canvas to display the game -->\n\n<canvas (move)="test($event)" width={{screenWidth}} height={{screenHeight}} #myCanvas></canvas>\n\n\n\n<!-- score and lives display -->\n\n<p class="stats">\n\n	<span style="float:left;">Score: {{points}}</span>\n\n	<span style="float:right;">Lives: {{lives}}</span>\n\n</p>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\game\game.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], GamePage);
     return GamePage;
 }());
 
+// priority queue implementation using a heap
 var PriorityQueue = (function () {
+    // constructor with comparitor for specific objects
     function PriorityQueue(comparator) {
         if (comparator === void 0) { comparator = function (a, b) { return a > b; }; }
         this.heap = [];
@@ -764,15 +751,19 @@ var PriorityQueue = (function () {
         this.indexRight = function (i) { return (i + 1) << 1; };
         this.comparator = comparator;
     }
+    // number of elements in queue
     PriorityQueue.prototype.size = function () {
         return this.heap.length;
     };
+    // if the queue is empty
     PriorityQueue.prototype.isEmpty = function () {
         return this.size() == 0;
     };
+    // return but not remove smallest element
     PriorityQueue.prototype.peek = function () {
         return this.heap[0];
     };
+    // add element and sort it into the queue
     PriorityQueue.prototype.push = function () {
         var values = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -785,6 +776,7 @@ var PriorityQueue = (function () {
         }
         return this.size();
     };
+    // remove and return the smallest element
     PriorityQueue.prototype.pop = function () {
         var poppedValue = this.heap[0];
         var last = this.size() - 1;
@@ -795,25 +787,29 @@ var PriorityQueue = (function () {
         this.siftDown();
         return poppedValue;
     };
-    PriorityQueue.prototype.greater = function (i, j) {
+    // use comparitor
+    PriorityQueue.prototype.smaller = function (i, j) {
         return this.comparator(this.heap[i], this.heap[j]);
     };
+    // swap two elements in queue
     PriorityQueue.prototype.swap = function (i, j) {
         _a = [this.heap[j], this.heap[i]], this.heap[i] = _a[0], this.heap[j] = _a[1];
         var _a;
     };
+    // perform a shift up 
     PriorityQueue.prototype.siftUp = function () {
         var node = this.size() - 1;
-        while (node > 0 && this.greater(node, this.indexParent(node))) {
+        while (node > 0 && this.smaller(node, this.indexParent(node))) {
             this.swap(node, this.indexParent(node));
             node = this.indexParent(node);
         }
     };
+    // perform a shift down
     PriorityQueue.prototype.siftDown = function () {
         var node = 0;
-        while ((this.indexLeft(node) < this.size() && this.greater(this.indexLeft(node), node)) ||
-            (this.indexRight(node) < this.size() && this.greater(this.indexRight(node), node))) {
-            var maxChild = (this.indexRight(node) < this.size() && this.greater(this.indexRight(node), this.indexLeft(node))) ? this.indexRight(node) : this.indexLeft(node);
+        while ((this.indexLeft(node) < this.size() && this.smaller(this.indexLeft(node), node)) ||
+            (this.indexRight(node) < this.size() && this.smaller(this.indexRight(node), node))) {
+            var maxChild = (this.indexRight(node) < this.size() && this.smaller(this.indexRight(node), this.indexLeft(node))) ? this.indexRight(node) : this.indexLeft(node);
             this.swap(node, maxChild);
             node = maxChild;
         }
@@ -868,7 +864,7 @@ var LostPage = (function () {
                     _this.account = accounts[activeuser];
                     if (_this.points > _this.account.highscore) {
                         _this.account.highscore = _this.points;
-                        _this.account.highscorehistory.push({ datetime: new Date().getDate() + "-" + (new Date().getMonth() + 1), highscore: _this.points });
+                        _this.account.highscorehistory.push({ datetime: new Date().toISOString(), highscore: _this.points });
                         _this.storage.set('accounts', accounts);
                     }
                 });
@@ -881,7 +877,7 @@ var LostPage = (function () {
     };
     LostPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-lost',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/lost/lost.html"*/'<!--\n	Generated template for the LostPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n\n<ion-content padding>\n\n	<!-- main page content except bottom buttons -->\n	<div class="page_content">\n\n		<!-- big top title -->\n		<div class = "title">\n			The End\n		</div>\n\n		<!-- main texual based content -->\n		<table class="text">\n			<tr>\n				<td>\n					<!-- score and highscore if user account is setup -->\n					<p>You Scored: {{points}}</p>\n					<p *ngIf="account != null"><small>Highscore: {{account.highscore}}</small></p>\n				</td>\n			</tr>\n		</table>\n	</div>\n\n	<!-- bottom buttons layout -->\n	<div class="button_container">\n		<button ion-button color="red1" (click)="onClickBack()">Back</button>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/lost/lost.html"*/,
+            selector: 'page-lost',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\lost\lost.html"*/'<!--\n\n	Generated template for the LostPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n	<!-- main page content except bottom buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- big top title -->\n\n		<div class = "title">\n\n			The End\n\n		</div>\n\n\n\n		<!-- main texual based content -->\n\n		<table class="text">\n\n			<tr>\n\n				<td>\n\n					<!-- score and highscore if user account is setup -->\n\n					<p>You Scored: {{points}}</p>\n\n					<p *ngIf="account != null"><small>Highscore: {{account.highscore}}</small></p>\n\n				</td>\n\n			</tr>\n\n		</table>\n\n	</div>\n\n\n\n	<!-- bottom buttons layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="red1" (click)="onClickBack()">Back</button>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\lost\lost.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
     ], LostPage);
@@ -931,7 +927,7 @@ var HowToPage = (function () {
     };
     HowToPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-how-to',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/how-to/how-to.html"*/'<!--\n	Generated template for the HowToPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n\n\n<ion-content padding>\n\n	<!-- main content except bottom buttons -->\n	<div class="page_content">\n\n		<!-- big top buttons -->\n		<div class = "title">\n			How To Play\n		</div>\n\n		<!-- main text based content - how to instructions -->\n		<div class = "text">\n			<p>\n				Here you\'ll be tought how to play a basic af game\n			</p>\n			<p>\n				Drag you finger or cusor to the location your snake shall slithers to\n			</p>\n			<p>\n				You need to consume all points before they disappear\n			</p>\n			<p>\n				Once you\'ve gained a point it will be appended to you snake\n			</p>\n			<p>\n				But beware you cannot consume your self! Otherwise it would be way to simple\n			</p>\n		</div>\n\n\n	<div class = "title">\n		Play against AI\n	</div>\n\n	<div class = "text">\n		<p>\n			To play against an AI press the "ENABLE COMPUTER" button in the home screen\n		</p>\n		<p>\n			Choose difficulty of AI in home screen and then click play\n		</p>\n		<p>\n			Everytime you consume a point you gain a life, everytime the AI consumes a point you lose a life\n		</p>\n	</div>\n</div>\n\n	<!-- bottom button layout -->\n	<div class="button_container">\n		<button ion-button color="yellow1" (click)="onClickBack()">Back</button>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/how-to/how-to.html"*/,
+            selector: 'page-how-to',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\how-to\how-to.html"*/'<!--\n\n	Generated template for the HowToPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n	<!-- main content except bottom buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- big top buttons -->\n\n		<div class = "title">\n\n			How To Play\n\n		</div>\n\n\n\n		<!-- main text based content - how to instructions -->\n\n		<div class = "text">\n\n			<p>\n\n				Here you\'ll be tought how to play a basic af game\n\n			</p>\n\n			<p>\n\n				Drag you finger or cusor to the location your snake shall slithers to\n\n			</p>\n\n			<p>\n\n				You need to consume all points before they disappear\n\n			</p>\n\n			<p>\n\n				Once you\'ve gained a point it will be appended to you snake\n\n			</p>\n\n			<p>\n\n				But beware you cannot consume your self! Otherwise it would be way to simple\n\n			</p>\n\n		</div>\n\n\n\n\n\n	<div class = "title">\n\n		Play against AI\n\n	</div>\n\n\n\n	<div class = "text">\n\n		<p>\n\n			To play against an AI press the "ENABLE COMPUTER" button in the home screen\n\n		</p>\n\n		<p>\n\n			Choose difficulty of AI in home screen and then click play\n\n		</p>\n\n		<p>\n\n			Everytime you consume a point you gain a life, everytime the AI consumes a point you lose a life\n\n		</p>\n\n	</div>\n\n</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="yellow1" (click)="onClickBack()">Back</button>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\how-to\how-to.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], HowToPage);
@@ -987,7 +983,6 @@ var LeaderBoardPage = (function () {
         storage.get("accounts").then(function (val) {
             _this.staticLoeaderBoardData = val;
             _this.currentPlayer = _this.staticLoeaderBoardData[_this.indexOfCurrentPlayer];
-            // console.log(this.staticLoeaderBoardData);
             _this.staticLoeaderBoardData = _this.staticLoeaderBoardData.sort(function (a, b) { return b.highscore - a.highscore; });
             _this.displayChart();
             console.log(_this.staticLoeaderBoardData);
@@ -996,9 +991,9 @@ var LeaderBoardPage = (function () {
     LeaderBoardPage.prototype.displayChart = function () {
         for (var i = 0; i < this.currentPlayer.highscorehistory.length; i++) {
             this.playerScores.push(this.currentPlayer.highscorehistory[i].highscore);
-            this.playerScoreDates.push(this.currentPlayer.highscorehistory[i].datetime);
+            var datetime = new Date(this.currentPlayer.highscorehistory[i].datetime);
+            this.playerScoreDates.push(datetime.getDate() + "/" + (datetime.getMonth() + 1));
         }
-        console.log(this.playerScoreDates);
         this.chart = new __WEBPACK_IMPORTED_MODULE_3_chart_js__["Chart"](this.canvas.nativeElement, {
             type: 'line',
             data: {
@@ -1036,7 +1031,7 @@ var LeaderBoardPage = (function () {
     ], LeaderBoardPage.prototype, "canvas", void 0);
     LeaderBoardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-leader-board',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/leader-board/leader-board.html"*/'<!--\n	Generated template for the LeaderBoardPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n\n\n<ion-content padding>\n\n	<!-- main content except buttom buttons -->\n	<div class="page_content">\n\n		<!-- bit top title -->\n		<div class = "title">\n			Leader Board\n		</div>\n\n		<!-- main text based content -->\n		<div class="text">\n\n			<!-- section title -->\n			<h3>\n				Highscore chart\n			</h3>\n\n			<!-- chart -->\n			<canvas #scoreChart height=300></canvas>\n\n			<!-- section title -->\n			<h3>\n				Global highscores\n			</h3>\n\n			<!-- leader board output table with header row -->\n			<ion-list>\n				<ion-item>\n					<p style="float:left">USERNAME</p>\n					<p style="float:right">SCORE</p>\n				</ion-item>\n				<ion-item *ngFor=\'let leader of staticLoeaderBoardData; index as i\'>\n					<p style="float:left">{{i+1}} &nbsp; {{leader.username}}</p>\n					<p style="float:right">{{leader.highscore}}</p>\n				</ion-item>\n			</ion-list>\n		</div>\n	</div>\n\n	<!-- bottom button layout -->\n	<div class="button_container">\n		<button ion-button color="orange1" (click)="onClickBack()">Back</button>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/leader-board/leader-board.html"*/,
+            selector: 'page-leader-board',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\leader-board\leader-board.html"*/'<!--\n\n	Generated template for the LeaderBoardPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n	<!-- main content except buttom buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- bit top title -->\n\n		<div class = "title">\n\n			Leader Board\n\n		</div>\n\n\n\n		<!-- main text based content -->\n\n		<div class="text">\n\n\n\n			<!-- section title -->\n\n			<h3>\n\n				Your highscore chart\n\n			</h3>\n\n\n\n			<!-- chart -->\n\n			<canvas #scoreChart height=300></canvas>\n\n\n\n			<!-- section title -->\n\n			<h3>\n\n				Global highscores\n\n			</h3>\n\n\n\n			<!-- leader board output table with header row -->\n\n			<ion-list>\n\n				<ion-item class="leaderboard_item">\n\n					<p style="float:left">Username</p>\n\n					<p style="float:right">Highscore</p>\n\n				</ion-item>\n\n				<ion-item *ngFor=\'let leader of staticLoeaderBoardData; index as i\' class="leaderboard_item">\n\n					<p style="float:left">{{i+1}}. &nbsp; {{leader.username}}</p>\n\n					<p style="float:right">{{leader.highscore}}</p>\n\n				</ion-item>\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- bottom button layout -->\n\n	<div class="button_container">\n\n		<button ion-button color="orange1" (click)="onClickBack()">Back</button>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\leader-board\leader-board.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
     ], LeaderBoardPage);
@@ -1136,7 +1131,7 @@ var AccountsPage = (function () {
     };
     AccountsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-accounts',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/accounts/accounts.html"*/'<!--\n  Generated template for the AccountsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n\n\n<ion-content padding>\n	\n	<!-- all of the page content except for the buttons -->\n	<div class="page_content">\n\n		<!-- Big top title -->\n		<div class = "title">\n			Accounts\n		</div>\n		\n		<!-- contains middle text based content -->\n		<div class = "text">\n\n			<!-- list of inputs -->\n			<ion-list>\n\n        <ion-item-sliding *ngFor="let account of accounts; index as i" class="account_item">\n\n          <ion-item (click)="onClickSelect(i)">\n            <img src="{{account.avatar}}"/>\n            <div>\n              <p>{{account.username}}</p>\n              <p>{{account.birthday | date:"dd/MM/yyyy"}}</p>\n            </div>\n          </ion-item>\n\n          <ion-item-options>\n\n            <button ion-button color="turquoise1" (click)="onClickEdit(i)">\n              Edit\n            </button>\n\n            <button ion-button color="red1" *ngIf="accounts.length > 1" (click)="onClickDelete(i)">\n              Delete\n            </button>\n\n          </ion-item-options>\n\n        </ion-item-sliding>\n\n        <ion-item-sliding  class="account_item">\n          \n          <ion-item (click)="onClickNew()">\n              <img src="assets/imgs/add.png"/>\n              <div>\n                <p>Add account</p>\n              </div>\n          </ion-item>\n\n        </ion-item-sliding>\n\n\n			</ion-list>\n		</div>\n	</div>\n\n	<!-- contains buttom buttons -->\n	<div class="button_container">\n		<button ion-button color="turquoise1" (click)="onClickBack()">Back</button>\n	</div>\n\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/accounts/accounts.html"*/,
+            selector: 'page-accounts',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\accounts\accounts.html"*/'<!--\n\n  Generated template for the AccountsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	\n\n	<!-- all of the page content except for the buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- Big top title -->\n\n		<div class = "title">\n\n			Accounts\n\n		</div>\n\n		\n\n		<!-- contains middle text based content -->\n\n		<div class = "text">\n\n\n\n			<!-- list of inputs -->\n\n			<ion-list>\n\n\n\n        <ion-item-sliding *ngFor="let account of accounts; index as i" class="account_item">\n\n\n\n          <ion-item (click)="onClickSelect(i)">\n\n            <img src="{{account.avatar}}"/>\n\n            <div>\n\n              <p>{{account.username}}</p>\n\n              <p>{{account.birthday | date:"dd/MM/yyyy"}}</p>\n\n            </div>\n\n          </ion-item>\n\n\n\n          <ion-item-options>\n\n\n\n            <button ion-button color="turquoise1" (click)="onClickEdit(i)">\n\n              Edit\n\n            </button>\n\n\n\n            <button ion-button color="red1" *ngIf="accounts.length > 1" (click)="onClickDelete(i)">\n\n              Delete\n\n            </button>\n\n\n\n          </ion-item-options>\n\n\n\n        </ion-item-sliding>\n\n\n\n        <ion-item-sliding  class="account_item">\n\n          \n\n          <ion-item (click)="onClickNew()">\n\n              <img src="assets/imgs/add.png"/>\n\n              <div>\n\n                <p>Add account</p>\n\n              </div>\n\n          </ion-item>\n\n\n\n        </ion-item-sliding>\n\n\n\n\n\n			</ion-list>\n\n		</div>\n\n	</div>\n\n\n\n	<!-- contains buttom buttons -->\n\n	<div class="button_container">\n\n		<button ion-button color="turquoise1" (click)="onClickBack()">Back</button>\n\n	</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\accounts\accounts.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], AccountsPage);
@@ -1194,7 +1189,7 @@ var EditAccountPage = (function () {
                     avatar: "assets/imgs/default_avatar.png",
                     highscore: 0,
                     highscorehistory: [
-                        { datetime: new Date().getDate() + "-" + (new Date().getMonth() + 1), highscore: 0 }
+                        { datetime: new Date().toISOString(), highscore: 0 }
                     ]
                 };
                 _this.accounts.push(_this.account);
@@ -1227,7 +1222,7 @@ var EditAccountPage = (function () {
     };
     EditAccountPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-edit-account',template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/pages/edit-account/edit-account.html"*/'<!--\n	Generated template for the EditAccountPage page.\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n	Ionic pages and navigation.\n-->\n<ion-header>\n</ion-header>\n\n\n<ion-content padding>\n\n	<!-- all of the page content except for the buttons -->\n	<div class="page_content">\n\n		<!-- Big top title -->\n		<div class = "title">\n			Edit Account\n		</div>\n\n		<!-- contains middle text based content -->\n		<div class = "text">\n\n			<!-- list of inputs -->\n			<ion-list>\n\n				<!-- Name input -->\n				<ion-item>\n					<ion-label color="turquoise4" stacked>Name</ion-label>\n					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>\n				</ion-item>\n\n				<!-- date input -->\n				<ion-item>\n					<ion-label color="turquoise4" stacked>Birthday</ion-label>\n					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>\n				</ion-item>\n\n				<ion-item>\n					<ion-thumbnail item-end>\n						<img src="{{account.avatar}}"/>\n					</ion-thumbnail>\n\n					<ion-label color="turquoise4" stacked>Avatar</ion-label>\n\n					<div class="avatar">\n					</div>\n				</ion-item>\n\n			</ion-list>\n\n			<label class="myFakeUploadButton" for="myFileInput" ion-button>Change Photo</label>\n			<input\n				#fileInput\n				type="file"\n				accept="image/*"\n				(change)="avatarSelected(fileInput.files)"\n				id="myFileInput">\n\n		</div>\n	</div>\n\n	<!-- contains buttom buttons -->\n	<div class="button_container">\n		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>\n		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/pages/edit-account/edit-account.html"*/,
+            selector: 'page-edit-account',template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/'<!--\n\n	Generated template for the EditAccountPage page.\n\n\n\n	See http://ionicframework.com/docs/components/#navigation for more info on\n\n	Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n	<!-- all of the page content except for the buttons -->\n\n	<div class="page_content">\n\n\n\n		<!-- Big top title -->\n\n		<div class = "title">\n\n			Edit Account\n\n		</div>\n\n\n\n		<!-- contains middle text based content -->\n\n		<div class = "text">\n\n\n\n			<!-- list of inputs -->\n\n			<ion-list>\n\n\n\n				<!-- Name input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4" stacked>Name</ion-label>\n\n					<ion-input placeholder="Name" [(ngModel)]="account.username"></ion-input>\n\n				</ion-item>\n\n\n\n				<!-- date input -->\n\n				<ion-item>\n\n					<ion-label color="turquoise4" stacked>Birthday</ion-label>\n\n					<ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="account.birthday"></ion-datetime>\n\n				</ion-item>\n\n\n\n				<ion-item>\n\n					<ion-thumbnail item-end>\n\n						<img class="rounded" src="{{account.avatar}}"/>\n\n					</ion-thumbnail>\n\n\n\n					<ion-label color="turquoise4" stacked>Avatar</ion-label>\n\n\n\n					<div class="avatar">\n\n					</div>\n\n				</ion-item>\n\n\n\n			</ion-list>\n\n\n\n			<label class="myFakeUploadButton" for="myFileInput" ion-button>Change Photo</label>\n\n			<input\n\n				#fileInput\n\n				type="file"\n\n				accept="image/*"\n\n				(change)="avatarSelected(fileInput.files)"\n\n				id="myFileInput">\n\n\n\n		</div>\n\n	</div>\n\n\n\n	<!-- contains buttom buttons -->\n\n	<div class="button_container">\n\n		<button ion-button color="turquoise1" (click)="onClickCancel()">Cancel</button>\n\n		<button ion-button color="turquoise2" (click)="onClickSave()">Save</button>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\pages\edit-account\edit-account.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
     ], EditAccountPage);
@@ -1401,7 +1396,7 @@ var MyApp = (function () {
                         avatar: "assets/imgs/default_avatar.png",
                         highscore: 0,
                         highscorehistory: [
-                            { datetime: new Date().getDate() + "-" + (new Date().getMonth() + 1), highscore: 0 }
+                            { datetime: new Date().toISOString(), highscore: 0 }
                         ]
                     };
                     storage.set('accounts', [defaultUser]);
@@ -1413,7 +1408,7 @@ var MyApp = (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/tc/Documents/Programming/appdev/snake/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/tc/Documents/Programming/appdev/snake/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"X:\OneDrive\University\Interactive App Development 2701ICT\Assignment 2\snake\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]])
     ], MyApp);

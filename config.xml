@@ -3,7 +3,7 @@
     <name>King Snake</name>
     <description>A twist on the clasical game of "snake".</description>
     <author email="tomcsere@gmail.com" href="http://tomcsere.com/">Tom and friends</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.0.0.30:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

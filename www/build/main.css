@@ -129438,12 +129438,12 @@ page-edit-account .text {
   color: #3E4B4D;
 }
 
-page-edit-account .avatar img {
-  border-radius: 10px;
-}
-
 page-edit-account .avatar * {
   float: left;
+}
+
+page-edit-account .rounded {
+  border-radius: 10px;
 }
 
 page-edit-account ion-item {
@@ -129537,6 +129537,17 @@ page-home .avatar {
   border-radius: 10px;
   width: 80px;
   height: 80px;
+}
+
+page-home .difficulty_input {
+  background: #9fc5f8;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+page-home .difficulty_input * {
+  border: none !important;
+  color: #313D4D !important;
 }
 
 page-home ion-item {
@@ -129655,14 +129666,13 @@ page-leader-board .text {
   padding: 30px;
 }
 
-page-leader-board #leader_board_table {
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
+page-leader-board .leaderboard_item {
+  background: #f9cb9c;
 }
 
-page-leader-board #leader_board_table tr > td:last-child {
-  text-align: right;
+page-leader-board .leaderboard_item * {
+  border: none !important;
+  color: #4D3F30;
 }
 
 page-leader-board .scroll-content {
