@@ -40,6 +40,7 @@ export class GamePage {
   enableComputer:boolean = false;
   computerDifficulty:number;
   computerSpeed:number = this.screenHeight / 1000;
+  maxAiTime:number = 10;
 
   constructor(public navCtrl: NavController, /*private nativeAudio: NativeAudio,*/ public plt: Platform, public navParams: NavParams) {
 
@@ -161,6 +162,7 @@ export class GamePage {
 
   // update targets for bots
   updateBotTargets(){
+    var startTime = new Date().getTime();
 
     //this.drawObsticaleMap();
     var pathPoints = this.getPathPoints();
@@ -222,24 +224,16 @@ export class GamePage {
       var looped = 0;
       // find all consequtive moves
       while(queue.size() > 0){
-        //console.log("    while has queue " + queue.size());
+        looped++;
         
         var path = queue.pop();
-        //console.log("    with first element " + path.lengthTotal);
-        //if(queue.size() > 0)
-        //  console.log("    with next element " + queue.peek().lengthTotal);
-        //this.drawCircle(path.x, path.y, 3, "#00ff00");
 
-        looped++;
-        if(looped > 100){
-          console.log("No path found");
-          //clearInterval(this.updateInterval);
-          //target = {x: this.snakes[s][0].x, y: this.snakes[s][0].y};
-          //break;
+        var elapsedTime = new Date().getTime() - startTime;
+        if(elapsedTime > this.maxAiTime){
+          console.log("Path not found after " + looped);
         }
-
         // check if current point leads directly to the fruit or no path is found
-        if(this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || looped > 100){
+        if(this.hasFreeLineOfSightTo(path, this.fruit, pathPoints) || elapsedTime > this.maxAiTime){
           //console.log("      exit has line of sight to fruit");
           //console.log("      target = queue element");
 
