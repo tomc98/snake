@@ -37,7 +37,7 @@ export class LostPage {
           if(this.points > this.account.highscore){
             this.account.highscore = this.points;
 
-            this.account.highscorehistory.push({datetime: new Date().getDate() +"-"+ (new Date().getMonth()+1), highscore: this.points});
+            this.account.highscorehistory.push({datetime: new Date().toISOString(), highscore: this.points});
 
             this.storage.set('accounts', accounts);
           }

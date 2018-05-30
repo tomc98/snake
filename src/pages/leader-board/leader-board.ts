@@ -35,7 +35,6 @@ export class LeaderBoardPage {
     storage.get("accounts").then((val) => {
       this.staticLoeaderBoardData = val;
       this.currentPlayer = this.staticLoeaderBoardData[this.indexOfCurrentPlayer];
-      // console.log(this.staticLoeaderBoardData);
       this.staticLoeaderBoardData = this.staticLoeaderBoardData.sort(function(a, b){return b.highscore - a.highscore});
       this.displayChart();
       console.log(this.staticLoeaderBoardData);
@@ -45,9 +44,11 @@ export class LeaderBoardPage {
   displayChart(){
     for (var i = 0; i < this.currentPlayer.highscorehistory.length; i++){
       this.playerScores.push(this.currentPlayer.highscorehistory[i].highscore);
-      this.playerScoreDates.push(this.currentPlayer.highscorehistory[i].datetime);
+
+      var datetime = new Date(this.currentPlayer.highscorehistory[i].datetime);
+      this.playerScoreDates.push(datetime.getDate() + "/" + (datetime.getMonth()+1));
     }
-    console.log(this.playerScoreDates);
+    
     this.chart = new Chart(this.canvas.nativeElement, {
       type: 'line',
       data: {

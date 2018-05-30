@@ -38,7 +38,7 @@ export class EditAccountPage {
           avatar: "assets/imgs/default_avatar.png",
           highscore: 0,
           highscorehistory: [
-            {datetime: new Date().getDate() +"-"+ (new Date().getMonth()+1), highscore: 0}
+            {datetime: new Date().toISOString(), highscore: 0}
           ]
         };
 
