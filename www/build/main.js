@@ -868,7 +868,7 @@ var LostPage = (function () {
                     _this.account = accounts[activeuser];
                     if (_this.points > _this.account.highscore) {
                         _this.account.highscore = _this.points;
-                        _this.account.highscorehistory.push({ datetime: new Date().getDate() + "-" + new Date().getMonth(), highscore: _this.points });
+                        _this.account.highscorehistory.push({ datetime: new Date().getDate() + "-" + (new Date().getMonth() + 1), highscore: _this.points });
                         _this.storage.set('accounts', accounts);
                     }
                 });
@@ -1194,7 +1194,7 @@ var EditAccountPage = (function () {
                     avatar: "assets/imgs/default_avatar.png",
                     highscore: 0,
                     highscorehistory: [
-                        { datetime: new Date().toISOString(), highscore: 0 }
+                        { datetime: new Date().getDate() + "-" + (new Date().getMonth() + 1), highscore: 0 }
                     ]
                 };
                 _this.accounts.push(_this.account);
@@ -1401,7 +1401,7 @@ var MyApp = (function () {
                         avatar: "assets/imgs/default_avatar.png",
                         highscore: 0,
                         highscorehistory: [
-                            { datetime: new Date().getDate() + "-" + new Date().getMonth(), highscore: 0 }
+                            { datetime: new Date().getDate() + "-" + (new Date().getMonth() + 1), highscore: 0 }
                         ]
                     };
                     storage.set('accounts', [defaultUser]);
