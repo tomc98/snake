@@ -129299,24 +129299,6 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-page-accounts {
-  /*
-	//remove background and border from checkbox and number input
-	ion-item{
-		background: none !important;
-		border: none !important;
-		color: #313D4D !important;
-		padding: 0px !important;
-	}
-	
-	//remove background and border from checkbox and number input
-	ion-item *{
-		border: none !important;
-		box-shadow: none !important;
-	}
-	*/
-}
-
 page-accounts * {
   font-family: "Bungee",cursive;
   font-size: 20px;

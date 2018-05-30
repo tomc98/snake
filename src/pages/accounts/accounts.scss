@@ -31,30 +31,17 @@ page-accounts {
 		color: #3E4B4D;
 	}
 
-	/*
-	//remove background and border from checkbox and number input
-	ion-item{
-		background: none !important;
-		border: none !important;
-		color: #313D4D !important;
-		padding: 0px !important;
-	}
-	
-	//remove background and border from checkbox and number input
-	ion-item *{
-		border: none !important;
-		box-shadow: none !important;
-	}
-	*/
-
+	// account sliding item containing item with image and text
 	.account_item{
 		background: #45818e;
 		border-radius: 10px;
 		margin-bottom: 10px;
 
+		// ion item with image and text
 		ion-item{
 			background: #8ab2b8;
 
+			// avatar image
 			img{
 				float: left;
 				width: 80px;
@@ -63,6 +50,7 @@ page-accounts {
 				border-radius: 10px;
 			}
 
+			// other stylings
 			div{
 				float: left;
 			}
@@ -78,12 +66,14 @@ page-accounts {
 
 		}
 
+		// sliding item options
 		ion-item-options{
 			border: none !important;
 		}
 
 	}
 
+	// for add accoun titem
 	.add_account{
 		background: #8ab2b8;
 	}
