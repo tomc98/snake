@@ -35,9 +35,7 @@ export class HomePage {
       console.log(activeuser);
 
       this.storage.get('accounts').then((accounts) =>{
-
         this.account = accounts[activeuser];
-
       });
 
     });
