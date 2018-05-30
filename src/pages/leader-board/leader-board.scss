@@ -30,16 +30,14 @@ page-leader-board {
 		padding: 30px;
 	}
 
-	//leader board html table
-	#leader_board_table{
-		width: 100%;
-		padding: 0px;
-		margin: 0px;
-	}
+	.leaderboard_item{
+		
+		background: #f9cb9c;
 
-	//table right column allign right
-	#leader_board_table tr > td:last-child{
-		text-align: right;
+		*{
+			border: none !important;
+			color: #4D3F30;
+		}
 	}
 
 	//page background and padding

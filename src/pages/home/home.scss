@@ -45,6 +45,16 @@ page-home {
 	}
 
 
+	.difficulty_input{
+		
+		background: #9fc5f8;
+		box-shadow: none !important;
+
+		*{
+			border: none !important;
+			color: #313D4D !important;
+		}
+	}
 
 	//remove background and border from checkbox and number input
 	ion-item{

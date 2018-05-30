@@ -23,7 +23,7 @@
 
 			<!-- section title -->
 			<h3>
-				Highscore chart
+				Your highscore chart
 			</h3>
 
 			<!-- chart -->
@@ -36,12 +36,12 @@
 
 			<!-- leader board output table with header row -->
 			<ion-list>
-				<ion-item>
-					<p style="float:left">USERNAME</p>
-					<p style="float:right">SCORE</p>
+				<ion-item class="leaderboard_item">
+					<p style="float:left">Username</p>
+					<p style="float:right">Highscore</p>
 				</ion-item>
-				<ion-item *ngFor='let leader of staticLoeaderBoardData; index as i'>
-					<p style="float:left">{{i+1}} &nbsp; {{leader.username}}</p>
+				<ion-item *ngFor='let leader of staticLoeaderBoardData; index as i' class="leaderboard_item">
+					<p style="float:left">{{i+1}}. &nbsp; {{leader.username}}</p>
 					<p style="float:right">{{leader.highscore}}</p>
 				</ion-item>
 			</ion-list>

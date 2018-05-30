@@ -54,15 +54,15 @@
 			</p>
 
 			<ion-list>
-				<!-- checkbox to enable bots -->
-				<ion-item>
+				<!-- checkbox to enable computer -->
+				<ion-item class="difficulty_input">
 					<ion-label>Enable Computer</ion-label>
 					<ion-checkbox #checkboxEnableComputer></ion-checkbox>
 				</ion-item>
 
-				<!-- bots count -->
-				<ion-item>
-						<ion-label>Difficulty</ion-label>
+				<!-- computer difficulty -->
+				<ion-item class="difficulty_input">
+					<ion-label>Difficulty:</ion-label>
 					<ion-input type="number" [(ngModel)]='computerDifficulty' min="1" max="10" align="right"></ion-input>
 				</ion-item>
 			</ion-list>
