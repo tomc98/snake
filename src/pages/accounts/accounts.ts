@@ -68,7 +68,7 @@ export class AccountsPage {
             this.storage.set('accounts', this.accounts);
 
             // if removed account was above removed account, shift selected index up
-            if(i <= this.activeuser){
+            if(i <= this.activeuser && i > 0){
               this.storage.set('activeuser', this.activeuser-1);
             }
             
