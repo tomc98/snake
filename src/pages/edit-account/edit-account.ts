@@ -19,9 +19,9 @@ export class EditAccountPage {
   activeaccount:number = -1;
   account:any = {username:'', birthday:''};
   accounts:any;
-  
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
-    
+
     this.activeaccount = navParams.data;
 
     storage.get('accounts').then((accounts) => {
@@ -38,7 +38,7 @@ export class EditAccountPage {
           avatar: "assets/imgs/default_avatar.png",
           highscore: 0,
           highscorehistory: [
-            {datetime: new Date().toISOString(), highscore: 0}
+            {datetime: new Date().getDate() +"-"+ (new Date().getMonth()+1), highscore: 0}
           ]
         };
 
@@ -49,7 +49,7 @@ export class EditAccountPage {
         this.account = this.accounts[this.activeaccount];
 
       }
-      
+
     });
   }
 
