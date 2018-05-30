@@ -23,10 +23,12 @@ export class HomePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
   }
 
+  // when the screen is shown it will reload preferences from storage
   ionViewWillEnter(){
     this.loadPreferences();
   }
 
+  // load from storage
   loadPreferences(){
     this.storage.get('activeuser').then((activeuser) => {
 
