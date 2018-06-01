@@ -18,7 +18,7 @@ export class HomePage {
   //values to be displayed on the page
   computerDifficulty:number = 5;
   
-  account = {username: '', highscore: 0};
+  account:any = {username: '', highscore: 0};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
   }
@@ -32,10 +32,47 @@ export class HomePage {
   loadPreferences(){
     this.storage.get('activeuser').then((activeuser) => {
 
-      console.log(activeuser);
+      this.storage.get('accounts').then((accounts) => {
 
-      this.storage.get('accounts').then((accounts) =>{
-        this.account = accounts[activeuser];
+        if(accounts != null && activeuser != null){
+          // if accounts have been setup use them
+          this.account = accounts[activeuser];
+        }else{
+          // else setup default account
+
+          // accounts holds a list of all accounts
+          // [
+          //   {
+          //     username:'name',
+          //     birthday:'bday',
+          //     avatar:image,
+          //     highscore:x,
+          //     highscorehistory:[
+          //       {
+          //         datetime:time,
+          //         highscore:x
+          //       },
+          //       ...
+          //     ]
+          //   },
+          //   ...
+          // ]
+
+          this.account = {
+            username: 'player1',
+            birthday: new Date().toISOString(),
+            avatar: "assets/imgs/default_avatar.png",
+            highscore: 0,
+            highscorehistory: [
+              {datetime: new Date().toISOString(), highscore: 0}
+            ]
+          };
+
+          this.storage.set('accounts', [this.account]);
+          this.storage.set('activeuser', 0);
+
+        }
+
       });
 
     });
